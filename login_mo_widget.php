@@ -87,7 +87,7 @@ window.moAsyncInit = function() {
 }(document));
 
 function MOLogin(){
-			window.location.href = "https://test.miniorange.com/moas/idp/openidsso?client_id=<?php echo get_option('client_id'); ?>&redirect_uri=<?php echo urlencode(site_url() . '?option=mologin'); ?>&state=kienvoeinc&nonce=eourvoeirn&response_type=code";
+			window.location.href = "https://auth.miniorange.com/moas/idp/openidsso?client_id=<?php echo get_option('client_id'); ?>&redirect_uri=<?php echo urlencode(site_url() . '?option=mologin'); ?>&state=kienvoeinc&nonce=eourvoeirn&response_type=code";
 	
 }
 </script>
@@ -144,7 +144,7 @@ function mo_login_validate(){
 		$code = $codeArray[1]; 
 		$obj = new AuthorizeOpenIDRequest();
 		$obj->authCode = $code;
-		$obj->hostName = 'test.miniorange.com';
+		$obj->hostName = 'auth.miniorange.com';
 		$obj->clientSecret = $appsecret;
 		
 		$token = $obj->sendTokenRequest();
