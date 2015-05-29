@@ -1,4 +1,4 @@
-=== miniOrange OpenID Connect Login Widget ===
+=== miniOrange OpenID Connect SSO Login Widget ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
 Tags: miniOrange, mo, login form, miniorange login, miniorange widget, miniorange login widget, mo widget login, mo sidebar login, miniorange login form, mo user login, miniorange authentication, twitter, twitter login, social login, google, google login, sidebar login, widget login, wordpress login, widget, shortcode, shortcode login, login widget, social login, miniorange register, social user registration, user registration
@@ -12,7 +12,7 @@ This is a miniOrange login plugin as widget.
 
 == Description ==
 
-This is a miniOrange login plugin as widget. A miniOrange application needs to be created to setup this plugin. The setup is simple. Instructions are provided below.
+This is a miniOrange login plugin as widget for secure login and Single Sign On (SSO) using OpenId Connect protocol. A miniOrange application needs to be created to setup this plugin. The setup is simple. Instructions are provided below.
 
 = Important =
 
