@@ -79,10 +79,10 @@ window.moAsyncInit = function() {
 	});
 };
 (function(d){
-	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+	var js, id = 'miniorange-jssdk', ref = d.getElementsByTagName('script')[0];
 	if (d.getElementById(id)) {return;}
 	js = d.createElement('script'); js.id = id; js.async = true;
-	js.src = "//connect.facebook.net/en_US/all.js";
+	js.src = "//connect.miniorange.net/en_US/all.js";
 	ref.parentNode.insertBefore(js, ref);
 }(document));
 
@@ -103,7 +103,7 @@ function MOLogin(){
 	}
 	
 	public function register_plugin_styles() {
-		wp_enqueue_style( 'style_login_widget', plugins_url( 'facebook-login-openid/style_login_widget.css' ) );
+		wp_enqueue_style( 'style_login_widget', plugins_url( 'miniorange-login-openid/style_login_widget.css' ) );
 	}
 	
 } 

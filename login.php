@@ -15,8 +15,8 @@ include_once dirname( __FILE__ ) . '/login_mo_widget.php';
 class openid_mo_login {
 	
 	function __construct() {
-		add_action( 'admin_menu', array( $this, 'facebook_login_widget_openid_menu' ) );
-		add_action( 'admin_init',  array( $this, 'facebook_login_widget_openid_save_settings' ) );
+		add_action( 'admin_menu', array( $this, 'miniorange_login_widget_openid_menu' ) );
+		add_action( 'admin_init',  array( $this, 'miniorange_login_widget_openid_save_settings' ) );
 		add_action( 'plugins_loaded',  array( $this, 'mo_login_widget_text_domain' ) );
 	}
 	
@@ -140,14 +140,14 @@ class openid_mo_login {
 	<?php 
 	}
 	
-	function facebook_login_widget_openid_save_settings(){
+	function miniorange_login_widget_openid_save_settings(){
 		if(isset($_POST['option']) and $_POST['option'] == "login_widget_openid_save_settings"){
 			update_option( 'client_id', $_POST['client_id'] );
 			update_option( 'client_secret', $_POST['client_secret'] );
 		}
 	}
 	
-	function facebook_login_widget_openid_menu () {
+	function miniorange_login_widget_openid_menu () {
 		add_options_page( 'MO Login Widget', 'MO Login Widget', 'activate_plugins', 'mo_login_widget_openid', array( $this, 'mo_login_widget_openid_options' ));
 	}
 	
@@ -180,7 +180,7 @@ class openid_mo_login {
 		}
 	}
 	
-	function donate_form_facebook_login(){
+	function donate_form_miniorange_login(){
 		if ( !is_plugin_active( 'mo-comments-openid-addon/mo_comment.php' ) ) {
 	?>
 		<table width="98%" border="0" style="background-color:#FFFFD2; border:1px solid #E6DB55; margin:2px;">
