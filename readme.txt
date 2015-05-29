@@ -23,7 +23,8 @@ You need to create a new miniOrange OpenID Application to setup this plugin. Ple
 * <strong>3.</strong> From applications Select "OpenID Application".
 * <strong>4.</strong> Enter your wordpress application name, description. And in the redirect URL add : "your-wordpress-site-url/?option=mologin". 
 * <strong>5.</strong> Click save. Go to Edit Application and Note Client ID and Client Secret.
-* <strong>6.</strong> Now in the Wordpress admin go to Settings > MO Login Widget. Copy-paste the Client Id and Client Secret here. That's All. Have fun :)
+* <strong>6.</strong> Now in the Wordpress admin go to Settings > MO Login Widget. Copy-paste the Client Id and Client Secret here.
+* <strong>7.</strong> Go to Appearances> Widgets and add "miniOrange Login Widget" at desired location. That's All. Have fun :)
 
 Features :-
 
