@@ -18,7 +18,7 @@ This is a miniOrange login plugin as widget. A miniOrange application needs to b
 
 You need to create a new miniOrange OpenID Application to setup this plugin. Please follow the instructions provided below.
 			
-* <strong>1.</strong> Go to <a href="https://auth.miniorange.com/moas/login target="_blank">miniOrange Admin Console</a>
+* <strong>1.</strong> Go to https://auth.miniorange.com/moas/login miniOrange Admin Console.
 * <strong>2.</strong> Click on "Apps" menu. Then click on Configure Apps button.
 * <strong>3.</strong> From applications Select "OpenID Application".
 * <strong>4.</strong> Enter your wordpress application name, description. And in the redirect URL add : "your-wordpress-site-url/?option=mologin". 
