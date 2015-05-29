@@ -1,7 +1,7 @@
 === miniOrange OpenID Connect Login Widget ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
-Tags: miniOrange, mo, login form, miniorange login, miniorange widget, miniorange login widget, mo widget login, mo sidebar login, miniorange login form, mo user login, miniorange authentication, twitter, twitter login, social login, google, google login, sidebar login, widget login, wordpress login, widget, shortcode, shortcode login, login widget, social login, facebook register, social user registration, user registration
+Tags: miniOrange, mo, login form, miniorange login, miniorange widget, miniorange login widget, mo widget login, mo sidebar login, miniorange login form, mo user login, miniorange authentication, twitter, twitter login, social login, google, google login, sidebar login, widget login, wordpress login, widget, shortcode, shortcode login, login widget, social login, miniorange register, social user registration, user registration
 Requires at least: 2.0.2
 Tested up to: 4.2.1
 Stable tag: 2.2.0
@@ -24,6 +24,40 @@ You need to create a new miniOrange OpenID Application to setup this plugin. Ple
 * <strong>4.</strong> Enter your wordpress application name, description. And in the redirect URL add : "your-wordpress-site-url/?option=mologin". 
 * <strong>5.</strong> Click save. Go to Edit Application and Note Client ID and Client Secret.
 * <strong>6.</strong> Now in the Wordpress admin go to Settings > MO Login Widget. Copy-paste the Client Id and Client Secret here. That's All. Have fun :)
+
+Features :-
+
+Single Sign On
+miniOrange Single Sign On (SSO) Solution provides easy and seamless access to all enterprise resources with one set of credentials. miniOrange provides Single Sign On (SSO) to any type of devices or applications whether they are in the cloud or on-premise.
+
+Strong Authentication
+Secure your Wordpress site from password thefts using multi factor authentication methods with 15+ authentication types provided by miniOrange. Our multi factor authentication methods prevent unauthorized users from accessing information and resources having password alone as authentication factor. Enabling second factor authentication for wordpress protects you against password thefts.
+
+Fraud Prevention
+miniOrange prevents frauds with its dynamic risk engine in conjunction with enterprise specific security policy. We support a combination of the Device Id, Location and Time of access as multi-factor authentication that can detect and block fraud in real-time, without any interaction with the user.
+
+Why should you pick our Wordpress plugin over other plugins that are available?
+
+1) The most extensive range of 2 factor authentication methods
+2) A single sign on service for 3000+ apps (whether they are standards based or not), besides Wordpress, like Google apps, Salesforce etc.
+3) A fraud prevention service that lets you define trusted devices, location, time of access and other parameters that are extensive
+4) All the above bundled together and available instantly to you as a cloud service
+5) REST APIs that can be called from anywhere anytime
+6) Secure login APIs using standards such as SAML and OpenID Connect
+7) APIs for Single Sign on, 2 Factor Authentication and Fraud Prevention for Any App
+8) Plugin based login for non standard apps
+9) Admin dashboard to manage your account
+10) Self service dashboard for letting end users manage their profiles
+11) Customization for look and feel and functionality
+
+open source single sign on for Wordpress
+sso saml, sso integration Wordpress, sso openid connect
+two step verification Wordpress
+2-step verification Wordpress
+2 step verification
+two factor authentication Wordpress
+strong authentication Wordpress
+mobile authentication Wordpress
 
 For more details - Refer: http://miniorange.com
 
