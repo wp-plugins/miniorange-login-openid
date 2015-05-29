@@ -8,11 +8,11 @@ Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This is a facebook login plugin as widget. This widget also supports default wordpress user login. 
+This is a miniOrange login plugin as widget.
 
 == Description ==
 
-This is a facebook login plugin as widget. This widget also supports default wordpress user login. A facebook application API needs to be created to setup this plugin. The setup is simple. Instructions are provided below.
+This is a miniOrange login plugin as widget. A miniOrange application needs to be created to setup this plugin. The setup is simple. Instructions are provided below.
 
 = Important =
 
@@ -23,7 +23,9 @@ You need to create a new miniOrange OpenID Application to setup this plugin. Ple
 * <strong>3.</strong> From applications Select "OpenID Application".
 * <strong>4.</strong> Enter your wordpress application name, description. And in the redirect URL add : "your-wordpress-site-url/?option=mologin". 
 * <strong>5.</strong> Click save. Go to Edit Application and Note Client ID and Client Secret.
-* <strong>6.</strong> Copy paste the Client Id and Client Secret here. That's All. Have fun :)
+* <strong>6.</strong> Now in the Wordpress admin go to Settings > MO Login Widget. Copy-paste the Client Id and Client Secret here. That's All. Have fun :)
+
+For more details - Refer: http://miniorange.com
 
 == Installation ==
 
@@ -44,7 +46,6 @@ You need to create a new miniOrange OpenID Application to setup this plugin. Ple
 
 1. front end widget view
 2. settings page view
-3. facebook comments addon view
 
 == Changelog ==
 

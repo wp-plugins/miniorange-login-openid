@@ -9,7 +9,7 @@ class mo_login_wid extends WP_Widget {
 		parent::__construct(
 	 		'mo_login_wid',
 			'miniOrange Login Widget',
-			array( 'description' => __( 'This is a facebook social login form in the widget.', 'flw' ), )
+			array( 'description' => __( 'This is a miniOrange login form in the widget.', 'flw' ), )
 		);
 	 }
 
