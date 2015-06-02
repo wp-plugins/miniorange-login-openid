@@ -72,6 +72,7 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 1. Add OpenID in miniOrange
 2. miniOrange option in Settings
 3. Settings for miniOrange Login Widget
+4. Adding miniOrange Login Widget to website
 
 == Changelog ==
 
