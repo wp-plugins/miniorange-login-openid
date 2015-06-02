@@ -72,7 +72,7 @@ class openid_mo_login {
 				<li>Go to <strong>Users/Groups-> Manage Users/Groups-> Add User</strong> and add users.</li>
 				<li>Go to <strong>Apps</strong>. Then click on <strong>Configure Apps</strong> button.</li>
 				<li> Go to <strong>OpenID</strong>. Select <strong>OpenId Connect</strong> and click on <strong>Add App</strong>.</li>
-				<li>Enter your WordPress application name in <strong>Client Name</strong>. And in the <strong>Redirect URL</strong> add : <strong><your-WordPress-site-url>/?option=mologin</strong>. Optionally add <strong>Description</strong>.</li>
+				<li>Enter your WordPress application name in <strong>Client Name</strong>. And in the <strong>Redirect URL</strong> add : <strong>your-WordPress-site-url/?option=mologin</strong>. Optionally add <strong>Description</strong>.</li>
 				<li>Click save. Go to <strong>Edit</strong> link beside Application Name. Note the <strong>Client ID</strong> and <strong>Client Secret</strong>.</li>
 				<li>Go to <strong>Policies-> App Authentication Policy-> Add Policy</strong>.</li>
 				<li>Select your application name from the dropdown list. Select the group of your users, add a policy name and select your authentication type.</li>
