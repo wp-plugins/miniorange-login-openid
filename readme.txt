@@ -8,8 +8,7 @@ Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Secure Single Sign On (SSO) using miniOrange OpenID authentication for WordPress. Wide range of 2-factor authentication methods available which also supports adaptive authentication(risk based access).
-
+Secure Single Sign On (SSO) using miniOrange OpenID Connect for WordPress.
 == Description ==
 
 miniOrange login plugin as widget provides secure login and Single Sign On (SSO) using OpenId Connect protocol. miniOrange not only supports authentication using password, it also supports a wide range of 2-factor authentication methods.
