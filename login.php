@@ -62,15 +62,30 @@ class openid_mo_login {
 	function mo_login_help(){ ?>
 		<p><font color="#FF0000"><strong>Note*</strong></font>
 			    <br />
-		      You need to create a new <b>miniOrange OpenID Application</b> to setup this plugin. Please follow the instructions provided below.
+		      You need to create a new <b>miniOrange OpenID Application</b> to setup this plugin. Please follow the instruction provided below.
 			</p>
 			  <p>
-			 <strong>1.</strong> Go to <a href="https://auth.miniorange.com/moas/login target="_blank">miniOrange Admin Console</a><br/>
-			 <strong>2.</strong> Click on <b>"Apps"</b> menu. Then click on <b>Configure Apps</b> button.<br/>
-			 <strong>3.</strong> From applications Select <b>"OpenID Application"</b>.<br/>
-			 <strong>4.</strong> Enter your wordpress application name, description. And in the redirect URL add : <b>"http://(your-wordpress-site-url)/?option=mologin"</b>. <br/>
-			 <strong>5.</strong> Click save. Go to Edit Application and Note <b>Client ID</b> and <b>Client Secret</b>.<br/>
-			 <strong>6.</strong> Copy paste the Client Id and Client Secret here. That's All. Have fun :)<br/>
+			 <b>Setting up miniOrange OpenID</b>
+			 <ol>
+				<li>Go to <a href="https://auth.miniorange.com/moas/login">miniOrange login</a> . Register a new account by clicking on <strong>Sign up for a Free Trial</strong>.</li>
+				<li>Go back to <a href="https://auth.miniorange.com/moas/login">miniOrange login</a> and login with your credentials.</li>
+				<li>Go to <strong>Users/Groups-> Manage Users/Groups-> Add User</strong> and add users.</li>
+				<li>Go to <strong>Apps</strong>. Then click on <strong>Configure Apps</strong> button.</li>
+				<li> Go to <strong>OpenID</strong>. Select <strong>OpenId Connect</strong> and click on <strong>Add App</strong>.</li>
+				<li>Enter your WordPress application name in <strong>Client Name</strong>. And in the <strong>Redirect URL</strong> add : <strong><your-WordPress-site-url>/?option=mologin</strong>. Optionally add <strong>Description</strong>.</li>
+				<li>Click save. Go to <strong>Edit</strong> link beside Application Name. Note the <strong>Client ID</strong> and <strong>Client Secret</strong>.</li>
+				<li>Go to <strong>Policies-> App Authentication Policy-> Add Policy</strong>.</li>
+				<li>Select your application name from the dropdown list. Select the group of your users, add a policy name and select your authentication type.</li>
+			</ol>
+
+			<b>Plugin installation</b>
+			<ol>
+				<li>Upload <strong>miniorange-login-openid.zip</strong> to the <strong>/wp-content/plugins/</strong> directory.</li>
+				<li>Activate the plugin through the <strong>Plugins</strong> menu in WordPress.</li>
+				<li>Go to <strong>Settings-> MO Login Widget</strong>, and follow the instructions. Copy-paste the <strong>Client Id</strong> and <strong>Client Secret</strong> here.</li>
+				<li>Go to <strong>Appearance->Widgets</strong> ,in available widgets you will find <strong>miniOrange Login Widget</strong>, drag it to chosen widget area where you want it to appear.</li>
+				<li>Now logout and go to your site. You will see a login link where you placed that widget. That's All. Have fun :)</li>
+			</ol>
 
 			  </p>
 			  
