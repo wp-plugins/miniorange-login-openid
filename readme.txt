@@ -9,6 +9,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Secure Single Sign On (SSO) using miniOrange OpenID Connect for WordPress.
+
 == Description ==
 
 miniOrange login plugin as widget provides secure login and Single Sign On (SSO) using OpenId Connect protocol. miniOrange not only supports authentication using password, it also supports a wide range of 2-factor authentication methods.
@@ -70,6 +71,7 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 
 1. Add OpenID in miniOrange
 2. miniOrange option in Settings
+3. Settings for miniOrange Login Widget
 
 == Changelog ==
 
