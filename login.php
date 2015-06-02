@@ -80,9 +80,7 @@ class openid_mo_login {
 
 			<b>Plugin installation</b>
 			<ol>
-				<li>Upload <strong>miniorange-login-openid.zip</strong> to the <strong>/wp-content/plugins/</strong> directory.</li>
-				<li>Activate the plugin through the <strong>Plugins</strong> menu in WordPress.</li>
-				<li>Go to <strong>Settings-> MO Login Widget</strong>, and follow the instructions. Copy-paste the <strong>Client Id</strong> and <strong>Client Secret</strong> here.</li>
+				<li>Copy-paste the <strong>Client Id</strong> and <strong>Client Secret</strong> here.</li>
 				<li>Go to <strong>Appearance->Widgets</strong> ,in available widgets you will find <strong>miniOrange Login Widget</strong>, drag it to chosen widget area where you want it to appear.</li>
 				<li>Now logout and go to your site. You will see a login link where you placed that widget. That's All. Have fun :)</li>
 			</ol>
