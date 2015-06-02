@@ -25,7 +25,7 @@ Secure your WordPress site from password thefts using multi factor authenticatio
 = Fraud Prevention =
 miniOrange prevents frauds with its dynamic risk engine in conjunction with enterprise specific security policy. We support a combination of the Device ID, Location and Time of access as multi-factor authentication that can detect and block fraud in real-time, without any interaction with the user.
 
-Why should you pick our WordPress plugin over other plugins that are available?
+= Why should you pick our WordPress plugin over other plugins that are available? =
 
 1. The most extensive range of 2 factor authentication methods
 2. A single sign on service for 3000+ apps (whether they are standards based or not), besides WordPress, like Google apps, Salesforce etc.
@@ -44,8 +44,8 @@ For more details - Refer: http://miniorange.com
 == Installation ==
 
 = Setting up miniOrange OpenID =
-1. Go to <a href="https://auth.miniorange.com/moas/login">miniOrange login</a> . Register a new account by clicking on `Sign up for a Free Trial`.
-2. Go back to <a href="https://auth.miniorange.com/moas/login">miniOrange login</a> and login with your credentials.
+1. Go to <a href="https://auth.miniorange.com/moas/login" target="_blank">miniOrange login</a> . Register a new account by clicking on `Sign up for a Free Trial`.
+2. Go back to <a href="https://auth.miniorange.com/moas/login" target="_blank">miniOrange login</a> and login with your credentials.
 3. Go to `Users/Groups-> Manage Users/Groups-> Add User` and add users.
 4. Go to `Apps`. Then click on `Configure Apps` button.
 5. Go to `OpenID`. Select `OpenId Connect` and click on `Add App`.
@@ -65,7 +65,7 @@ For more details - Refer: http://miniorange.com
 
 = For any kind of problem =
 
-Please email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>.
+Please email us at info@miniorange.com or <a href="http://miniorange.com/contact" target="_blank">Contact us</a>.
 
 == Screenshots ==
 

@@ -67,8 +67,8 @@ class openid_mo_login {
 			  <p>
 			 <b>Setting up miniOrange OpenID</b>
 			 <ol>
-				<li>Go to <a href="https://auth.miniorange.com/moas/login">miniOrange login</a> . Register a new account by clicking on <strong>Sign up for a Free Trial</strong>.</li>
-				<li>Go back to <a href="https://auth.miniorange.com/moas/login">miniOrange login</a> and login with your credentials.</li>
+				<li>Go to <a href="https://auth.miniorange.com/moas/login" target="_blank">miniOrange login</a> . Register a new account by clicking on <strong>Sign up for a Free Trial</strong>.</li>
+				<li>Go back to <a href="https://auth.miniorange.com/moas/login" target="_blank">miniOrange login</a> and login with your credentials.</li>
 				<li>Go to <strong>Users/Groups-> Manage Users/Groups-> Add User</strong> and add users.</li>
 				<li>Go to <strong>Apps</strong>. Then click on <strong>Configure Apps</strong> button.</li>
 				<li> Go to <strong>OpenID</strong>. Select <strong>OpenId Connect</strong> and click on <strong>Add App</strong>.</li>
