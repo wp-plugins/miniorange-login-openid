@@ -22,6 +22,8 @@ class openid_mo_login {
 	
 	function  mo_login_widget_openid_options () {
 		global $wpdb;
+		$host_name = get_option('host_name');
+		if(!$host_name) { $host_name = 'auth.miniorange.com';}
 		$client_id = get_option('client_id');
 		$client_secret = get_option('client_secret');
 		
@@ -32,6 +34,10 @@ class openid_mo_login {
 		  <tr>
 			<td width="45%"><h1>miniOrange Login Widget</h1></td>
 			<td width="55%">&nbsp;</td>
+		  </tr>
+		   <tr>
+			<td><strong>Host Name:</strong></td>
+			<td><input type="text" name="host_name" value="<?php echo $host_name;?>" /></td>
 		  </tr>
 		  <tr>
 			<td><strong>Client ID:</strong></td>
@@ -157,6 +163,7 @@ class openid_mo_login {
 		if(isset($_POST['option']) and $_POST['option'] == "login_widget_openid_save_settings"){
 			update_option( 'client_id', $_POST['client_id'] );
 			update_option( 'client_secret', $_POST['client_secret'] );
+			update_option( 'host_name', $_POST['host_name']);
 		}
 	}
 	

@@ -3,6 +3,7 @@ require('AuthorizeOpenIDRequest.php');
 class mo_login_wid extends WP_Widget {
 	private $appId,$appSecret;
 	public function __construct() {
+		$this->hostName = get_option('host_name');
 		$this->appId = get_option('client_id');
 		$this->appSecret = get_option('client_secret');
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_styles' ) );
@@ -87,7 +88,7 @@ window.moAsyncInit = function() {
 }(document));
 
 function MOLogin(){
-			window.location.href = "https://auth.miniorange.com/moas/idp/openidsso?client_id=<?php echo get_option('client_id'); ?>&redirect_uri=<?php echo urlencode(site_url() . '?option=mologin'); ?>&state=kienvoeinc&nonce=eourvoeirn&response_type=code";
+			window.location.href = "https://<?php echo get_option('host_name'); ?>/moas/idp/openidsso?client_id=<?php echo get_option('client_id'); ?>&redirect_uri=<?php echo urlencode(site_url() . '?option=mologin'); ?>&state=kienvoeinc&nonce=eourvoeirn&response_type=code";
 	
 }
 </script>
@@ -139,12 +140,12 @@ function mo_login_validate(){
 		global $wpdb;
 		$appid 		= get_option('client_id');
 		$appsecret  = get_option('client_secret');
-		
+		$hostName = get_option('client_id'); 
 		$codeArray= explode("=", $_REQUEST['option']);
 		$code = $codeArray[1]; 
 		$obj = new AuthorizeOpenIDRequest();
 		$obj->authCode = $code;
-		$obj->hostName = 'auth.miniorange.com';
+		$obj->hostName = $hostName;
 		$obj->clientSecret = $appsecret;
 		
 		$token = $obj->sendTokenRequest();
