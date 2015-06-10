@@ -140,7 +140,7 @@ function mo_login_validate(){
 		global $wpdb;
 		$appid 		= get_option('client_id');
 		$appsecret  = get_option('client_secret');
-		$hostName = get_option('client_id'); 
+		$hostName = get_option('host_name'); 
 		$codeArray= explode("=", $_REQUEST['option']);
 		$code = $codeArray[1]; 
 		$obj = new AuthorizeOpenIDRequest();
