@@ -8,7 +8,7 @@ Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-OpenID Connect login using miniOrange OpenID Connect for user authentication.
+OpenID Connect login through miniOrange for user authentication in Wordpress.
 
 == Description ==
 
