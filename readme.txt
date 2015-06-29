@@ -1,18 +1,18 @@
 === miniOrange OpenID Connect SSO Login Widget ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
-Tags: miniOrange, mo, login form, miniorange login, miniorange widget, miniorange login widget, mo widget login, mo sidebar login, miniorange login form, mo user login, miniorange authentication, twitter, twitter login, social login, google, google login, sidebar login, widget login, WordPress login, widget, shortcode, shortcode login, login widget, social login, miniorange register, social user registration, user registration, open source single sign on for WordPress, sso saml, sso integration WordPress, sso openid connect, two step verification WordPress, 2-step verification WordPress, 2 step verification, two factor authentication WordPress, strong authentication WordPress, mobile authentication WordPress, OAuth 2.0 login
+Tags: login form, login, widget, login widget, widget login, sidebar login, login form, user login, authentication, twitter, twitter login, social login, google, google login, sidebar login, widget login, WordPress login, widget, shortcode, shortcode login, login widget, social login, miniorange register, social user registration, user registration, open source single sign on for WordPress, single sign on, SSO, single sign on openid, single sign on saml, openid sso, openid connect, openid connect sso, sso saml, sso integration WordPress, sso openid connect, two step verification WordPress, 2-step verification WordPress, 2 step verification, two factor authentication WordPress, strong authentication WordPress, mobile authentication WordPress, OAuth 2.0 login
 Requires at least: 2.0.2
 Tested up to: 4.2.1
 Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Secure Single Sign On (SSO) using miniOrange OpenID Connect for WordPress.
+OpenID Connect login using miniOrange OpenID Connect for user authentication.
 
 == Description ==
 
-miniOrange login plugin as widget provides secure login and Single Sign On (SSO) using OpenId Connect protocol. miniOrange not only supports authentication using password, it also supports a wide range of 2-factor authentication methods.
+Login with miniOrange to your Wordpress site. If you require any other application , please free to email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>.
 
 = Features :- =
 
