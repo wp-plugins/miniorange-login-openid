@@ -8,7 +8,7 @@ Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simple and secure login for Wordpress through our miniOrange Provider(uses OpenID Connect).
+Simple and secure login for Wordpress through miniOrange(uses OpenID Connect).
 
 == Description ==
 
