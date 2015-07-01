@@ -1,7 +1,7 @@
 === miniOrange OpenID Connect SSO Login Widget ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
-Tags: login form, login, widget, login widget, widget login, sidebar login, login form, user login, authentication, twitter, twitter login, social login, google, google login, sidebar login, widget login, WordPress login, widget, shortcode, shortcode login, login widget, social login, miniorange register, social user registration, user registration, open source single sign on for WordPress, single sign on, SSO, single sign on openid, single sign on saml, openid sso, openid connect, openid connect sso, sso saml, sso integration WordPress, sso openid connect, two step verification WordPress, 2-step verification WordPress, 2 step verification, two factor authentication WordPress, strong authentication WordPress, mobile authentication WordPress, OAuth 2.0 login
+Tags: login form, login, widget, login widget, widget login, sidebar login, login form, user login, authentication, social login , sidebar login, widget login, WordPress login, widget, shortcode, shortcode login, login widget, social login, miniorange register, social user registration, user registration, open source single sign on for WordPress, single sign on, SSO, single sign on openid, single sign on saml, openid sso, openid connect, openid connect sso, sso saml, sso integration WordPress, sso openid connect, two step verification WordPress, 2-step verification WordPress, 2 step verification, two factor authentication WordPress, strong authentication WordPress, mobile authentication WordPress, OAuth 2.0 login
 Requires at least: 2.0.2
 Tested up to: 4.2.1
 Stable tag: 2.2.0
