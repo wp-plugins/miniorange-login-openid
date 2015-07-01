@@ -13,7 +13,7 @@ Simple and secure login for Wordpress through our miniOrange Provider(uses OpenI
 == Description ==
 
 miniOrange allows users to login to your Wordpress website using miniOrange Identity provider to securely Authenticate their account. This means, If you are logged in to miniOrange, you can login to your WordPress site by simply clicking a "Log in with miniOrange" button without having the necessity to provide a username or password!
-If you require any other application or need any help with installing this plugin, please free to email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>.
+<br><br>If you require any other application or need any help with installing this plugin, please free to email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>.
 
 = Features :- =
 
