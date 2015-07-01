@@ -16,14 +16,22 @@ miniOrange allows users to login to your Wordpress website using miniOrange Iden
 
 This plugin also allows Single Sign On between two wordpress sites that you own.
 
-If you require any other application or need any help with installing this plugin, please free to email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>.
+When can this plugin be used?
+
+*	Use this for Single Sign On from one Wordpress site to another site. That is if the user is logged in to one Wordpress site for example, they can simply click their way through one login button to login to another Wordpress site with the same user.
+*	Both Wordpress site share the same secret key. Use this as a simple and secure login from one site to another.
+*	The user must exist on both the Wordpress site. Also, this plugin must be installed on both the Wordpress site, where you want the login to be shared.
+
+
+If you require any other application or need any help with installing this plugin, please free to email us at <b>info@miniorange.com</b> or <a href="http://miniorange.com/contact">Contact us</a>.
 
 = Features :- =
 
 *	Login to your Wordpress site using miniOrange.
+*	Single Sign On between two Wordpress sites.
 *	Valid user registrations verified by miniOrange.
 *	Easily integrate the login link with your Wordpress website using widgets. Just drop it in a desirable place in your website.
-*	Automatic user registration after login if the user is not already registered with your site.
+*	Automatic user registration after login if the user is not already registered with your site if single sign on using miniOrange.
 
 == Installation ==
 
