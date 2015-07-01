@@ -8,22 +8,27 @@ Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-OpenID Connect login through miniOrange for user authentication in Wordpress.
+Simple and secure login for Wordpress through our miniOrange Provider(uses OpenID Connect).
 
 == Description ==
 
-Login with miniOrange to your Wordpress site. If you require any other application , please free to email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>.
+miniOrange allows users to login to your Wordpress website using miniOrange Identity provider to securely Authenticate their account. This means, If you are logged in to miniOrange, you can login to your WordPress site by simply clicking a "Log in with miniOrange" button without having the necessity to provide a username or password!
+If you require any other application or need any help with installing this plugin, please free to email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>.
 
 = Features :- =
 
-= Single Sign On =
-miniOrange Single Sign On (SSO) Solution provides easy and seamless access to all enterprise resources with one set of credentials. miniOrange provides Single Sign On (SSO) to any type of devices or applications whether they are in the cloud or on-premise.
+*	Login to your Wordpress site using miniOrange.
+*	Valid user registrations verified by miniOrange.
+*	Easily integrate the login link with your Wordpress website using widgets. Just drop it in a desirable place in your website.
+*	Automatic user registration after login if the user is not already registered with your site.
 
-= Strong Authentication =
-Secure your WordPress site from password thefts using multi factor authentication methods with 15+ authentication types provided by miniOrange. Our multi factor authentication methods prevent unauthorized users from accessing information and resources having password alone as authentication factor. Enabling second factor authentication for WordPress protects you against password thefts.
+= miniOrange specific features =
 
-= Fraud Prevention =
-miniOrange prevents frauds with its dynamic risk engine in conjunction with enterprise specific security policy. We support a combination of the Device ID, Location and Time of access as multi-factor authentication that can detect and block fraud in real-time, without any interaction with the user.
+*  Single Sign On : miniOrange Single Sign On (SSO) Solution provides easy and seamless access to all enterprise resources with one set of credentials. miniOrange provides Single Sign On (SSO) to any type of devices or applications whether they are in the cloud or on-premise.
+
+*  Strong Authentication : Secure your WordPress site from password thefts using multi factor authentication methods with 15+ authentication types provided by miniOrange. Our multi factor authentication methods prevent unauthorized users from accessing information and resources having password alone as authentication factor. Enabling second factor authentication for WordPress protects you against password thefts.
+
+*  Fraud Prevention : miniOrange prevents frauds with its dynamic risk engine in conjunction with enterprise specific security policy. We support a combination of the Device ID, Location and Time of access as multi-factor authentication that can detect and block fraud in real-time, without any interaction with the user.
 
 = Why should you pick our WordPress plugin over other plugins that are available? =
 
