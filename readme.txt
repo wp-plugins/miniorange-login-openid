@@ -8,11 +8,11 @@ Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simple and secure login for Wordpress through miniOrange(uses OpenID Connect).
+Simple and secure single sign on into your WordPress sites using miniOrange(uses OpenID Connect).
 
 == Description ==
 
-miniOrange allows users to login to your Wordpress website using miniOrange Identity provider to securely Authenticate their account. This means, If you are logged in to miniOrange, you can login to your WordPress site by simply clicking a "Log in with miniOrange" button without having the necessity to provide a username or password!
+miniOrange allows users to single sign on (sso) into your WordPress site using miniOrange Identity provider. This means, you can login to your WordPress site by simply clicking a "Log in with miniOrange" button without having the necessity to provide a username or password!
 
 This plugin also allows Single Sign On between two wordpress sites that you own.
 
@@ -27,7 +27,7 @@ If you require any other application or need any help with installing this plugi
 
 = Features :- =
 
-*	Login to your Wordpress site using miniOrange.
+*	SSO into your WordPress site using miniOrange.
 *	Single Sign On between two Wordpress sites.
 *	Valid user registrations verified by miniOrange.
 *	Easily integrate the login link with your Wordpress website using widgets. Just drop it in a desirable place in your website.
