@@ -1,77 +1,84 @@
-=== Single Sign on between Wordpress sites ===
+=== miniOrange - OpenID Connect Login ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
-Tags: single sign-on, sso, sso integration WordPress, Single Sign on wordpress,SSO wordpress,sso openid connect, sso saml, open source single sign on for WordPress, single sign on openid connect, single sign on saml, sso openid, single sign on openid
+Tags: google,google apps,Google Login,apps,social login, google social login, openid connect,login with google,login with openid connect,google openidconnect,widget login,login widget,user auto register,autologin,auto login,auto user registration, single sign-on,SSO, openid connect sso,authentication,security,2 factor authentication, 2fa
 Requires at least: 2.0.2
 Tested up to: 4.2.1
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simple and secure single sign on into your WordPress sites using miniOrange(uses OpenID Connect).
+Simple secure login using any OpenIDs. E.g you can now login using your Google account. 
 
 == Description ==
 
-miniOrange allows users to single sign on (sso) into your WordPress site using miniOrange Identity provider. This means, you can login to your WordPress site by simply clicking a "Log in with miniOrange" button without having the necessity to provide a username or password!
+One-click login to your WordPress site using Google. This means, if your users are logged in to google, they can login to your WordPress site by simply clicking a `google icon` - no username or password is explicitly required! `No Setup` required in Google. Simply enable Google login and you are done.
 
-This plugin also allows Single Sign On between two wordpress sites that you own.
+miniOrange Google Login Widget uses the latest secure OpenID Connect authentication recommended by Google. Also supports 2-factor authentication if enabled for your google account.
 
-When can this plugin be used?
+All other OpenID Connect providers are supported through a simple email to info@miniorange.com.
 
-*	Use this for Single Sign On from one Wordpress site to another site. That is if the user is logged in to one Wordpress site for example, they can simply click their way through one login button to login to another Wordpress site with the same user.
-*	Both Wordpress site share the same secret key. Use this as a simple and secure login from one site to another.
-*	The user must exist on both the Wordpress site. Also, this plugin must be installed on both the Wordpress site, where you want the login to be shared.
+= Features - =
 
+*	One-click login to your WordPress site using Google account.
+*	Valid user registrations verified by applications such as Google.
+*	Extremely easy integration with Google.
+*	NO SETUP required on Google.
+*	Integrates the login with Google with your WordPress website using widget.
+*	Automatic user registration after login if the user is not already registered with a site.
 
-If you require any other application or need any help with installing this plugin, please free to email us at <b>info@miniorange.com</b> or <a href="http://miniorange.com/contact">Contact us</a>.
+= Website - =
+Check out our website for other plugins <a href="http://miniorange.com/plugins" >http://miniorange.com/plugins</a> or <a href="https://wordpress.org/plugins/search.php?q=miniorange" >click here</a> to see all our listed WordPress plugins.
+For more support or info email us at info@miniorange.com or <a href="http://miniorange.com/contact" >Contact us</a>. You can also submit your query from plugin's configuration page.
 
-= Features :- =
-
-*	SSO into your WordPress site using miniOrange.
-*	Single Sign On between two Wordpress sites.
-*	Valid user registrations verified by miniOrange.
-*	Easily integrate the login link with your Wordpress website using widgets. Just drop it in a desirable place in your website.
-*	Automatic user registration after login if the user is not already registered with your site if single sign on using miniOrange.
 
 == Installation ==
 
-= Setting up miniOrange OpenID =
-1. Go to <a href="https://auth.miniorange.com/moas/login" target="_blank">miniOrange login</a> . Register a new account by clicking on `Sign up for a Free Trial`.
-2. Go back to <a href="https://auth.miniorange.com/moas/login" target="_blank">miniOrange login</a> and login with your credentials.
-3. Go to `Users/Groups-> Manage Users/Groups-> Add User` and add users.
-4. Go to `Apps`. Then click on `Configure Apps` button.
-5. Go to `OpenID`. Select `OpenId Connect` and click on `Add App`.
-6. Enter your WordPress application name in `Client Name`. And in the `Redirect URL` add : `<your-WordPress-site-url>/?option=mologin`. Optionally add `Description`.
-7. Click save. Go to `Edit` link beside Application Name. Note the `Client ID` and `Client Secret`.
-8. Go to `Policies-> App Authentication Policy-> Add Policy`. 
-9. Select your application name from the dropdown list. Select the group of your users, add a policy name and select your authentication type.
+= From your WordPress dashboard =
+1. Visit `Plugins > Add New`.
+2. Search for `miniOrange - OpenID Connect Login`. Find and Install `miniOrange - OpenID Connect Login`.
+3. Activate the plugin from your Plugins page.
 
-= Plugin installation =
-1. Upload `miniorange-login-openid.zip` to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the `Plugins` menu in WordPress.
-3. Go to `Settings-> MO Login Widget`, and follow the instructions. Copy-paste the `Client Id` and `Client Secret` here.
-4. Go to `Appearance->Widgets` ,in available widgets you will find `miniOrange Login Widget`, drag it to chosen widget area where you want it to appear.
-5. Now logout and go to your site. You will see a login link where you placed that widget. That's All. Have fun :)
+= From WordPress.org =
+1. Download miniOrange - Google OpenID Connect.
+2. Unzip and upload the `miniorange-openid-login` directory to your `/wp-content/plugins/` directory.
+3. Activate miniOrange Google OpenID Connect from your Plugins page.
+
+= Once Activated =
+1. Go to `Google OpenID Connect` from side menu and follow the instructions.
+2. Go to `Appearance->Widgets` ,in available widgets you will find `miniOrange OpenID Login` widget, drag it to chosen widget area where you want it to appear.
+3. Now visit your site and you will see login with widget.
+
 
 == Frequently Asked Questions ==
 
-= For any kind of problem =
+= I need login with other OpenID Connect Providers like Salesforce, AWS etc. ? =
+Please email us at info@miniorange.com or <a href="http://miniorange.com/contact" >Contact us</a>. You can also submit your app request from plugin's configuration page.
 
-Please email us at info@miniorange.com or <a href="http://miniorange.com/contact" target="_blank">Contact us</a>.
+= I don't see any Google login widget to enable. I only see Register with miniOrange? =
+Our very simple and easy registration lets you register with miniOrange. Google OpenID Connect login works if you are connected to miniOrange. 
+Once you have registered with a valid email-address and phone number, you will be able to enable Google OpenID Connect login.
+
+= For any other query/problem/request =
+Please email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>. You can also submit your query from plugin's configuration page.
 
 == Screenshots ==
 
-1. Add OpenID in miniOrange
-2. miniOrange option in Settings
-3. Settings for miniOrange Login Widget
-4. Adding miniOrange Login Widget to website
+1. Enable Google login.
+2. Add Google OpenID Connect Widget.
+
 
 == Changelog ==
 
-= 1.0.0 =
-* this is the first release.
+= 1.0.1 =
+* login with google openid connect added to the plugin.
+
+= 1.0 =
+*First version of plugin.
 
 == Upgrade Notice ==
 
-= 1.0 =
-I will update this plugin when ever it is required.
+= 1.0.1 = * login with google openid connect added to the plugin.
+
+= 1.0=
+First version of plugin.
