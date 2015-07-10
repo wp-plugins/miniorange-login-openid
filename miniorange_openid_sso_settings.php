@@ -3,7 +3,7 @@
 * Plugin Name: miniOrange OpenID SSO
 * Plugin URI: http://miniorange.com
 * Description: This plugin enables login with google using openid connect.
-* Version: 1.0.1
+* Version: 2.0
 * Author: miniOrange
 * Author URI: http://miniorange.com
 * License: GPL2
