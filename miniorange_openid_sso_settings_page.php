@@ -9,6 +9,7 @@ function mo_register_openid() {
 			class="nav-tab" href="admin.php?page=mo_openid_settings&tab2=true" id="tab2">Login with other OpenID Connect Providers</a>
 	</h2>
 </div>
+
 <div id="mo_openid_settings">
 
 	<div class="miniorange_container">
@@ -26,10 +27,12 @@ function mo_register_openid() {
 		mo_openid_show_verify_password_page();
 	} else if (trim ( get_option ( 'mo_openid_admin_email' ) ) != '' && trim ( get_option ( 'mo_openid_admin_api_key' ) ) == '' && get_option ( 'mo_openid_new_registration' ) != 'true') {
 		mo_openid_show_verify_password_page();
-	} else if (! mo_openid_is_customer_registered()) {
+	} else if(get_option('mo_openid_registration_status') == 'MO_OTP_DELIVERED_SUCCESS' || get_option('mo_openid_registration_status') == 'MO_OTP_VALIDATION_FAILURE' || get_option('mo_openid_registration_status') == 'MO_OTP_DELIVERED_FAILURE' ){
+		mo_openid_show_otp_verification();
+	}else if (! mo_openid_is_customer_registered()) {
 		delete_option ( 'password_mismatch' );
 		mo_openid_show_new_registration_page();
-	} else {
+	}  else {
 		mo_openid_apps_config();
 	}
 
@@ -50,7 +53,7 @@ function mo_openid_show_new_registration_page() {
 	?>
 
 		<!--Register with miniOrange-->
-					<form name="f" method="post" action="">
+					<form name="f" method="post" action="" id="register-form">
 								<input type="hidden" name="option" value="mo_openid_connect_register_customer" />
 								<div class="mo_table_layout">
 									<div id="toggle1" class="panel_toggle">
@@ -72,8 +75,8 @@ function mo_openid_show_new_registration_page() {
 												<td><input class="mo_table_textbox" type="tel" id="phone"
 													pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" name="phone" required
 													title="Phone with country code eg. +1xxxxxxxxxx"
-													placeholder="Phone with country code eg. +1xxxxxxxxxx"
 													value="<?php echo get_option('mo_openid_admin_phone');?>" /></td>
+												<td></td>
 											</tr>
 											<tr>
 												<td><b><font color="#FF0000">*</font>Password:</b></td>
@@ -96,6 +99,9 @@ function mo_openid_show_new_registration_page() {
 		</form>
 				<script>
 						jQuery("#phone").intlTelInput();
+						var text = "&nbsp;&nbsp;We call only if you need support."
+						jQuery('.intl-number-input').append(text);
+
 		</script>
 		<?php
 }
@@ -186,8 +192,42 @@ function mo_openid_apps_config() {
 					</div>
 		</form>
 
-</div>
+<?php
+}
 
+function mo_openid_show_otp_verification(){
+	?>
+		<!-- Enter otp -->
+		<form name="f" method="post" id="otp_form" action="">
+			<input type="hidden" name="option" value="mo_openid_validate_otp" />
+				<div class="mo_table_layout">
+					<div id="panel2">
+						<table class="mo_settings_table">
+							<h3>Verify Your Email</h3>
+							<tr>
+								<td><b><font color="#FF0000">*</font>Enter OTP:</b></td>
+								<td colspan="2"><input class="mo_table_textbox" autofocus="true" type="text" name="otp_token" required placeholder="Enter OTP" style="width:61%;" pattern="{6,8}"/>
+								 &nbsp;&nbsp;<a style="cursor:pointer;" onclick="document.getElementById('resend_otp_form').submit();">resend otp</a></td>
+							</tr>
+							<tr><td colspan="3"></td></tr>
+							<tr>
+
+								<td>&nbsp;</td>
+								<td style="width:17%">
+								<input type="submit" name="submit" value="Validate OTP" class="button button-primary button-large" /></td>
+
+		</form>
+		<form name="f" id="resend_otp_form" method="post" action="">
+							<td>
+
+							<input type="hidden" name="option" value="mo_openid_resend_otp"/>
+							</td>
+							</tr>
+		</form>
+				</table>
+			</div>
+
+		</div>
 <?php
 }
 function mo_openid_is_customer_registered() {
@@ -214,15 +254,15 @@ function miniorange_openid_support(){
 				<table class="mo_settings_table">
 					<tr>
 						<td><b><font color="#FF0000">*</font>Email:</b></td>
-						<td><input type="email" class="mo_table_textbox" required name="mo_openid_contact_us_email" value="<?php echo get_option("mo_openid_admin_email"); ?>"></td>
+						<td><input type="email" class="mo_table_contact" required name="mo_openid_contact_us_email" value="<?php echo get_option("mo_openid_admin_email"); ?>"></td>
 					</tr>
 					<tr>
 						<td><b>Phone:</b></td>
-						<td><input type="tel" id="contact_us_phone" pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" class="mo_table_textbox" name="mo_openid_contact_us_phone" value="<?php echo get_option('mo_openid_admin_phone');?>"></td>
+						<td><input type="tel" id="contact_us_phone" pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" class="mo_table_contact" name="mo_openid_contact_us_phone" value="<?php echo get_option('mo_openid_admin_phone');?>"></td>
 					</tr>
 					<tr>
 						<td><b><font color="#FF0000">*</font>Query:</b></td>
-						<td><textarea class="mo_table_textbox" onkeypress="mo_openid_valid_query(this)" onkeyup="mo_openid_valid_query(this)" onblur="mo_openid_valid_query(this)" required name="mo_openid_contact_us_query" rows="4" style="resize: vertical;"></textarea></td>
+						<td><textarea class="mo_table_contact" onkeypress="mo_openid_valid_query(this)" onkeyup="mo_openid_valid_query(this)" onblur="mo_openid_valid_query(this)" required name="mo_openid_contact_us_query" rows="4" style="resize: vertical;"></textarea></td>
 					</tr>
 				</table>
 				<br>

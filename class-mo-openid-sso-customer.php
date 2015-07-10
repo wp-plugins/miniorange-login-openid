@@ -26,6 +26,8 @@ class CustomerOpenID {
 
 	public $email;
 	public $phone;
+	private $defaultCustomerKey = "16555";
+	private $defaultApiKey = "fFd2XcvTGDemZvbw1bcUesNJWEqKbbUq";
 
 	function create_customer(){
 
@@ -100,6 +102,134 @@ class CustomerOpenID {
 		curl_close( $ch );
 
 		return $content;
+	}
+
+	function check_customer() {
+			$url 	= get_option('mo_openid_host_name') . "/moas/rest/customer/check-if-exists";
+			$ch 	= curl_init( $url );
+			$email 	= get_option("mo_openid_admin_email");
+
+			$fields = array(
+				'email' 	=> $email,
+			);
+			$field_string = json_encode( $fields );
+
+			curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+			curl_setopt( $ch, CURLOPT_ENCODING, "" );
+			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			curl_setopt( $ch, CURLOPT_AUTOREFERER, true );
+			curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
+
+			curl_setopt( $ch, CURLOPT_MAXREDIRS, 10 );
+			curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json', 'charset: UTF - 8', 'Authorization: Basic' ) );
+			curl_setopt( $ch, CURLOPT_POST, true);
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
+			$content = curl_exec( $ch );
+			if( curl_errno( $ch ) ){
+				echo 'Request Error:' . curl_error( $ch );
+				exit();
+			}
+			curl_close( $ch );
+
+			return $content;
+	}
+
+	function send_otp_token(){
+			$url = get_option('mo_openid_host_name') . '/moas/api/auth/challenge';
+			$ch = curl_init($url);
+			$customerKey =  $this->defaultCustomerKey;
+			$apiKey =  $this->defaultApiKey;
+
+			$username = get_option('mo_openid_admin_email');
+
+			/* Current time in milliseconds since midnight, January 1, 1970 UTC. */
+			$currentTimeInMillis = round(microtime(true) * 1000);
+
+			/* Creating the Hash using SHA-512 algorithm */
+			$stringToHash = $customerKey . $currentTimeInMillis . $apiKey;
+			$hashValue = hash("sha512", $stringToHash);
+
+			$customerKeyHeader = "Customer-Key: " . $customerKey;
+			$timestampHeader = "Timestamp: " . $currentTimeInMillis;
+			$authorizationHeader = "Authorization: " . $hashValue;
+
+			$fields = array(
+				'customerKey' => $customerKey,
+				'email' => $username,
+				'authType' => 'EMAIL',
+			);
+			$field_string = json_encode($fields);
+
+			curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+			curl_setopt( $ch, CURLOPT_ENCODING, "" );
+			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			curl_setopt( $ch, CURLOPT_AUTOREFERER, true );
+			curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
+
+			curl_setopt( $ch, CURLOPT_MAXREDIRS, 10 );
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", $customerKeyHeader,
+												$timestampHeader, $authorizationHeader));
+			curl_setopt( $ch, CURLOPT_POST, true);
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
+			$content = curl_exec($ch);
+
+			if(curl_errno($ch)){
+				echo 'Request Error:' . curl_error($ch);
+			   exit();
+			}
+			curl_close($ch);
+			return $content;
+		}
+
+		function validate_otp_token($transactionId,$otpToken){
+			$url = get_option('mo_openid_host_name') . '/moas/api/auth/validate';
+			$ch = curl_init($url);
+
+			$customerKey =  $this->defaultCustomerKey;
+			$apiKey =  $this->defaultApiKey;
+
+			$username = get_option('mo_openid_admin_email');
+
+			/* Current time in milliseconds since midnight, January 1, 1970 UTC. */
+			$currentTimeInMillis = round(microtime(true) * 1000);
+
+			/* Creating the Hash using SHA-512 algorithm */
+			$stringToHash = $customerKey . $currentTimeInMillis . $apiKey;
+			$hashValue = hash("sha512", $stringToHash);
+
+			$customerKeyHeader = "Customer-Key: " . $customerKey;
+			$timestampHeader = "Timestamp: " . $currentTimeInMillis;
+			$authorizationHeader = "Authorization: " . $hashValue;
+
+			$fields = '';
+
+				//*check for otp over sms/email
+				$fields = array(
+					'txId' => $transactionId,
+					'token' => $otpToken,
+				);
+
+			$field_string = json_encode($fields);
+
+			curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+			curl_setopt( $ch, CURLOPT_ENCODING, "" );
+			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			curl_setopt( $ch, CURLOPT_AUTOREFERER, true );
+			curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
+
+			curl_setopt( $ch, CURLOPT_MAXREDIRS, 10 );
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", $customerKeyHeader,
+												$timestampHeader, $authorizationHeader));
+			curl_setopt( $ch, CURLOPT_POST, true);
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
+			$content = curl_exec($ch);
+
+			if(curl_errno($ch)){
+				echo 'Request Error:' . curl_error($ch);
+			   exit();
+			}
+			curl_close($ch);
+			return $content;
 	}
 
 	function submit_contact_us( $email, $phone, $query ) {

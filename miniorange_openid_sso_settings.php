@@ -85,7 +85,7 @@ class Miniorange_OpenID_SSO {
 			delete_option('mo_openid_admin_password');
 			delete_option('mo_openid_admin_phone');
 			delete_option('mo_openid_verify_customer');
-
+			delete_option('mo_openid_registration_status');
 			delete_option('mo_openid_customer_token');
 			delete_option('mo_openid_message');
 			delete_option('mo_openid_admin_customer_key');
@@ -129,49 +129,57 @@ if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_registe
 			update_option( 'mo_openid_admin_phone', $phone );
 			if( strcmp( $password, $confirmPassword) == 0 ) {
 				update_option( 'mo_openid_admin_password', $password );
+
 				$customer = new CustomerOpenID();
-				$customerKey = json_decode( $customer->create_customer(), true );
+				$content = json_decode($customer->check_customer(), true);
+				if( strcasecmp( $content['status'], 'CUSTOMER_NOT_FOUND') == 0 ){
+					$content = json_decode($customer->send_otp_token(), true);
+										if(strcasecmp($content['status'], 'SUCCESS') == 0) {
+											update_option( 'mo_openid_message', ' A one time passcode is sent to ' . get_option('mo_openid_admin_email') . '. Please enter the otp here to verify your email.');
+											update_option('mo_openid_transactionId',$content['txId']);
+											update_option('mo_openid_registration_status','MO_OTP_DELIVERED_SUCCESS');
 
-				if( strcasecmp( $customerKey['status'], 'CUSTOMER_USERNAME_ALREADY_EXISTS') == 0 ) {
-					$content = $customer->get_customer_key();
-					$customerKey = json_decode( $content, true );
-
-					if( json_last_error() == JSON_ERROR_NONE ) {
-
-						update_option( 'mo_openid_admin_customer_key', $customerKey['id'] );
-						update_option( 'mo_openid_admin_api_key', $customerKey['apiKey'] );
-						update_option( 'mo_openid_customer_token', $customerKey['token'] );
-						update_option('mo_openid_admin_password', '' );
-						update_option( 'mo_openid_message', 'Your account has been retrieved successfully.' );
-						delete_option('mo_openid_verify_customer');
-						delete_option('mo_openid_new_registration');
-						$this->mo_openid_show_success_message();
-
-					} else {
-						update_option( 'mo_openid_message', 'You already have an account with miniOrange. Please enter a valid password.');
-						update_option('mo_openid_verify_customer', 'true');
-						delete_option('mo_openid_new_registration');
-						$this->mo_openid_show_error_message();
-
-					}
-				} else if( strcasecmp( $customerKey['status'], 'SUCCESS' ) == 0 ) {
-					update_option( 'mo_openid_admin_customer_key', $customerKey['id'] );
-					update_option( 'mo_openid_admin_api_key', $customerKey['apiKey'] );
-					update_option( 'mo_openid_customer_token', $customerKey['token'] );
-					update_option('mo_openid_admin_password', '');
-					update_option( 'mo_openid_message', 'Registration complete!');
-					delete_option('mo_openid_verify_customer');
-					delete_option('mo_openid_new_registration');
-					$this->mo_openid_show_success_message();
+											$this->mo_openid_show_success_message();
+										}else{
+											update_option('mo_openid_message','There was an error in sending email. Please click on Resend OTP to try again.');
+											update_option('mo_openid_registration_status','MO_OTP_DELIVERED_FAILURE');
+											$this->mo_openid_show_error_message();
+										}
+				}else{
+						$this->get_current_customer();
 				}
+
 			} else {
 				update_option( 'mo_openid_message', 'Passwords do not match.');
 				delete_option('mo_openid_verify_customer');
 				$this->mo_openid_show_error_message();
 			}
-			update_option('mo_openid_admin_password', '');
+
+		}if(isset($_POST['option']) and $_POST['option'] == "mo_openid_validate_otp"){
+
+			//validation and sanitization
+			$otp_token = '';
+			if( $this->mo_openid_check_empty_or_null( $_POST['otp_token'] ) ) {
+				update_option( 'mo_openid_message', 'Please enter a value in otp field.');
+				update_option('mo_openid_registration_status','MO_OTP_VALIDATION_FAILURE');
+				$this->mo_openid_show_error_message();
+				return;
+			} else{
+				$otp_token = sanitize_text_field( $_POST['otp_token'] );
+			}
+
+			$customer = new CustomerOpenID();
+			$content = json_decode($customer->validate_otp_token(get_option('mo_openid_transactionId'), $otp_token ),true);
+			if(strcasecmp($content['status'], 'SUCCESS') == 0) {
+
+					$this->create_customer();
+			}else{
+				update_option( 'mo_openid_message','Invalid one time passcode. Please enter a valid otp.');
+				update_option('mo_openid_registration_status','MO_OTP_VALIDATION_FAILURE');
+				$this->mo_openid_show_error_message();
+			}
 		}
-			if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_verify_customer" ) {	//register the admin to miniOrange
+       else if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_verify_customer" ) {	//register the admin to miniOrange
 
 						//validation and sanitization
 						$email = '';
@@ -239,8 +247,69 @@ if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_registe
 				}
 			}
 		}
+		else if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_resend_otp" ) {
+
+					    $customer = new CustomerOpenID();
+						$content = json_decode($customer->send_otp_token(), true);
+									if(strcasecmp($content['status'], 'SUCCESS') == 0) {
+											update_option( 'mo_openid_message', ' A one time passcode is sent to ' . get_option('mo_openid_admin_email') . ' again. Please check if you got the otp and enter it here.');
+											update_option('mo_openid_transactionId',$content['txId']);
+											update_option('mo_openid_registration_status','MO_OTP_DELIVERED_SUCCESS');
+											$this->mo_openid_show_success_message();
+									}else{
+											update_option('mo_openid_message','There was an error in sending email. Please click on Resend OTP to try again.');
+											update_option('mo_openid_registration_status','MO_OTP_DELIVERED_FAILURE');
+											$this->mo_openid_show_error_message();
+									}
+
+		}
 
 	}
+
+	function create_customer(){
+				$customer = new CustomerOpenID();
+				$customerKey = json_decode( $customer->create_customer(), true );
+				if( strcasecmp( $customerKey['status'], 'CUSTOMER_USERNAME_ALREADY_EXISTS') == 0 ) {
+							$this->get_current_customer();
+				} else if( strcasecmp( $customerKey['status'], 'SUCCESS' ) == 0 ) {
+												update_option( 'mo_openid_admin_customer_key', $customerKey['id'] );
+												update_option( 'mo_openid_admin_api_key', $customerKey['apiKey'] );
+												update_option( 'mo_openid_customer_token', $customerKey['token'] );
+												update_option('mo_openid_admin_password', '');
+												update_option( 'mo_openid_message', 'Registration complete!');
+												update_option('mo_openid_registration_status','MO_OPENID_REGISTRATION_COMPLETE');
+												delete_option('mo_openid_verify_customer');
+												delete_option('mo_openid_new_registration');
+												$this->mo_openid_show_success_message();
+				}
+				update_option('mo_openid_admin_password', '');
+		}
+
+		function get_current_customer(){
+			$customer = new CustomerOpenID();
+			$content = $customer->get_customer_key();
+			$customerKey = json_decode( $content, true );
+
+						if( json_last_error() == JSON_ERROR_NONE ) {
+
+									update_option( 'mo_openid_admin_customer_key', $customerKey['id'] );
+									update_option( 'mo_openid_admin_api_key', $customerKey['apiKey'] );
+									update_option( 'mo_openid_customer_token', $customerKey['token'] );
+									update_option('mo_openid_admin_password', '' );
+									update_option( 'mo_openid_message', 'Your account has been retrieved successfully.' );
+									delete_option('mo_openid_verify_customer');
+									delete_option('mo_openid_new_registration');
+									$this->mo_openid_show_success_message();
+
+						} else {
+									update_option( 'mo_openid_message', 'You already have an account with miniOrange. Please enter a valid password.');
+									update_option('mo_openid_verify_customer', 'true');
+									delete_option('mo_openid_new_registration');
+									$this->mo_openid_show_error_message();
+
+						}
+
+		}
 
 
 		function miniorange_openid_menu() {

@@ -56,7 +56,7 @@ public function openidloginForm(){
 						?>
 						<p>
 						<a href="javascript:void(0)" onClick="moOpenIdLogin('google');"><img src="<?php echo plugins_url( 'includes/images/icons/google.jpg', __FILE__ )?>" ></a>
-                        <a href="http://miniorange.com/plugins" hidden></a>
+                        <a href="http://miniorange.com/single-sign-on-sso" hidden></a>
 						<?php
 						}
 

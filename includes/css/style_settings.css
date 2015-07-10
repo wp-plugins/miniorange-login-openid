@@ -13,20 +13,17 @@
 	margin-bottom: 10px;
 	height:400px;
 }
-.mo_table_layout td {
-	
-}
+
 .mo_table_layout input['type=text'] {
 	width: 80%;
 }
 .mo_table_layout td strong {
-	margin-left: 10px;
+	
 }
 .mo_eve_table_layout {
 	background-color:#FFFFFF; 
 	border:1px solid #CCCCCC; 
-	padding:0px 10px 0px 10px; 
-	margin:10px 15% 10px 0px;
+	
 }
 .col1 {
 	width: 20%;
@@ -44,6 +41,9 @@
 	padding-left: 10px;
 }
 .mo_table_textbox {
+	width:52%;
+}
+.mo_table_contact {
 	width:80%;
 }
 .mo_settings_table {

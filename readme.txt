@@ -4,7 +4,7 @@ Donate link: http://miniorange.com
 Tags: google,google apps,Google Login,apps,social login, google social login, openid connect,login with google,login with openid connect,google openidconnect,widget login,login widget,user auto register,autologin,auto login,auto user registration, single sign-on,SSO, openid connect sso,authentication,security,2 factor authentication, 2fa
 Requires at least: 2.0.2
 Tested up to: 4.2.1
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,9 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 
 == Changelog ==
 
+= 2.0 =
+* bug fixes and changes in user email verification.
+
 = 1.0.1 =
 * login with google openid connect added to the plugin.
 
@@ -77,6 +80,9 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 *First version of plugin.
 
 == Upgrade Notice ==
+
+= 2.0 =
+* bug fixes and changes in user email verification.
 
 = 1.0.1 = * login with google openid connect added to the plugin.
 
