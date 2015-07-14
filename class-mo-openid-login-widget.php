@@ -47,28 +47,34 @@ class mo_openid_login_wid extends WP_Widget {
 public function openidloginForm(){
 		global $post;
 				$this->error_message();
-				$appsConfigured = get_option('mo_openid_google_enable');
+				$appsConfigured = get_option('mo_openid_google_enable') | get_option('mo_openid_salesforce_enable');
 				if( ! is_user_logged_in() ) {
 
 					if( $appsConfigured ) {
+						$this->mo_openid_load_login_script();
+					?>
+						 <a href="http://miniorange.com/single-sign-on-sso" hidden></a>
+						 <div class="app-icons">
+					<?php
 						if( get_option('mo_openid_google_enable') ) {
-							$this->mo_openid_load_login_script();
 						?>
-						<p>
-						<a href="javascript:void(0)" onClick="moOpenIdLogin('google');"><img src="<?php echo plugins_url( 'includes/images/icons/google.jpg', __FILE__ )?>" ></a>
-                        <a href="http://miniorange.com/single-sign-on-sso" hidden></a>
+						<a href="javascript:void(0)" onClick="moOpenIdLogin('google');" ><img src="<?php echo plugins_url( 'includes/images/icons/google.png', __FILE__ )?>" ></a>
 						<?php
 						}
+						if( get_option('mo_openid_salesforce_enable') ) {
+						?>
+
+						<a href="javascript:void(0)" onClick="moOpenIdLogin('salesforce');"><img src="<?php echo plugins_url( 'includes/images/icons/salesforce.png', __FILE__ )?>" ></a>
+						<?php
+						}
+
 
 					} else {
 						?>
 						<div>No apps configured. Please contact your administrator.</div>
-						<?php
-					}
-					?>
-					</p>
 					<?php
-				} else {
+					}
+				}else {
 					global $current_user;
 			     	get_currentuserinfo();
 					$link_with_username = __('Howdy, ', 'flw') . $current_user->display_name;

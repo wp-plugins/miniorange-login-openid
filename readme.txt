@@ -1,18 +1,18 @@
 === miniOrange - OpenID Connect Login ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
-Tags: google,google apps,Google Login,apps,social login, google social login, openid connect,login with google,login with openid connect,google openidconnect,widget login,login widget,user auto register,autologin,auto login,auto user registration, single sign-on,SSO, openid connect sso,authentication,security,2 factor authentication, 2fa
+Tags: google,google apps,Google Login,apps,social login, google social login, openid connect,login with google,login with openid connect,google openidconnect,widget login,login widget,user auto register,autologin,auto login,auto user registration, single sign-on,SSO, openid connect sso,authentication,security,2 factor authentication, 2fa,salesforce,salesforce login,salesforce openid connect,login with salesforce
 Requires at least: 2.0.2
 Tested up to: 4.2.1
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simple secure login using any OpenIDs. E.g you can now login using your Google account. 
+Simple secure login using any OpenIDs. E.g you can now login using your Google,Salesforce account. 
 
 == Description ==
 
-One-click login to your WordPress site using Google. This means, if your users are logged in to google, they can login to your WordPress site by simply clicking a `google icon` - no username or password is explicitly required! `No Setup` required in Google. Simply enable Google login and you are done.
+One-click login to your WordPress site using Google,Salesforce or any social app. This means, if your users are logged in to google, they can login to your WordPress site by simply clicking a `google icon` - no username or password is explicitly required! `No Setup` required in Google. Simply enable Google login and you are done.
 
 miniOrange Google Login Widget uses the latest secure OpenID Connect authentication recommended by Google. Also supports 2-factor authentication if enabled for your google account.
 
@@ -21,10 +21,10 @@ All other OpenID Connect providers are supported through a simple email to info@
 = Features - =
 
 *	One-click login to your WordPress site using Google account.
-*	Valid user registrations verified by applications such as Google.
-*	Extremely easy integration with Google.
-*	NO SETUP required on Google.
-*	Integrates the login with Google with your WordPress website using widget.
+*	Valid user registrations verified by applications such as Google,Salesforce.
+*	Extremely easy integration with apps like Google,Salesforce.
+*	NO SETUP required on Google,Salesforce.
+*	Integrates the login with apps with your WordPress website using widget.
 *	Automatic user registration after login if the user is not already registered with a site.
 
 = Website - =
@@ -70,6 +70,9 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 
 == Changelog ==
 
+= 3.0 =
+* added login with salesforce as app and bug fixes.
+
 = 2.0 =
 * bug fixes and changes in user email verification.
 
@@ -80,6 +83,9 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 *First version of plugin.
 
 == Upgrade Notice ==
+
+= 3.0 =
+* added login with salesforce as app and bug fixes.
 
 = 2.0 =
 * bug fixes and changes in user email verification.

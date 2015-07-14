@@ -3,7 +3,7 @@
 * Plugin Name: miniOrange OpenID SSO
 * Plugin URI: http://miniorange.com
 * Description: This plugin enables login with google using openid connect.
-* Version: 2.0
+* Version: 3.0
 * Author: miniOrange
 * Author URI: http://miniorange.com
 * License: GPL2
@@ -91,6 +91,9 @@ class Miniorange_OpenID_SSO {
 			delete_option('mo_openid_admin_customer_key');
 			delete_option('mo_openid_admin_api_key');
 		    delete_option('mo_openid_google_enable');
+		    delete_option('mo_openid_salesforce_enable');
+
+
 
 
 		}
@@ -213,18 +216,15 @@ if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_registe
 						}
 						update_option('mo_openid_admin_password', '');
 		}
-		else if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_google" ) {
-
-
+		else if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_enable_apps" ) {
 			if(mo_openid_is_customer_registered()) {
 				update_option( 'mo_openid_google_enable', isset( $_POST['mo_openid_google_enable']) ? $_POST['mo_openid_google_enable'] : 0);
+				update_option( 'mo_openid_salesforce_enable', isset( $_POST['mo_openid_salesforce_enable']) ? $_POST['mo_openid_salesforce_enable'] : 0);
 
 						update_option( 'mo_openid_message', 'Your settings are saved successfully.' );
 						$this->mo_openid_show_success_message();
-
-
 			} else {
-				update_option('mo_openid_message', 'Please register customer before trying to save other configurations');
+				update_option('mo_openid_message', 'Please register an account before trying to enable any app');
 				$this->mo_openid_show_error_message();
 			}
 		}else if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_contact_us_query_option" ) {
@@ -261,6 +261,11 @@ if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_registe
 											update_option('mo_openid_registration_status','MO_OTP_DELIVERED_FAILURE');
 											$this->mo_openid_show_error_message();
 									}
+
+		}else if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_go_back" ){
+				update_option('mo_openid_registration_status','');
+				delete_option('mo_openid_new_registration');
+				delete_option('mo_openid_admin_email');
 
 		}
 
@@ -315,7 +320,7 @@ if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_registe
 		function miniorange_openid_menu() {
 
 			//Add miniOrange plugin to the menu
-			$page = add_menu_page( 'MO OpenID Settings ' . __( 'Configure OpenID', 'mo_openid_settings' ), 'Google OpenID Connect', 'administrator',
+			$page = add_menu_page( 'MO OpenID Settings ' . __( 'Configure OpenID', 'mo_openid_settings' ), 'Social Apps Login', 'administrator',
 			'mo_openid_settings', array( $this, 'mo_login_widget_openid_options' ),plugin_dir_url(__FILE__) . 'includes/images/miniorange_icon.png');
 
 
