@@ -62,24 +62,24 @@ function mo_openid_show_new_registration_page() {
 		<!--Register with miniOrange-->
 					<form name="f" method="post" action="" id="register-form">
 								<input type="hidden" name="option" value="mo_openid_connect_register_customer" />
-								<div class="mo_table_layout">
+								<div class="mo_openid_table_layout">
 									<div id="toggle1" class="panel_toggle">
 										<h3>Register with miniOrange</h3>
 									</div>
 									<div id="panel1">
 										<p>Please enter a valid email id that you have access to. You will be able to move forward after verifying an OTP that we will be send to this email.
 										</p>
-										<table class="mo_settings_table">
+										<table class="mo_openid_settings_table">
 											<tr>
 												<td><b><font color="#FF0000">*</font>Email:</b></td>
-												<td><input class="mo_table_textbox" type="email" name="email"
+												<td><input class="mo_openid_table_textbox" type="email" name="email"
 													required placeholder="person@example.com"
 													value="<?php echo $current_user->user_email;?>" /></td>
 											</tr>
 
 											<tr>
 												<td><b><font color="#FF0000">*</font>Phone number:</b></td>
-												<td><input class="mo_table_textbox" type="tel" id="phone"
+												<td><input class="mo_openid_table_textbox" type="tel" id="phone"
 													pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" name="phone" required
 													title="Phone with country code eg. +1xxxxxxxxxx"
 													value="<?php echo get_option('mo_openid_admin_phone');?>" /></td>
@@ -87,12 +87,12 @@ function mo_openid_show_new_registration_page() {
 											</tr>
 											<tr>
 												<td><b><font color="#FF0000">*</font>Password:</b></td>
-												<td><input class="mo_table_textbox" required type="password"
+												<td><input class="mo_openid_table_textbox" required type="password"
 													name="password" placeholder="Choose your password (Min. length 6)" /></td>
 											</tr>
 											<tr>
 												<td><b><font color="#FF0000">*</font>Confirm Password:</b></td>
-												<td><input class="mo_table_textbox" required type="password"
+												<td><input class="mo_openid_table_textbox" required type="password"
 													name="confirmPassword" placeholder="Confirm your password" /></td>
 											</tr>
 											<tr>
@@ -117,21 +117,21 @@ function mo_openid_show_verify_password_page() {
 			<!--Verify password with miniOrange-->
 		<form name="f" method="post" action="">
 			<input type="hidden" name="option" value="mo_openid_connect_verify_customer" />
-			<div class="mo_table_layout">
+			<div class="mo_openid_table_layout">
 				<div id="toggle1" class="panel_toggle">
 					<h3>Login with miniOrange</h3>
 				</div>
 				<div id="panel1">
 					</p>
-					<table class="mo_settings_table">
+					<table class="mo_openid_settings_table">
 						<tr>
 							<td><b><font color="#FF0000">*</font>Email:</b></td>
-							<td><input class="mo_table_textbox" type="email" name="email"
+							<td><input class="mo_openid_table_textbox" type="email" name="email"
 								required placeholder="person@example.com"
 								value="<?php echo get_option('mo_openid_admin_email');?>" /></td>
 						</tr>
 						<td><b><font color="#FF0000">*</font>Password:</b></td>
-						<td><input class="mo_table_textbox" required type="password"
+						<td><input class="mo_openid_table_textbox" required type="password"
 							name="password" placeholder="Choose your password" /></td>
 						</tr>
 						<tr>
@@ -154,14 +154,14 @@ function mo_openid_apps_config() {
 		<!-- Google configurations -->
 				<form id="form-apps" name="form-apps" method="post" action="">
 					<input type="hidden" name="option" value="mo_openid_enable_apps" />
-					<div class="mo_table_layout">
+					<div class="mo_openid_table_layout">
 
 						<div id="panel2">
-							<table class="mo_settings_table">
+							<table class="mo_openid_settings_table">
 
 								<h3>Enable Login with Social Apps</h3>
 								<tr>
-									<td class="mo_table_td_checkbox"><input type="checkbox"
+									<td class="mo_openid_table_td_checkbox"><input type="checkbox"
 										id="google_enable" name="mo_openid_google_enable" value="1"
 										<?php checked( get_option('mo_openid_google_enable') == 1 );?> /><strong>Login with
 											Google</strong></td>
@@ -178,7 +178,7 @@ function mo_openid_apps_config() {
 								</td>
 								</tr>
 								<tr>
-								<td class="mo_table_td_checkbox"><input type="checkbox"
+								<td class="mo_openid_table_td_checkbox"><input type="checkbox"
 										id="salesforce_enable" name="mo_openid_salesforce_enable" value="1"
 								<?php checked( get_option('mo_openid_salesforce_enable') == 1 );?> /><strong>Login with
 										Salesforce</strong></td>
@@ -226,13 +226,13 @@ function mo_openid_show_otp_verification(){
 		<!-- Enter otp -->
 		<form name="f" method="post" id="otp_form" action="">
 			<input type="hidden" name="option" value="mo_openid_validate_otp" />
-				<div class="mo_table_layout">
+				<div class="mo_openid_table_layout">
 					<div id="panel2">
-						<table class="mo_settings_table">
+						<table class="mo_openid_settings_table">
 							<h3>Verify Your Email</h3>
 							<tr>
 								<td><b><font color="#FF0000">*</font>Enter OTP:</b></td>
-								<td colspan="2"><input class="mo_table_textbox" autofocus="true" type="text" name="otp_token" required placeholder="Enter OTP" style="width:61%;" pattern="{6,8}"/>
+								<td colspan="2"><input class="mo_openid_table_textbox" autofocus="true" type="text" name="otp_token" required placeholder="Enter OTP" style="width:61%;" pattern="{6,8}"/>
 								 &nbsp;&nbsp;<a style="cursor:pointer;" onclick="document.getElementById('resend_otp_form').submit();">resend otp</a></td>
 							</tr>
 							<tr><td colspan="3"></td></tr>
@@ -277,24 +277,24 @@ function miniorange_openid_support(){
 	global $current_user;
 		get_currentuserinfo();
 ?>
-	<div class="mo_support_layout">
+	<div class="mo_openid_support_layout">
 
 			<h3>Support</h3>
 			<p>Need any help? Just send us a query so we can help you.</p>
 			<form method="post" action="">
 				<input type="hidden" name="option" value="mo_openid_contact_us_query_option" />
-				<table class="mo_settings_table">
+				<table class="mo_openid_settings_table">
 					<tr>
 						<td><b><font color="#FF0000">*</font>Email:</b></td>
-						<td><input type="email" class="mo_table_contact" required name="mo_openid_contact_us_email" value="<?php echo get_option("mo_openid_admin_email"); ?>"></td>
+						<td><input type="email" class="mo_openid_table_contact" required name="mo_openid_contact_us_email" value="<?php echo get_option("mo_openid_admin_email"); ?>"></td>
 					</tr>
 					<tr>
 						<td><b>Phone:</b></td>
-						<td><input type="tel" id="contact_us_phone" pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" class="mo_table_contact" name="mo_openid_contact_us_phone" value="<?php echo get_option('mo_openid_admin_phone');?>"></td>
+						<td><input type="tel" id="contact_us_phone" pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" class="mo_openid_table_contact" name="mo_openid_contact_us_phone" value="<?php echo get_option('mo_openid_admin_phone');?>"></td>
 					</tr>
 					<tr>
 						<td><b><font color="#FF0000">*</font>Query:</b></td>
-						<td><textarea class="mo_table_contact" onkeypress="mo_openid_valid_query(this)" onkeyup="mo_openid_valid_query(this)" onblur="mo_openid_valid_query(this)" required name="mo_openid_contact_us_query" rows="4" style="resize: vertical;"></textarea></td>
+						<td><textarea class="mo_openid_table_contact" onkeypress="mo_openid_valid_query(this)" onkeyup="mo_openid_valid_query(this)" onblur="mo_openid_valid_query(this)" required name="mo_openid_contact_us_query" rows="4" style="resize: vertical;"></textarea></td>
 					</tr>
 				</table>
 				<br>
@@ -316,24 +316,24 @@ function miniorange_openid_support(){
 }
 function mo_login_with_openid_help(){
 ?>
-<div class="mo_support_layout">
+<div class="mo_openid_support_layout">
 
 			<h3>Support</h3>
 			<h3>If you want to login with any other app or OpenID Connect Providers like AWS, Paypal etc. Just submit a query here. We will get it for you.</h3>
 			<form method="post" action="">
 				<input type="hidden" name="option" value="mo_openid_contact_us_query_option" />
-				<table class="mo_settings_table">
+				<table class="mo_openid_settings_table">
 					<tr>
 						<td><b><font color="#FF0000">*</font>Email:</b></td>
-						<td><input type="email" class="mo_table_textbox" required name="mo_openid_contact_us_email" value="<?php echo get_option("mo_openid_admin_email"); ?>"></td>
+						<td><input type="email" class="mo_openid_table_textbox" required name="mo_openid_contact_us_email" value="<?php echo get_option("mo_openid_admin_email"); ?>"></td>
 					</tr>
 					<tr>
 						<td><b>Phone:</b></td>
-						<td><input type="tel" id="contact_us_phone" pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" class="mo_table_textbox" name="mo_openid_contact_us_phone" value="<?php echo get_option('mo_openid_admin_phone');?>"></td>
+						<td><input type="tel" id="contact_us_phone" pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" class="mo_openid_table_textbox" name="mo_openid_contact_us_phone" value="<?php echo get_option('mo_openid_admin_phone');?>"></td>
 					</tr>
 					<tr>
 						<td><b><font color="#FF0000">*</font>Query:</b></td>
-						<td><textarea class="mo_table_textbox" onkeypress="mo_openid_valid_query(this)" onkeyup="mo_openid_valid_query(this)" onblur="mo_openid_valid_query(this)" required name="mo_openid_contact_us_query" rows="4" style="resize: vertical;"></textarea></td>
+						<td><textarea class="mo_openid_table_textbox" onkeypress="mo_openid_valid_query(this)" onkeyup="mo_openid_valid_query(this)" onblur="mo_openid_valid_query(this)" required name="mo_openid_contact_us_query" rows="4" style="resize: vertical;"></textarea></td>
 					</tr>
 				</table>
 					<br>

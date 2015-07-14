@@ -1,4 +1,4 @@
- .mo_support_layout{
+ .mo_openid_support_layout{
        width: 93%;
        background-color:#FFFFFF; 
        border:1px solid #CCCCCC; 
@@ -6,7 +6,7 @@
        height:409px;
        
 }
-.mo_table_layout {
+.mo_openid_table_layout {
 	background-color:#FFFFFF; 
 	border:1px solid #CCCCCC; 
 	padding:0px 10px 10px 10px;
@@ -15,85 +15,36 @@
 	min-height:400px;
 }
 
-.mo_table_layout input['type=text'] {
+.mo_openid_table_layout input['type=text'] {
 	width: 80%;
-}
-.mo_table_layout td strong {
-	
-}
-.mo_eve_table_layout {
-	background-color:#FFFFFF; 
-	border:1px solid #CCCCCC; 
-	
-}
-.col1 {
-	width: 20%;
-}
-.panel_toggle {
-	cursor: pointer;
-}
-.panel_toggle:hover {
-	text-decoration: underline;
-}
-.mo_eve_table_textbox {
-	width: 80%;
-}
-.mo_table_td_checkbox {
-	padding-left: 10px;
-}
-.mo_table_textbox {
-	width:52%;
-}
-.mo_table_contact {
-	width:80%;
-}
-.mo_settings_table {
-	width: 100%;
-}
-.mo_settings_table tr td:first-child {
-	width: 30%;
-}
-.mo_heading_margin {
-	margin-left: 0px;
-}
-.error_wid_login {
-    background-color: #FFEBE8;
-    border: 1px dashed #FF0000;
-    color: #FF0000;
-    float: left;
-    font-family: Verdana,Arial,Helvetica,sans-serif;
-    font-weight: 500;
-    padding: 6px;
-	margin-left: 200px;
-    width: 80%;
-	clear:both !important;
 }
 
-.login_wid li{
+.mo_opneid_table_td_checkbox {
+	padding-left: 10px;
+}
+.mo_openid_table_textbox {
+	width:52%;
+}
+.mo_openid_table_contact {
+	width:80%;
+}
+.mo_openid_settings_table {
+	width: 100%;
+}
+.mo_openid_settings_table tr td:first-child {
+	width: 30%;
+}
+
+.openid_login_wid li{
 	margin:5px;
 }
 
-.login_wid{
-		list-style-type:none;
-		border: 1px dashed #999999;
-		width:98%;
-		float:left;
-		padding:5%;
-
-	}
-.login_wid li{
-	width:48%;
-	float:left;
-	margin:2px;
-}
-.openid_social_login{
-	padding:5px 0px 0px 0px;
-	clear:both;
-	width:100% !important;
+.app-icons>a>img{
+	width:40px;
+	height:40px;
 }
 
-.login_wid li input{
-	width:85%;
-	float:left;
-	margin:2px;
+.openid_login_wid li{
+list-style-type:none;
+
 }

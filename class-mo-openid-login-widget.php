@@ -79,7 +79,7 @@ public function openidloginForm(){
 			     	get_currentuserinfo();
 					$link_with_username = __('Howdy, ', 'flw') . $current_user->display_name;
 					?>
-					<div id="logged_in_user" class="login_wid">
+					<div id="logged_in_user" class="openid_login_wid">
 						<li><?php echo $link_with_username;?> | <a href="<?php echo wp_logout_url( site_url() ); ?>" title="<?php _e('Logout','flw');?>"><?php _e('Logout','flw');?></a></li>
 					</div>
 					<?php
@@ -105,7 +105,7 @@ public function openidloginForm(){
 	}
 
 	public function register_plugin_styles() {
-		wp_enqueue_style( 'style_login_widget', plugins_url( 'miniorange-login-openid/includes/css/style_login_widget.css' ) );
+		wp_enqueue_style( 'style_login_widget', plugins_url( 'miniorange-login-openid/includes/css/style_settings.css' ) );
 	}
 
 }
