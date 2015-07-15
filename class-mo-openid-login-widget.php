@@ -53,7 +53,7 @@ public function openidloginForm(){
 					if( $appsConfigured ) {
 						$this->mo_openid_load_login_script();
 					?>
-						 <a href="http://miniorange.com/single-sign-on-sso" hidden></a>
+						 <a href="http://miniorange.com/cloud-identity-broker-service" hidden></a>
 						 <div class="app-icons">
 					<?php
 						if( get_option('mo_openid_google_enable') ) {
