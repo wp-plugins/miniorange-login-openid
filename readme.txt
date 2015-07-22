@@ -39,7 +39,7 @@ For more support or info email us at info@miniorange.com or <a href="http://mini
 
 = From WordPress.org =
 1. Download miniOrange - Social Login.
-2. Unzip and upload the `miniorange-openid-login` directory to your `/wp-content/plugins/` directory.
+2. Unzip and upload the `miniorange-social-login` directory to your `/wp-content/plugins/` directory.
 3. Activate miniOrange - Social Login from your Plugins page.
 
 = Once Activated =
@@ -53,9 +53,9 @@ For more support or info email us at info@miniorange.com or <a href="http://mini
 = I need login with other social apps like Reddit, Paypal, Instagram, etc. ? =
 Please email us at info@miniorange.com or <a href="http://miniorange.com/contact" >Contact us</a>. You can also submit your app request from plugin's configuration page.
 
-= I don't see any Google login widget to enable. I only see Register with miniOrange? =
+= I can't see any Social Login to enable. I only see Register with miniOrange? =
 Our very simple and easy registration lets you register with miniOrange - Social Login works if you are connected to miniOrange. 
-Once you have registered with a valid email-address and phone number, you will be able to enable miniOrange - Social Login.
+Once you have registered with a valid email-address, you will be able to enable miniOrange - Social Login.
 
 = For any other query/problem/request =
 Please email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>. You can also submit your query from plugin's configuration page.
