@@ -1,9 +1,10 @@
 <?php
+
 /**
-* Plugin Name: miniOrange OpenID SSO
+* Plugin Name: miniOrange Social Login
 * Plugin URI: http://miniorange.com
-* Description: This plugin enables login with google using openid connect.
-* Version: 3.0.1
+* Description: This plugin enables login, comment, share and auto-register with social apps.
+* Version: 3.0.2
 * Author: miniOrange
 * Author URI: http://miniorange.com
 * License: GPL2
@@ -17,17 +18,71 @@ require('miniorange_openid_sso_support.php');
 
 
 class Miniorange_OpenID_SSO {
+	
+	
 
 	function __construct() {
+		    
 			add_action( 'admin_menu', array( $this, 'miniorange_openid_menu' ) );
 			add_action( 'admin_init',  array( $this, 'miniorange_openid_save_settings' ) );
-			register_deactivation_hook(__FILE__, array( $this, 'mo_openid_login_deactivate'));
 			add_action( 'plugins_loaded',  array( $this, 'mo_login_widget_text_domain' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'plugin_settings_style' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'plugin_settings_script' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'mo_openid_plugin_settings_style' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'mo_openid_plugin_settings_script' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'mo_openid_plugin_settings_style' ) ,5);
+			// add social login icons to default login form
+			if(get_option('mo_openid_default_login_enable') == 1){
+				add_action( 'login_form', array($this, 'mo_openid_add_social_login') );
+				add_action( 'login_enqueue_scripts', array( $this, 'mo_custom_login_stylesheet' ) );
+			}
+			
+			// add social login icons to default registration form
+			if(get_option('mo_openid_default_register_enable') == 1){
+				
+						add_action( 'register_form', array($this, 'mo_openid_add_social_login') );
+
+			}
+			
+			add_filter( 'the_content', array( $this, 'mo_openid_add_social_share_links' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'mo_openid_plugin_settings_style' ) );
+			
 			remove_action( 'admin_notices', array( $this, 'mo_openid_success_message') );
 		    remove_action( 'admin_notices', array( $this, 'mo_openid_error_message') );
 		}
+		
+		
+	
+		function mo_openid_add_social_login(){
+
+			if(!is_user_logged_in()){
+					$mo_login_widget = new mo_openid_login_wid();
+					$mo_login_widget->openidloginForm();
+			}
+		}
+		
+		function mo_openid_add_social_share_links($content) {
+				global $post;
+                $post_content=$content;
+                $title = str_replace('+', '%20', urlencode($post->post_title));
+                $content=strip_shortcodes( strip_tags( get_the_content() ) );
+                if(strlen($content) >= 100){
+                $excerpt= substr($content, 0, 100).'...';
+                }else{
+                    $excerpt = $content;
+                }
+				
+				if(is_single() && get_option('mo_share_options_enable_post')==1 ){
+						include('class-mo-openid-social-share.php');
+				}else if(is_front_page() && get_option('mo_share_options_enable_home_page')==1){
+						include('class-mo-openid-social-share.php');
+				}else if(is_page() && get_option('mo_share_options_enable_static_pages')==1){
+						include('class-mo-openid-social-share.php');
+				}
+				 return $post_content;
+                
+				 
+					 
+		}
+	
 
 		function mo_openid_success_message() {
 				$class = "error";
@@ -40,15 +95,25 @@ class Miniorange_OpenID_SSO {
 				$message = get_option('mo_openid_message');
 				echo "<div class='" . $class . "'> <p>" . $message . "</p></div>";
 	    }
+		
+		function mo_custom_login_stylesheet()
+		{
+					    wp_enqueue_style( 'login-head',plugins_url('includes/css/mo_openid_style.css', __FILE__), false );
+						 wp_enqueue_style( 'wp-head',plugins_url('includes/css/mo_openid_style.css', __FILE__), false );
+		}
+		
+		
 
-		function plugin_settings_style() {
-				wp_enqueue_style( 'mo_openid_admin_settings_style', plugins_url('includes/css/style_settings.css', __FILE__));
+		function mo_openid_plugin_settings_style() {
+				wp_enqueue_style( 'mo_openid_admin_settings_style', plugins_url('includes/css/mo_openid_style.css', __FILE__));
 				wp_enqueue_style( 'mo_openid_admin_settings_phone_style', plugins_url('includes/css/phone.css', __FILE__));
+				
+				
 			}
 
-			function plugin_settings_script() {
+			function mo_openid_plugin_settings_script() {
 				wp_enqueue_script( 'mo_openid_admin_settings_phone_script', plugins_url('includes/js/phone.js', __FILE__ ));
-		}
+			}
 
 		private function mo_openid_show_success_message() {
 				remove_action( 'admin_notices', array( $this, 'mo_openid_success_message') );
@@ -76,27 +141,7 @@ class Miniorange_OpenID_SSO {
 
 		}
 
-		public function mo_openid_login_deactivate() {
-			//delete all stored key-value pairs
-
-			delete_option('mo_openid_host_name');
-			delete_option('mo_openid_new_registration');
-			delete_option('mo_openid_admin_email');
-			delete_option('mo_openid_admin_password');
-			delete_option('mo_openid_admin_phone');
-			delete_option('mo_openid_verify_customer');
-			delete_option('mo_openid_registration_status');
-			delete_option('mo_openid_customer_token');
-			delete_option('mo_openid_message');
-			delete_option('mo_openid_admin_customer_key');
-			delete_option('mo_openid_admin_api_key');
-		    delete_option('mo_openid_google_enable');
-		    delete_option('mo_openid_salesforce_enable');
-
-
-
-
-		}
+		
 
 		function mo_login_widget_text_domain(){
 			load_plugin_textdomain('flw', FALSE, basename( dirname( __FILE__ ) ) .'/languages');
@@ -220,6 +265,8 @@ if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_registe
 			if(mo_openid_is_customer_registered()) {
 				update_option( 'mo_openid_google_enable', isset( $_POST['mo_openid_google_enable']) ? $_POST['mo_openid_google_enable'] : 0);
 				update_option( 'mo_openid_salesforce_enable', isset( $_POST['mo_openid_salesforce_enable']) ? $_POST['mo_openid_salesforce_enable'] : 0);
+				update_option( 'mo_openid_facebook_enable', isset( $_POST['mo_openid_facebook_enable']) ? $_POST['mo_openid_facebook_enable'] : 0);
+				update_option( 'mo_openid_linkedin_enable', isset( $_POST['mo_openid_linkedin_enable']) ? $_POST['mo_openid_linkedin_enable'] : 0);
 
 						update_option( 'mo_openid_message', 'Your settings are saved successfully.' );
 						$this->mo_openid_show_success_message();
@@ -266,6 +313,16 @@ if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_registe
 				update_option('mo_openid_registration_status','');
 				delete_option('mo_openid_new_registration');
 				delete_option('mo_openid_admin_email');
+
+		}else if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_save_other_settings" ){
+			update_option( 'mo_openid_default_login_enable', isset( $_POST['mo_openid_default_login_enable']) ? $_POST['mo_openid_default_login_enable'] : 0);
+			update_option( 'mo_openid_default_register_enable', isset( $_POST['mo_openid_default_register_enable']) ? $_POST['mo_openid_default_register_enable'] : 0);
+			
+			update_option('mo_share_options_enable_home_page',isset( $_POST['mo_share_options_home_page']) ? $_POST['mo_share_options_home_page'] : 0);
+			update_option('mo_share_options_enable_post',isset( $_POST['mo_share_options_post']) ? $_POST['mo_share_options_post'] : 0);
+			update_option('mo_share_options_enable_static_pages',isset( $_POST['mo_share_options_static_pages']) ? $_POST['mo_share_options_static_pages'] : 0);
+			update_option( 'mo_openid_message', 'Your settings are saved successfully.' );
+			$this->mo_openid_show_success_message();
 
 		}
 
@@ -320,7 +377,7 @@ if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_registe
 		function miniorange_openid_menu() {
 
 			//Add miniOrange plugin to the menu
-			$page = add_menu_page( 'MO OpenID Settings ' . __( 'Configure OpenID', 'mo_openid_settings' ), 'Social Apps Login', 'administrator',
+			$page = add_menu_page( 'MO OpenID Settings ' . __( 'Configure OpenID', 'mo_openid_settings' ), 'miniOrange Social Login', 'administrator',
 			'mo_openid_settings', array( $this, 'mo_login_widget_openid_options' ),plugin_dir_url(__FILE__) . 'includes/images/miniorange_icon.png');
 
 

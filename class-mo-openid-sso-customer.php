@@ -1,5 +1,5 @@
 <?php
-/** miniOrange enables user to log in through OAuth to apps such as Google, EVE Online etc.
+/** miniOrange enables user to log in through OpenID to apps such as Google, Salesforce etc.
     Copyright (C) 2015  miniOrange
 
     This program is free software: you can redistribute it and/or modify
@@ -26,6 +26,7 @@ class CustomerOpenID {
 
 	public $email;
 	public $phone;
+   
 	private $defaultCustomerKey = "16555";
 	private $defaultApiKey = "fFd2XcvTGDemZvbw1bcUesNJWEqKbbUq";
 

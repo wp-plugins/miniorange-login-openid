@@ -40,11 +40,32 @@
 }
 
 .app-icons>a>img{
-	width:40px;
-	height:40px;
+	width:30px !important; 
+	height:30px !important;
+	border-radius: 2px !important;
+	
+	
 }
+.app-share-icons{
+width:30px !important; 
+	height:30px !important;
+	border-radius: 2px !important;
+	display:inline !important;
+}
+
+.app-icons>p{
+margin:0px !important;
+
+}
+
+.app-icons{
+	display:inline !important;
+}
+
 
 .openid_login_wid li{
 list-style-type:none;
 
 }
+
+

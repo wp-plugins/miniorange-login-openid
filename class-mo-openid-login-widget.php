@@ -10,7 +10,7 @@ class mo_openid_login_wid extends WP_Widget {
 
 		parent::__construct(
 	 		'mo_openid_login_wid',
-			'miniOrange OpenID Login Widget',
+			'miniOrange Social Login Widget',
 			array( 'description' => __( 'Login to wordpress with OpenID Connect Providers like google, salesforce.', 'flw' ), )
 		);
 	 }
@@ -19,9 +19,9 @@ class mo_openid_login_wid extends WP_Widget {
 			if( ! session_id() ) {
 				session_start();
 			}
-		}
+	}
 
-		function mo_openid_end_session() {
+	function mo_openid_end_session() {
 			session_destroy();
 	}
 
@@ -35,6 +35,7 @@ class mo_openid_login_wid extends WP_Widget {
 		if ( ! empty( $wid_title ) )
 			echo $args['before_title'] . $wid_title . $args['after_title'];
 			$this->openidloginForm();
+			
 		echo $args['after_widget'];
 	}
 
@@ -44,29 +45,47 @@ class mo_openid_login_wid extends WP_Widget {
 		return $instance;
 	}
 
-public function openidloginForm(){
+	
+    public function openidloginForm(){
 		global $post;
 				$this->error_message();
-				$appsConfigured = get_option('mo_openid_google_enable') | get_option('mo_openid_salesforce_enable');
+				$appsConfigured = get_option('mo_openid_google_enable') | get_option('mo_openid_salesforce_enable') | get_option('mo_openid_facebook_enable') | get_option('mo_openid_linkedin_enable');
 				if( ! is_user_logged_in() ) {
 
 					if( $appsConfigured ) {
 						$this->mo_openid_load_login_script();
 					?>
-						 <a href="http://miniorange.com/cloud-identity-broker-service" hidden></a>
+
+						 <a href="http://miniorange.com/single-sign-on-sso" hidden></a>
 						 <div class="app-icons">
+						 <p>Connect with:</p>
 					<?php
 						if( get_option('mo_openid_google_enable') ) {
 						?>
 						<a href="javascript:void(0)" onClick="moOpenIdLogin('google');" ><img src="<?php echo plugins_url( 'includes/images/icons/google.png', __FILE__ )?>" ></a>
 						<?php
 						}
-						if( get_option('mo_openid_salesforce_enable') ) {
+
+						if( get_option('mo_openid_facebook_enable') ) {
+												?>
+
+							<a href="javascript:void(0)" onClick="moOpenIdLogin('facebook');"><img src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" ></a>
+
+						<?php
+								}
+							    if( get_option('mo_openid_linkedin_enable') ) {
+								?>
+
+								<a href="javascript:void(0)" onClick="moOpenIdLogin('linkedin');"><img src="<?php echo plugins_url( 'includes/images/icons/linkedin.png', __FILE__ )?>" ></a>
+						<?php
+						}if( get_option('mo_openid_salesforce_enable') ) {
 						?>
 
-						<a href="javascript:void(0)" onClick="moOpenIdLogin('salesforce');"><img src="<?php echo plugins_url( 'includes/images/icons/salesforce.png', __FILE__ )?>" ></a>
+						<a href="javascript:void(0)" onClick="moOpenIdLogin('salesforce');"><img  src="<?php echo plugins_url( 'includes/images/icons/salesforce.png', __FILE__ )?>" ></a>
 						<?php
 						}
+						?></div> <br>
+						<?php
 
 
 					} else {
@@ -90,7 +109,15 @@ public function openidloginForm(){
 			?>
 			<script type="text/javascript">
 				function moOpenIdLogin(app_name) {
-					window.location.href = '<?php echo site_url() ?>' + '/?option=generateDynmicUrl&app_name=' + app_name;
+				<?php
+					if ( strpos($_SERVER['REQUEST_URI'],'wp-login.php') !== FALSE){
+							$redirect_url = site_url() . '/wp-login.php';
+
+					}else{
+					    	$redirect_url = site_url();
+    				}
+    			?>
+					window.location.href = '<?php echo $redirect_url; ?>' + '/?option=getMoSocialLogin&app_name=' + app_name;
 				}
 			</script>
 			<?php
@@ -105,13 +132,13 @@ public function openidloginForm(){
 	}
 
 	public function register_plugin_styles() {
-		wp_enqueue_style( 'style_login_widget', plugins_url( 'miniorange-login-openid/includes/css/style_settings.css' ) );
+		wp_enqueue_style( 'style_login_widget', plugins_url( 'miniorange-login-openid/includes/css/mo_openid_style.css' ) );
 	}
 
 }
 
 function mo_openid_login_validate(){
-	if( isset( $_REQUEST['option'] ) and strpos( $_REQUEST['option'], 'generateDynmicUrl' ) !== false ) {
+	if( isset( $_REQUEST['option'] ) and strpos( $_REQUEST['option'], 'getMoSocialLogin' ) !== false ) {
 			$client_name = "wordpress";
 			$timestamp = round( microtime(true) * 1000 );
 			$api_key = get_option('mo_openid_admin_api_key');
@@ -125,7 +152,15 @@ function mo_openid_login_validate(){
 			$token_params_encode = base64_encode( $token_params_encrypt );
 			$token_params = urlencode( $token_params_encode );
 
-			$return_url = urlencode( site_url() . '/?option=moopenid' );
+			if ( strpos($_SERVER['REQUEST_URI'],'wp-login.php') !== FALSE){
+					$return_url = urlencode( site_url() . '/wp-admin/?option=moopenid' );
+					echo $return_url;
+
+			}else{
+    			$return_url = urlencode( site_url() . '/?option=moopenid' );
+    			echo "else";
+    		}
+
 			$url = get_option('mo_openid_host_name') . '/moas/openid-connect/client-app/authenticate?token=' . $token_params . '&id=' . get_option('mo_openid_admin_customer_key') . '&encrypted=true&app=' . $_REQUEST['app_name'] . '_oauth&returnurl=' . $return_url;
 			wp_redirect( $url );
 			exit;
@@ -150,11 +185,17 @@ function mo_openid_login_validate(){
 				}
 			}
 
-			wp_redirect( site_url() );
-			exit;
-
+				$redirect_url = str_replace('?option=moopenid','',$_SERVER['REQUEST_URI']);
+				
+					wp_redirect($redirect_url);
+					exit;
+			
+			}
 		}
-	}
+	
+	
+
+
 
 add_action( 'widgets_init', create_function( '', 'register_widget( "mo_openid_login_wid" );' ) );
 add_action( 'init', 'mo_openid_login_validate' );
