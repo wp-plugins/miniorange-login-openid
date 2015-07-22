@@ -8,7 +8,7 @@ Stable tag: 2.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Login,comment,share using any social account like Google, Facebook, LinkedIn and more. No WordPress account and user credentials to remember.
+Login, comment, share using any social account like Google, Facebook, LinkedIn and more. No WordPress account and user credentials to remember.
 
 == Description ==
 
@@ -34,28 +34,28 @@ For more support or info email us at info@miniorange.com or <a href="http://mini
 
 = From your WordPress dashboard =
 1. Visit `Plugins > Add New`.
-2. Search for `miniOrange - OpenID Connect Login`. Find and Install `miniOrange - OpenID Connect Login`.
+2. Search for `miniOrange - Social Login`. Find and Install `miniOrange - Social Login`.
 3. Activate the plugin from your Plugins page.
 
 = From WordPress.org =
-1. Download miniOrange - Google OpenID Connect.
+1. Download miniOrange - Social Login.
 2. Unzip and upload the `miniorange-openid-login` directory to your `/wp-content/plugins/` directory.
-3. Activate miniOrange Google OpenID Connect from your Plugins page.
+3. Activate miniOrange - Social Login from your Plugins page.
 
 = Once Activated =
-1. Go to `Google OpenID Connect` from side menu and follow the instructions.
-2. Go to `Appearance->Widgets` ,in available widgets you will find `miniOrange OpenID Login` widget, drag it to chosen widget area where you want it to appear.
+1. Go to `miniOrange - Social Login` from side menu and follow the instructions.
+2. Go to `Appearance->Widgets` ,in available widgets you will find `miniOrange - Social Login` widget, drag it to chosen widget area where you want it to appear.
 3. Now visit your site and you will see login with widget.
 
 
 == Frequently Asked Questions ==
 
-= I need login with other OpenID Connect Providers like Salesforce, AWS etc. ? =
+= I need login with other social apps like Reddit, Paypal, Instagram, etc. ? =
 Please email us at info@miniorange.com or <a href="http://miniorange.com/contact" >Contact us</a>. You can also submit your app request from plugin's configuration page.
 
 = I don't see any Google login widget to enable. I only see Register with miniOrange? =
-Our very simple and easy registration lets you register with miniOrange. Google OpenID Connect login works if you are connected to miniOrange. 
-Once you have registered with a valid email-address and phone number, you will be able to enable Google OpenID Connect login.
+Our very simple and easy registration lets you register with miniOrange - Social Login works if you are connected to miniOrange. 
+Once you have registered with a valid email-address and phone number, you will be able to enable miniOrange - Social Login.
 
 = For any other query/problem/request =
 Please email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>. You can also submit your query from plugin's configuration page.
