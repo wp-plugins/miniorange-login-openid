@@ -1,14 +1,14 @@
 === miniOrange - Social Login ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
-Tags: google,facebook,linkedin,salesforce,comments,oauth,social login,social connect,google apps,oauth login,Google Login,openid connect,google social login,facebook login,login with facebook,social network login,linkedin login, login with linkedin, social sharing , social sharing widget, openid connect,login with google,login with openid connect,google openidconnect,widget login,login widget,user auto register,autologin,auto login,auto user registration, single sign-on,SSO, openid connect sso,salesforce login,salesforce openid connect,login with salesforce
+Tags: google,facebook,twitter,linkedin,instagram,microsoft,windows live,amazon,pinterest,salesforce,comments,oauth,social login,social connect,google apps,oauth login,Google Login,openid connect,google social login,facebook login,login with facebook,social network login,linkedin login, login with linkedin, social sharing ,login with microsoft,login with amazon, social sharing widget, openid connect,login with google,login with openid connect,google openidconnect,widget login,login widget,user auto register,autologin,auto login,auto user registration, single sign-on,SSO, openid connect sso,salesforce login,salesforce openid connect,login with salesforce
 Requires at least: 2.0.2
 Tested up to: 4.2.2
-Stable tag: 2.2.5
+Stable tag: 2.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Login, comment, share using any social account like Google, Facebook, LinkedIn and more. No WordPress account and user credentials to remember.
+Login, comment, share using any social account like Google, Facebook, Twitter, LinkedIn and more. No WordPress account and user credentials to remember.
 
 == Description ==
 
@@ -20,8 +20,9 @@ All other Social Apps are supported through a simple email to info@miniorange.co
 
 *	One-click login to your website using any social app.
 *	Valid user registrations verified by applications such as Google,Facebook,LinkedIn,Salesforce.
-*   Choose where to add the Social Login Plugin: login page, registration page or anywhere on your site using our social login widget.
+*   Choose where to add the Social Login Plugin: login page, registration page , comment form or anywhere on your site using our social login widget.
 *   Options to add social sharing widget on homepage, posts, feeds, content pages, etc.
+*	Select your favourite theme for icons.
 *	NO SETUP required on Google,Facebook,LinkedIn,Salesforce.
 *	Automatic user registration after login if the user is not already registered with your site.
 
@@ -50,7 +51,7 @@ For more support or info email us at info@miniorange.com or <a href="http://mini
 
 == Frequently Asked Questions ==
 
-= I need login with other social apps like Reddit, Paypal, Instagram, etc. ? =
+= I need login with other social apps like Yahoo, Paypal etc. ? =
 Please email us at info@miniorange.com or <a href="http://miniorange.com/contact" >Contact us</a>. You can also submit your app request from plugin's configuration page.
 
 = I can't see any Social Login to enable. I only see Register with miniOrange? =
@@ -62,11 +63,14 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 
 == Screenshots ==
 
-1. Select social apps.
-2. Select display options for social login and social sharing widgets.
+1. Social login options.
+2. Social sharing options.
 
 
 == Changelog ==
+
+= 3.0.3 =
+* added more apps to login and share widgets. More theme options to select for social icons.
 
 = 3.0.2 =
 * added login with facebook, linkedin. Added new social sharing widget.
@@ -87,6 +91,9 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 *First version of plugin.
 
 == Upgrade Notice ==
+
+= 3.0.3 =
+* added more apps to login and share widgets. More theme options to select for social icons.
 
 = 3.0.2 =
 * added login with facebook, linkedin. Added new social sharing widget.

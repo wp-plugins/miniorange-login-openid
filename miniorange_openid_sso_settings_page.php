@@ -8,7 +8,7 @@ function mo_register_openid() {
 	<h2 class="nav-tab-wrapper">
 		<a class="nav-tab nav-tab-active"
 			href="admin.php?page=mo_openid_settings" id="tab1">Social Login</a> <a
-			class="nav-tab" href="admin.php?page=mo_openid_settings&tab2=true" id="tab2">Display Settings</a>
+			class="nav-tab disabledTab" href="admin.php?page=mo_openid_settings&tab2=true" id="tab2">Social Sharing</a>
 	</h2>
 </div>
 
@@ -67,7 +67,7 @@ function mo_openid_show_new_registration_page() {
 
 										<h3>Register with miniOrange</h3>
 
-										<p>Please enter a valid email id that you have access to. You will be able to move forward after verifying an OTP that we will be send to this email.
+										<p>Please enter a valid email that you have access to. You will be able to move forward after verifying an OTP that we will be sending to this email.
 										</p>
 										<table class="mo_openid_settings_table">
 											<tr>
@@ -155,61 +155,145 @@ function mo_openid_apps_config() {
 					<div class="mo_openid_table_layout">
 							<table class="mo_openid_settings_table">
 
-								<h3>Select Social Apps</h3>
-								<p>Selecting any app will show that app to social login widget or social share widget. Go to display settings to choose where you would like to show these icons on your site.</p>
-
-								<tr>
-									<td class="mo_openid_table_td_checkbox"><input type="checkbox"
-										id="google_enable" class="app_enable" name="mo_openid_google_enable" value="1"
-										<?php checked( get_option('mo_openid_google_enable') == 1 );?> /><strong>Login with
-											Google</strong></td>
-								</tr>
+								<h3>Select Apps</h3>
+							
 								
+									<tr>
+								<td class="mo_openid_table_td_checkbox"><input type="checkbox"
+										id="amazon_enable" class="app_enable" name="mo_openid_amazon_enable" value="1"
+								<?php checked( get_option('mo_openid_amazon_enable') == 1 );?> /><strong>Amazon</strong>
+								</td>
+								</tr>
+								<tr>
+								<td class="mo_openid_table_td_checkbox"><input type="checkbox"
+										id="instagram_enable" class="app_enable" name="mo_openid_instagram_enable" value="1"
+								<?php checked( get_option('mo_openid_instagram_enable') == 1 );?> /><strong>Instagram</strong>
+								</td>
+								</tr>
 								<tr>
 											<td class="mo_openid_table_td_checkbox"><input type="checkbox"
 															id="facebook_enable" class="app_enable" name="mo_openid_facebook_enable" value="1"
-										<?php checked( get_option('mo_openid_facebook_enable') == 1 );?> /><strong>Login with
-																		Facebook</strong></td>
+										<?php checked( get_option('mo_openid_facebook_enable') == 1 );?> /><strong>Facebook</strong></td>
+								</tr>
+								<tr>
+									<td class="mo_openid_table_td_checkbox"><input type="checkbox"
+										id="google_enable" class="app_enable" name="mo_openid_google_enable" value="1"
+										<?php checked( get_option('mo_openid_google_enable') == 1 );?> /><strong>Google</strong></td>
 								</tr>
 								<tr>
 										<td class="mo_openid_table_td_checkbox"><input type="checkbox"
 															id="linkedin_enable" class="app_enable" name="mo_openid_linkedin_enable" value="1"
-										<?php checked( get_option('mo_openid_linkedin_enable') == 1 );?> /><strong>Login with
-																								LinkedIn</strong></td>
+										<?php checked( get_option('mo_openid_linkedin_enable') == 1 );?> /><strong>LinkedIn</strong></td>
 								</tr>
-									<tr>
+							
+								<tr>
 								<td class="mo_openid_table_td_checkbox"><input type="checkbox"
 										id="salesforce_enable" class="app_enable" name="mo_openid_salesforce_enable" value="1"
-								<?php checked( get_option('mo_openid_salesforce_enable') == 1 );?> /><strong>Login with
-										Salesforce</strong></td>
+								<?php checked( get_option('mo_openid_salesforce_enable') == 1 );?> /><strong>Salesforce</strong></td>
 								</tr>
-							<script>
-																			jQuery('#facebook_enable').change(function() {
-																					jQuery('#form-apps').submit();
-																			});
-																			jQuery('#google_enable').change(function() {
-																				   jQuery('#form-apps').submit();
-																			});
-																			jQuery('#salesforce_enable').change(function() {
-																					jQuery('#form-apps').submit();
-																			});
-																			jQuery('#linkedin_enable').change(function() {
-																					jQuery('#form-apps').submit();
-																			});
-										</script>
+								
+								<tr>
+								<td class="mo_openid_table_td_checkbox"><input type="checkbox"
+										id="windowslive_enable" class="app_enable" name="mo_openid_windowslive_enable" value="1"
+								<?php checked( get_option('mo_openid_windowslive_enable') == 1 );?> /><strong>Windows Live</strong>
+								</td>
+								</tr>
+								
+								<tr>
+									<td>
+									<br>
+										<hr>
+										<h3>Display Options</h3>
+											<p>Please select the options where you want to display the social login icons:</p>
+										</td>
+								</tr>
+
+											<tr>
+												<td class="mo_openid_table_td_checkbox">
+												<input type="checkbox" id="default_login_enable" name="mo_openid_default_login_enable" value="1"
+																<?php checked( get_option('mo_openid_default_login_enable') == 1 );?> /><strong>Default Login Form</strong></td>
+											</tr>
+											<tr>
+															<td class="mo_openid_table_td_checkbox">
+																		<input type="checkbox" id="default_register_enable" name="mo_openid_default_register_enable" value="1"
+															<?php checked( get_option('mo_openid_default_register_enable') == 1 );?> /><strong>Default Registration Form</strong></td>
+											</tr>
+											<tr>
+															<td class="mo_openid_table_td_checkbox">
+																		<input type="checkbox" id="default_comment_enable" name="mo_openid_default_comment_enable" value="1"
+															<?php checked( get_option('mo_openid_default_comment_enable') == 1 );?> /><strong>Comment Form</strong></td>
+											</tr>
+											<tr>
+					<td>
+						<br>
+							<hr>
+							<h3>Theme Options</h3>
+							<p>Please select your favourite theme for icons:</p>
+							</td>
+		</tr>
+		<tr>
+				<td class="mo_openid_table_td_checkbox">
+						<input type="radio"   name="mo_openid_login_theme" class="theme-checkbox" value="oval"
+								<?php checked( get_option('mo_openid_login_theme') == 'oval' );?> /><img src="<?php echo plugins_url( 'includes/images/themes/login-theme-1.png', __FILE__ )?>" /></td>
+				
+		</tr>
+	
+		<tr>
+				<td class="mo_openid_table_td_checkbox">
+						<input type="radio"   class="theme-checkbox" name="mo_openid_login_theme" value="circle"
+								<?php checked( get_option('mo_openid_login_theme') == 'circle' );?> /><img src="<?php echo plugins_url( 'includes/images/themes/login-theme-2.png', __FILE__ )?>" /></td>
+				
+		</tr>
+		
+		<tr>
+				<td class="mo_openid_table_td_checkbox">
+						<input type="radio"  class="theme-checkbox" name="mo_openid_login_theme" value="square"
+								<?php checked( get_option('mo_openid_login_theme') == 'square' );?> /><img src="<?php echo plugins_url( 'includes/images/themes/login-theme-3.png', __FILE__ )?>" /></td>
+		</tr>
+		<tr>
+				<td class="mo_openid_table_td_checkbox">
+						<input type="radio"  class="theme-checkbox" name="mo_openid_login_theme" value="button"
+								<?php checked( get_option('mo_openid_login_theme') == 'button' );?> /><img src="<?php echo plugins_url( 'includes/images/themes/login-theme-4.png', __FILE__ )?>" /></td>
+		</tr>
+		<tr>
+					<td>
+						<br>
+							<hr>
+							<h3>Customize Text For Social Login Buttons / Icons</h3>
+							</td>
+		</tr>
+		</table>
+		<table class="mo_openid_display_table">
+		<tr>
+												<td><b>Enter text to show above login widget:</b></td>
+												<td><input class="mo_openid_table_textbox" type="text" name="mo_openid_login_widget_customize_text"
+													 value="<?php echo get_option('mo_openid_login_widget_customize_text'); ?>" /></td>
+											</tr>
+			
+		
+			<tr>
+												<td><b>Enter text to show on your login buttons (If you have selected theme 4 from above options):</b></td>
+												<td><input class="mo_openid_table_textbox" type="text" name="mo_openid_login_button_customize_text"
+													value="<?php echo get_option('mo_openid_login_button_customize_text'); ?>"  /></td>
+											</tr>
+		
+							<tr>
+											
+											<td><br /><input type="submit" name="submit" value="Save" style="width:100px;"
+													class="button button-primary button-large" /></td>
+											</tr>
 
 
 								<tr>
 									<td colspan="2">
 										<hr>
 										<p>
-											<strong>Instructions:</strong>
+											<h3>Add Login Widget</h3>
 
 										<ol>
 											<li>Go to Appearance->Widgets. Among the available widgets you
 												will find miniOrange Social Login Widget, drag it to the widget area where
 												you want it to appear.</li>
-											<li>Go to display settings to select where you want to show social share widget.</li>
 											<li>Now logout and go to your site. You will see app icon for which you enabled login.
 												</li>
 											<li>Click that app icon and login with your existing app account to wordpress.</li>
@@ -221,6 +305,11 @@ function mo_openid_apps_config() {
 						</div>
 
 		</form>
+		<script>
+jQuery(function() {
+				jQuery('#tab2').removeClass('disabledTab');
+});
+</script>
 
 <?php
 }
@@ -268,32 +357,50 @@ function mo_openid_show_otp_verification(){
 <?php
 }
 function mo_openid_other_settings(){
-	$options = get_option('mo_enable_share_to_apps');
+	
 ?>
 <form name="f" method="post" id="settings_form" action="">
 <input type="hidden" name="option" value="mo_openid_save_other_settings" />
 				<div class="mo_openid_table_layout">
 				<table class="mo_openid_settings_table">
-											<h3>Display Options - Social login icons</h3>
-											<p>Please select the options where you want to display the social login icons:</p>
-
-											<tr>
-												<td class="mo_openid_table_td_checkbox">
-												<input type="checkbox" id="default_login_enable" name="mo_openid_default_login_enable" value="1"
-																<?php checked( get_option('mo_openid_default_login_enable') == 1 );?> /><strong>Default Login Form</strong></td>
-											</tr>
-											<tr>
-															<td class="mo_openid_table_td_checkbox">
-																		<input type="checkbox" id="default_register_enable" name="mo_openid_default_register_enable" value="1"
-															<?php checked( get_option('mo_openid_default_register_enable') == 1 );?> /><strong>Default Registration Form</strong></td>
-											</tr>
+									<h3>Select Social Apps</h3>
+								<tr>
+											<td class="mo_openid_table_td_checkbox"><input type="checkbox"
+															id="facebook_enable" class="app_enable" name="mo_openid_facebook_share_enable" value="1"
+										<?php checked( get_option('mo_openid_facebook_share_enable') == 1 );?> /><strong>Facebook</strong></td>
+								</tr>
+								<tr>
+									<td class="mo_openid_table_td_checkbox"><input type="checkbox"
+										id="google_enable" class="app_enable" name="mo_openid_google_share_enable" value="1"
+										<?php checked( get_option('mo_openid_google_share_enable') == 1 );?> /><strong>Google</strong></td>
+								</tr>
+								<tr>
+										<td class="mo_openid_table_td_checkbox"><input type="checkbox"
+															id="linkedin_enable" class="app_enable" name="mo_openid_linkedin_share_enable" value="1"
+										<?php checked( get_option('mo_openid_linkedin_share_enable') == 1 );?> /><strong>LinkedIn</strong></td>
+								</tr>
+							<tr>
+								<td class="mo_openid_table_td_checkbox"><input type="checkbox"
+										id="pinterest_enable" class="app_enable" name="mo_openid_pinterest_share_enable" value="1"
+								<?php checked( get_option('mo_openid_pinterest_share_enable') == 1 );?> /><strong>Pinterest </strong></td>
+								</tr>
+								<tr>
+								<td class="mo_openid_table_td_checkbox"><input type="checkbox"
+										id="reddit_enable" class="app_enable" name="mo_openid_reddit_share_enable" value="1"
+								<?php checked( get_option('mo_openid_reddit_share_enable') == 1 );?> /><strong>Reddit </strong></td>
+								</tr>
+								<tr>
+								<td class="mo_openid_table_td_checkbox"><input type="checkbox"
+										id="twitter_enable" class="app_enable" name="mo_openid_twitter_share_enable" value="1"
+								<?php checked( get_option('mo_openid_twitter_share_enable') == 1 );?> /><strong>Twitter </strong></td>
+								</tr>	
 									
 
 											<tr>
 											<td>
 											<br>
 											  <hr>
-											<h3>Display Options - Social share icons</h3>
+											<h3>Display Options</h3>
 											<p>Please select the options where you want to display social share icons:</p>
 											</td>
 											</tr>
@@ -308,34 +415,71 @@ function mo_openid_other_settings(){
 		<tr>
 		<td><input type="checkbox" id="mo_apps_static_page"  name="mo_share_options_static_pages"  value="1"
 			<?php checked( get_option('mo_share_options_enable_static_pages') == 1 );?>><strong>Static Pages</strong></td></tr>
+		<tr>
+					<td>
+						<br>
+							<hr>
+							<h3>Theme Options</h3>
+							<p>Please select your favourite theme for icons:</p>
+							</td>
+		</tr>
+		<tr>
+				<td class="mo_openid_table_td_checkbox">
+						<input type="radio"   name="mo_openid_share_theme" class="theme-checkbox" value="oval"
+								<?php checked( get_option('mo_openid_share_theme') == 'oval' );?> /><img src="<?php echo plugins_url( 'includes/images/themes/theme-1.png', __FILE__ )?>" /></td>
+				
+		</tr>
+	
+		<tr>
+				<td class="mo_openid_table_td_checkbox">
+						<input type="radio"   class="theme-checkbox" name="mo_openid_share_theme" value="circle"
+								<?php checked( get_option('mo_openid_share_theme') == 'circle' );?> /><img src="<?php echo plugins_url( 'includes/images/themes/theme-2.png', __FILE__ )?>" /></td>
+				
+		</tr>
 		
+		<tr>
+				<td class="mo_openid_table_td_checkbox">
+						<input type="radio"  class="theme-checkbox" name="mo_openid_share_theme" value="square"
+								<?php checked( get_option('mo_openid_share_theme') == 'square' );?> /><img src="<?php echo plugins_url( 'includes/images/themes/theme-3.png', __FILE__ )?>" /></td>
+		</tr>
+		
+		<tr>
+					<td>
+						<br>
+							<hr>
+							<h3>Customize Text For Social Share Icons</h3>
+							</td>
+		</tr>
+		</table>
+		<table class="mo_openid_display_table">
+		
+		<tr>
+												<td><b>Enter text to show above share widget:</b></td>
+												<td><input class="mo_openid_table_textbox" type="text" name="mo_openid_share_widget_customize_text"
+													value="<?php echo get_option('mo_openid_share_widget_customize_text'); ?>"  /></td>
+											</tr>
+			
+			<tr>
+											
+											<td><br /><input type="submit" name="submit" value="Save" style="width:100px;"
+													class="button button-primary button-large" /></td>
+											</tr>
+
+
+								<tr>
 		
 										
+        </table>
 
-
-				</table>
+				
 			</div>
 
 </form>
 <script>
-	jQuery(function() {
+jQuery(function() {
 				jQuery('#tab1').removeClass("nav-tab-active");
 				jQuery('#tab2').addClass("nav-tab-active");
-		});
-		jQuery('#default_login_enable').change(function() {
-					jQuery('#settings_form').submit();
-		});
-		jQuery('#default_register_enable').change(function() {
-					jQuery('#settings_form').submit();
-		});
-		jQuery('#mo_apps_home_page').change(function() {
-							jQuery('#settings_form').submit();
-		});
-		jQuery('#mo_apps_posts').change(function() {
-							jQuery('#settings_form').submit();
-		});
-		jQuery('#mo_apps_static_page').change(function() {
-							jQuery('#settings_form').submit();
+				
 		});
 </script>
 <?php
@@ -379,6 +523,7 @@ function miniorange_openid_support(){
 			<input type="submit" name="submit" value="Submit Query" style="width:110px;" class="button button-primary button-large" />
 
 			</form>
+			<p>If you want custom features in the plugin, just drop an email at <a href="mailto:info@miniorange.com">info@miniorange.com</a>.</p>
 		</div>
 	</div>
 	</div>

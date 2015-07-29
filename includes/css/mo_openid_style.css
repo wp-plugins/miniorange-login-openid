@@ -28,30 +28,55 @@
 .mo_openid_table_contact {
 	width:80%;
 }
-.mo_openid_settings_table {
+.mo_openid_settings_table,.mo_openid_display_table {
 	width: 100%;
 }
 .mo_openid_settings_table tr td:first-child {
 	width: 30%;
 }
 
+.mo_openid_display_table tr td:first-child{
+	width: 50%;
+}
+
+.mo_openid_display_table .mo_openid_table_textbox {
+	width:70%;
+}
 .openid_login_wid li{
 	margin:5px;
 }
 
 .app-icons>a>img{
-	width:30px !important; 
-	height:30px !important;
-	border-radius: 2px !important;
+	width:35px !important; 
+	height:35px !important;
+	margin:8px 0px;
 	
 	
 }
+
 .app-share-icons{
-width:30px !important; 
-	height:30px !important;
-	border-radius: 2px !important;
-	display:inline !important;
+width:35px !important; 
+height:35px !important;
+display:inline !important;
 }
+
+.share-link{
+	     border-bottom: 0px !important;
+	
+}
+
+.circle{
+	width:40px !important; 
+    height:40px !important;
+	border-radius: 25px !important;
+}
+
+
+.oval{
+border-radius: 4px !important;
+}
+
+
 
 .app-icons>p{
 margin:0px !important;
@@ -66,6 +91,22 @@ margin:0px !important;
 .openid_login_wid li{
 list-style-type:none;
 
+}
+
+.theme-checkbox{
+	vertical-align :super !important;
+}
+
+
+  
+
+a{
+	cursor:pointer;
+	
+}
+
+.disabledTab{
+    pointer-events: none;
 }
 
 
