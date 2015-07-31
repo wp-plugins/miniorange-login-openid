@@ -3,7 +3,7 @@
 class mo_openid_login_wid extends WP_Widget {
 
 	public function __construct() {
-		
+
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_styles' ) );
 		add_action( 'init', array( $this, 'mo_openid_start_session' ) );
 		add_action( 'wp_logout', array( $this, 'mo_openid_end_session' ) );
@@ -35,7 +35,7 @@ class mo_openid_login_wid extends WP_Widget {
 		if ( ! empty( $wid_title ) )
 			echo $args['before_title'] . $wid_title . $args['after_title'];
 			$this->openidloginForm();
-			
+
 		echo $args['after_widget'];
 	}
 
@@ -45,7 +45,7 @@ class mo_openid_login_wid extends WP_Widget {
 		return $instance;
 	}
 
-	
+
     public function openidloginForm(){
 		global $post;
 				$this->error_message();
@@ -58,18 +58,18 @@ class mo_openid_login_wid extends WP_Widget {
 					?>
 
 						 <a href="http://miniorange.com/single-sign-on-sso" hidden></a>
-						 
+
 						 <div class="app-icons">
-						
+
 						 <p><?php   echo get_option('mo_openid_login_widget_customize_text'); ?>
 						</p>
 					<?php
-						
+
 						if( get_option('mo_openid_google_enable') ) {
 							if($selected_theme == 'button'){
 						?>
-						
-							<a href="javascript:void(0)" onClick="moOpenIdLogin('google');" class="btn btn-block btn-social btn-google" > <i class="fa fa-google-plus"></i><?php   
+
+							<a href="javascript:void(0)" onClick="moOpenIdLogin('google');" class="btn btn-block btn-social btn-google" > <i class="fa fa-google-plus"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Google</a>
 						<?php }
 						else{ ?>
@@ -79,38 +79,38 @@ class mo_openid_login_wid extends WP_Widget {
 						}
 
 						if( get_option('mo_openid_facebook_enable') ) {
-							if($selected_theme == 'button'){					
-						?> <a href="javascript:void(0)" onClick="moOpenIdLogin('facebook');" class="btn btn-block btn-social btn-facebook" > <i class="fa fa-facebook"></i><?php   
+							if($selected_theme == 'button'){
+						?> <a href="javascript:void(0)" onClick="moOpenIdLogin('facebook');" class="btn btn-block btn-social btn-facebook" > <i class="fa fa-facebook"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Facebook</a>
 						<?php }
 						else{ ?>
-			
+
 							<a href="javascript:void(0)" onClick="moOpenIdLogin('facebook');"><img src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" class="<?php echo $selected_theme; ?>" ></a>
 
 						<?php }
-						
+
 						}
 					if( get_option('mo_openid_linkedin_enable') ) {
-									if($selected_theme == 'button'){ ?> 
-							<a href="javascript:void(0)" onClick="moOpenIdLogin('linkedin');" class="btn btn-block btn-social btn-linkedin" > <i class="fa fa-linkedin"></i><?php   
+									if($selected_theme == 'button'){ ?>
+							<a href="javascript:void(0)" onClick="moOpenIdLogin('linkedin');" class="btn btn-block btn-social btn-linkedin" > <i class="fa fa-linkedin"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> LinkedIn</a>
 						<?php }
 						else{ ?>
 							<a href="javascript:void(0)" onClick="moOpenIdLogin('linkedin');"><img src="<?php echo plugins_url( 'includes/images/icons/linkedin.png', __FILE__ )?>" class="<?php echo $selected_theme; ?>" ></a>
 								<?php }
 						}if( get_option('mo_openid_instagram_enable') ) {
-							if($selected_theme == 'button'){	?>				
-						 <a href="javascript:void(0)" onClick="moOpenIdLogin('instagram');" class="btn btn-block btn-social btn-instagram" > <i class="fa fa-instagram"></i><?php   
+							if($selected_theme == 'button'){	?>
+						 <a href="javascript:void(0)" onClick="moOpenIdLogin('instagram');" class="btn btn-block btn-social btn-instagram" > <i class="fa fa-instagram"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Instagram</a>
 						<?php }
 						else{ ?>
-						
+
 
 						<a href="javascript:void(0)" onClick="moOpenIdLogin('instagram');"><img  src="<?php echo plugins_url( 'includes/images/icons/instagram.png', __FILE__ )?>" class="<?php echo $selected_theme; ?>"></a>
 						<?php }
 						}if( get_option('mo_openid_amazon_enable') ) {
-							if($selected_theme == 'button'){					
-						?> <a href="javascript:void(0)" onClick="moOpenIdLogin('amazon');" class="btn btn-block btn-social btn-linkedin" ><?php   
+							if($selected_theme == 'button'){
+						?> <a href="javascript:void(0)" onClick="moOpenIdLogin('amazon');" class="btn btn-block btn-social btn-linkedin" ><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Amazon</a>
 						<?php }
 						else{ ?>
@@ -118,22 +118,22 @@ class mo_openid_login_wid extends WP_Widget {
 						<a href="javascript:void(0)" onClick="moOpenIdLogin('amazon');"><img  src="<?php echo plugins_url( 'includes/images/icons/amazon.png', __FILE__ )?>" class="<?php echo $selected_theme; ?>"></a>
 						<?php }
 						}if( get_option('mo_openid_salesforce_enable') ) {
-								if($selected_theme == 'button'){					
-						?> <a href="javascript:void(0)" onClick="moOpenIdLogin('salesforce');" class="btn btn-block btn-social btn-linkedin" > <?php   
+								if($selected_theme == 'button'){
+						?> <a href="javascript:void(0)" onClick="moOpenIdLogin('salesforce');" class="btn btn-block btn-social btn-linkedin" > <?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Salesforce</a>
 						<?php }
 						else{ ?>
-						
+
 
 						<a href="javascript:void(0)" onClick="moOpenIdLogin('salesforce');"><img  src="<?php echo plugins_url( 'includes/images/icons/salesforce.png', __FILE__ )?>" class="<?php echo $selected_theme; ?>" ></a>
 						<?php }
 						}if( get_option('mo_openid_windowslive_enable') ) {
-							if($selected_theme == 'button'){					
-						?> <a href="javascript:void(0)" onClick="moOpenIdLogin('windowslive');" class="btn btn-block btn-social btn-microsoft" > <i class="fa fa-windows"></i><?php   
+							if($selected_theme == 'button'){
+						?> <a href="javascript:void(0)" onClick="moOpenIdLogin('windowslive');" class="btn btn-block btn-social btn-microsoft" > <i class="fa fa-windows"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Microsoft</a>
 						<?php }
 						else{ ?>
-					
+
 
 						<a href="javascript:void(0)" onClick="moOpenIdLogin('windowslive');"><img  src="<?php echo plugins_url( 'includes/images/icons/windowslive.png', __FILE__ )?>" class="<?php echo $selected_theme; ?>"></a>
 						<?php }
@@ -211,11 +211,11 @@ function mo_openid_login_validate(){
 
 			if ( strpos($_SERVER['REQUEST_URI'],'wp-login.php') !== FALSE){
 					$return_url = urlencode( site_url() . '/wp-admin/?option=moopenid' );
-					echo $return_url;
+
 
 			}else{
     			$return_url = urlencode( site_url() . '/?option=moopenid' );
-    			echo "else";
+
     		}
 
 			$url = get_option('mo_openid_host_name') . '/moas/openid-connect/client-app/authenticate?token=' . $token_params . '&id=' . get_option('mo_openid_admin_customer_key') . '&encrypted=true&app=' . $_REQUEST['app_name'] . '_oauth&returnurl=' . $return_url;
@@ -241,20 +241,20 @@ function mo_openid_login_validate(){
 				} else { // this user is a guest
 					  $random_password 	= wp_generate_password( 10, false );
 					  $user_id 			= wp_create_user( $user_email, $random_password, $user_email );
-					  
+
 					  wp_set_auth_cookie( $user_id, true );
 				}
 			}
 
 				$redirect_url = str_replace('?option=moopenid','',$_SERVER['REQUEST_URI']);
-				
+
 					wp_redirect($redirect_url);
 					exit;
-			
+
 			}
 		}
-	
-	
+
+
 
 
 
