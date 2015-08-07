@@ -199,7 +199,7 @@ function mo_openid_login_validate(){
 			$client_name = "wordpress";
 			$timestamp = round( microtime(true) * 1000 );
 			$api_key = get_option('mo_openid_admin_api_key');
-			$token = $client_name . ':' . $timestamp . ':' . $api_key;
+			$token = $client_name . ':' . number_format($timestamp, 0, '', ''). ':' . $api_key;
 
 			$customer_token = get_option('mo_openid_customer_token');
 			$blocksize = 16;

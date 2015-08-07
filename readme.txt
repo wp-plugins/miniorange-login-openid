@@ -1,10 +1,10 @@
 === miniOrange - Social Login ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
-Tags: google,facebook,twitter,linkedin,instagram,microsoft,windows live,amazon,pinterest,salesforce,comments,oauth,social login,social connect,google apps,oauth login,Google Login,openid connect,google social login,facebook login,login with facebook,social network login,linkedin login, login with linkedin, social sharing ,login with microsoft,login with amazon, social sharing widget, openid connect,login with google,login with openid connect,google openidconnect,widget login,login widget,user auto register,autologin,auto login,auto user registration, single sign-on,SSO, openid connect sso,salesforce login,salesforce openid connect,login with salesforce
+Tags: google,facebook,twitter,linkedin,instagram,microsoft,windows live,amazon,pinterest,salesforce,comments,oauth,social login,social connect,google apps,oauth login,Google Login,openid connect,google social login,facebook login,login with facebook,social network login,linkedin login, login with linkedin, social sharing ,social share, social media,login with microsoft,login with amazon, social sharing widget, openid connect,login with google,login with openid connect,google openidconnect,widget login,login widget,user auto register,autologin,auto login,auto user registration, single sign-on,SSO, openid connect sso,salesforce login,salesforce openid connect,login with salesforce
 Requires at least: 2.0.2
-Tested up to: 4.2.2
-Stable tag: 2.2.7
+Tested up to: 4.2.4
+Stable tag: 2.2.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,9 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 
 == Changelog ==
 
+= 3.0.5 =
+* bug fix for older php versions.
+
 = 3.0.4 =
 * bug fixes.
 
@@ -94,6 +97,9 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 *First version of plugin.
 
 == Upgrade Notice ==
+
+= 3.0.5 =
+* bug fix for older php versions.
 
 = 3.0.4 =
 * bug fixes.

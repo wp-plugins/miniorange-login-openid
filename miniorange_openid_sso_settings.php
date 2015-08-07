@@ -4,7 +4,7 @@
 * Plugin Name: miniOrange Social Login
 * Plugin URI: http://miniorange.com
 * Description: This plugin enables login, comment, share and auto-register with social apps.
-* Version: 3.0.4
+* Version: 3.0.5
 * Author: miniOrange
 * Author URI: http://miniorange.com
 * License: GPL2
