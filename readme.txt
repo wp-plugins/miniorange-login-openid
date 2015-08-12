@@ -26,6 +26,13 @@ All other Social Apps are supported through a simple email to info@miniorange.co
 *	NO SETUP required on Google,Facebook,LinkedIn,Salesforce.
 *	Automatic user registration after login if the user is not already registered with your site.
 
+= Registration - =
+Our very simple and easy registration lets you register with miniOrange.
+
+In any other social login, if you are providing login with facebook for example, you will need an App ID for which you will need to create an entire application in facebook and so if you want to provide login with 10 social apps then you need to go and create 10 apps in those social platforms.
+
+Using our plugin you do not need to do that. Just by creating one registration with us, you get social login plus other features.
+
 = Website - =
 Check out our website for other plugins <a href="http://miniorange.com/plugins" >http://miniorange.com/plugins</a> or <a href="https://wordpress.org/plugins/search.php?q=miniorange" >click here</a> to see all our listed WordPress plugins.
 For more support or info email us at info@miniorange.com or <a href="http://miniorange.com/contact" >Contact us</a>. You can also submit your query from plugin's configuration page.
