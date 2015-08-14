@@ -86,12 +86,16 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 
 1. Social login options.
 2. Social sharing options.
+3. Login with square images
+4. Login with square buttons
+5. Login with circle buttons
+6. Square share buttons
+7. Share icons without background
 
 
 == Changelog ==
 
 = 4.0 =
-Feature additions
 *	Set Redirect URL
 *	Vertical floating sharing widget and horizontal sharing widget
 *	Preview & Customize buttons and icons - new themes and option to change size
