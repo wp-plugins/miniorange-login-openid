@@ -147,7 +147,7 @@ class CustomerOpenID {
 			$currentTimeInMillis = round(microtime(true) * 1000);
 
 			/* Creating the Hash using SHA-512 algorithm */
-			$stringToHash = $customerKey . $currentTimeInMillis . $apiKey;
+			$stringToHash = $customerKey . number_format($currentTimeInMillis, 0, '', '') . $apiKey;
 			$hashValue = hash("sha512", $stringToHash);
 
 			$customerKeyHeader = "Customer-Key: " . $customerKey;
@@ -195,7 +195,7 @@ class CustomerOpenID {
 			$currentTimeInMillis = round(microtime(true) * 1000);
 
 			/* Creating the Hash using SHA-512 algorithm */
-			$stringToHash = $customerKey . $currentTimeInMillis . $apiKey;
+			$stringToHash = $customerKey . number_format($currentTimeInMillis, 0, '', '') . $apiKey;
 			$hashValue = hash("sha512", $stringToHash);
 
 			$customerKeyHeader = "Customer-Key: " . $customerKey;

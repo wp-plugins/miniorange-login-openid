@@ -11,6 +11,7 @@
 				delete_option('mo_openid_customer_token');
 				delete_option('mo_openid_message');
 				delete_option('mo_openid_admin_customer_key');
+				delete_option('mo_openid_transactionId');
 				delete_option('mo_openid_google_enable');
 			delete_option('mo_openid_salesforce_enable');
 			delete_option('mo_openid_facebook_enable');
@@ -21,6 +22,8 @@
 			delete_option('mo_openid_default_login_enable');
 			delete_option('mo_openid_default_register_enable');
 			delete_option('mo_openid_default_comment_enable');
+			delete_option('mo_openid_login_redirect');
+			delete_option('mo_openid_login_redirect_url');
 
 			delete_option('mo_share_options_enable_post');
 			delete_option('mo_share_options_enable_home_page');
@@ -36,5 +39,19 @@
 		    delete_option('mo_openid_twitter_share_enable');
 			delete_option('mo_openid_pinterest_share_enable');
 			delete_option('mo_openid_reddit_share_enable');
+			
+			delete_option('mo_login_icon_custom_size');
+			delete_option('mo_login_icon_space' );
+			delete_option('mo_login_icon_custom_width' );
+			delete_option('mo_login_icon_custom_height' );
+			delete_option('mo_openid_login_custom_theme' );
+			delete_option( 'mo_login_icon_custom_color');
+			
+			delete_option('mo_sharing_icon_custom_size');
+			delete_option('mo_sharing_icon_custom_color');
+			delete_option('mo_openid_share_custom_theme');
+			delete_option('mo_sharing_icon_custom_font');
+			delete_option('mo_sharing_icon_space');
+			delete_option( 'mo_openid_message');
 
 ?>

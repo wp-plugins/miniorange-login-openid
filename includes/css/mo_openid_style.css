@@ -23,10 +23,10 @@
 	padding-left: 10px;
 }
 .mo_openid_table_textbox {
-	width:52%;
+	width:80%;
 }
 .mo_openid_table_contact {
-	width:80%;
+	width:95%;
 }
 .mo_openid_settings_table,.mo_openid_display_table {
 	width: 100%;
@@ -50,6 +50,7 @@
 	width:35px !important; 
 	height:35px !important;
 	margin:8px 0px;
+	display: inline !important;
 	
 	
 }
@@ -60,9 +61,15 @@ height:35px !important;
 display:inline !important;
 }
 
+.app-share-icons-grey{
+width:28px !important; 
+height:28px !important;
+display:inline !important;
+}
+
 .share-link{
 	     border-bottom: 0px !important;
-	
+		box-sizing:border-box !important;
 }
 
 .circle{
@@ -98,6 +105,7 @@ list-style-type:none;
 }
 
 
+
   
 
 a{
@@ -110,3 +118,39 @@ a{
 }
 
 
+.grey{
+	  -webkit-filter:grayscale(100%);
+}
+
+.mo_openid_display_interface{
+	width:100%;
+}
+
+.vertical{
+	display:inline-block !important;
+	 overflow: visible;
+    z-index: 10000000;
+    padding: 10px;
+    border-radius: 4px;
+    opacity: 1;
+    -webkit-box-sizing: content-box!important;
+    -moz-box-sizing: content-box!important;
+    box-sizing: content-box!important;
+	width:40px;
+	position:fixed;
+}
+
+.btn-customtheme{
+	color:#ffffff !important;
+}
+
+ .custom-login-button{
+       text-align:center !important;
+       color:white !important;
+       padding-top:8px !important;
+	   box-sizing: border-box !important;
+}
+
+.mo-custom-share-icon{
+	box-sizing:border-box !important;
+}
