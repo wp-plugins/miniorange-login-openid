@@ -18,7 +18,7 @@ Allow your visitors to choose from their favorite social apps to login, comment,
 = Social Sharing =
 Allow anyone to easily share your website content using their favorite social applications such as Facebook, Twitter, Google+, Pinterest, Reddit etc. Customize your buttons to suit to your website's theme. Easy integration with your website with options to add to home page, posts, content pages and anywhere on your site using floating vertical widgets and horizontal widgets.
 
-*Beautiful customizations*
+= Beautiful customizations =
 Customize Social Login and Social Sharing icons using a range of UI options like shape, size and theme.
 
 All other Social Apps are supported through a simple email to info@miniorange.com.
@@ -42,7 +42,7 @@ All other Social Apps are supported through a simple email to info@miniorange.co
 *	Automatic user registration after login if the user is not already registered with your site.
 *	*Support* using email and in-plugin support form
 
-*Registration - How it makes us better*
+= Registration - How it makes us better =
 Our very simple and easy registration lets you register with miniOrange. miniOrange takes care of creating applications for you. In any other social login, if you are providing login with facebook for example, you will need an App ID for which you will need to create an entire application in facebook and so if you want to provide login with 10 social apps then you need to go and create 10 apps in those social platforms. Using our plugin you do not need to do that. Just by creating one registration with us, you get social login plus other features.
 
 = Website - =
@@ -84,12 +84,12 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 
 == Screenshots ==
 
-1. Social login options.
-2. Social sharing options.
+1. Icon customization and preview.
+2. Social login display customizations.
 3. Login with square images
-4. Login with square buttons
+4. Login with icon and text buttons
 5. Login with circle buttons
-6. Square share buttons
+6. Square share buttons - horizontal and vertical
 7. Share icons without background
 
 
