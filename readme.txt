@@ -8,7 +8,7 @@ Stable tag: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Login, comment, share using any social account like Google, Facebook, Twitter and more. No WordPress account and user credentials to remember.
+Social Login, Social Sharing allow login, comment, share using any social account like Google, Facebook, Twitter and more. No WordPress account and user credentials to remember. No application setup required.
 
 == Description ==
 
