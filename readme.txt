@@ -8,7 +8,7 @@ Stable tag: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Social Login, Social Sharing allow login, comment, share using any social account like Google, Facebook, Twitter and more. No WordPress account and user credentials to remember. No application setup required.
+Social Login, Social Sharing allows login, comment, share using any social account like Google, Facebook, Twitter and more. No application setup required.
 
 == Description ==
 
@@ -26,7 +26,7 @@ All other Social Apps are supported through a simple email to info@miniorange.co
 = Features - =
 
 *	Clean and easy to use WordPress admin UI
-*	*NO SETUP required for any login application*
+*	**NO SETUP required for any login application**
 *	One-click login to your website using any social app.
 *	Login to applications - Google, Facebook, LinkedIn, Instagram, Amazon, Salesforce, Windows Live.
 *	Set custom redirect links for your users to point them to 
