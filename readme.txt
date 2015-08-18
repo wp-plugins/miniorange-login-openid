@@ -1,14 +1,14 @@
-=== Social Login, Social Sharing by miniOrange ===
+=== Social Login, Social Share by miniOrange ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
-Tags: woocommerce,social login,social share,social sharing,share with social, connect with social, post to social networks, floating buttons, oauth,openid,login with, facebook, google, twitter, linkedin, instagram, microsoft, windows live, amazon, pinterest, salesforce, widget, reddit,twitter share,social connect,login,facebook share,google login,openid connect,google social login,facebook login,login with facebook,social network login,social network share,accesspress,linkedin login, login with linkedin, woocommerce connect, post to social networks, login with microsoft,login with amazon, social sharing widget, openid connect,login with google,login with openid connect,login widget,user auto register,autologin,auto login,auto user registration, facebook connect, openid connect sso,salesforce login,salesforce openid connect,login with salesforce, social provider
+Tags: woocommerce, free social sharing, Share, share button, increase shares, share buttons, share links, social login, social share, social sharing, twitter share, post to social networks, floating buttons, oauth, openid, facebook, google, twitter, linkedin, instagram, microsoft, windows live, amazon, salesforce, widget, reddit, twitter share, social connect, login, facebook share, google login, openid connect, google social login, facebook login, login with facebook, social network login, social network share, accesspress, linkedin login, login with linkedin, woocommerce connect, post to social networks, login with microsoft,login with amazon, social sharing widget, openid connect,login with google,login with openid connect,login widget,user auto register,autologin,auto login,auto user registration, facebook connect, openid connect sso,salesforce login,salesforce openid connect,login with salesforce, social provider
 Requires at least: 2.0.2
 Tested up to: 4.2.4
 Stable tag: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Social Login, Social Sharing allows login, comment, share using any social account like Google, Facebook, Twitter and more. No app setup required.
+Social Login, Social Sharing allows login, share, comment using any social networks like Twitter, Facebook, Google and more. No app setup required.
 
 == Description ==
 
