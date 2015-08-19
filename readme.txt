@@ -96,37 +96,41 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 == Changelog ==
 
 = 4.0 =
-*	Set Redirect URL
-*	Vertical floating sharing widget and horizontal sharing widget
-*	Preview & Customize buttons and icons - new themes and option to change size
-*	Twitter username for Social Share
+*	Set Redirect URL for Social Login
+*	Vertical floating sharing widget and horizontal sharing widget for Social Sharing
+*	Preview & Customize buttons and icons - new themes and option to change size for Social Login and Social Sharing
+*	Twitter username for Social Sharing
 
 = 3.0.5 =
-* bug fix for older php versions.
+* Bug fix for Social Login for older php versions.
 
 = 3.0.4 =
-* bug fixes.
+* Bug fix for Social Sharing.
 
 = 3.0.3 =
-* added more apps to login and share widgets. More theme options to select for social icons.
+* Added social login applications Instagram, Windows Live, Amazon to widgets
+* Added social sharing applications like Twitter, Pinterest and Reddit. 
+* Added more theme options to select Social Login and Social Sharing icons.
 
 = 3.0.2 =
-* added login with facebook, linkedin. Added new social sharing widget.
+* Added Social login with Facebook, Linkedin. 
+* Added new social sharing buttons for social applications Facebook, Google, LinkedIn.
 
 = 3.0.1 =
-* added login with salesforce as app and bug fixes.
+* Bug fixes for Social Login.
 
 = 3.0 =
-* added login with salesforce as app and bug fixes.
+* added Social login with Salesforce as app
+* Bug fixes
 
 = 2.0 =
-* bug fixes and changes in user email verification.
+* bug fixes and changes for Social Login in user email verification.
 
 = 1.0.1 =
-* login with google openid connect added to the plugin.
+* Social login with Google OpenID Connect added to the plugin.
 
 = 1.0 =
-*First version of plugin.
+* First version of Social Login, Social Sharing plugin.
 
 == Upgrade Notice ==
 
