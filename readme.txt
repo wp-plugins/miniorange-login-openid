@@ -1,7 +1,7 @@
 === Social Login, Social Sharing by miniOrange ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
-Tags: woocommerce, free social sharing, Share, share button, increase shares, share buttons, share links, social login, social share, social sharing, twitter share, post to social networks, floating buttons, oauth, openid, facebook, google, twitter, linkedin, instagram, microsoft, windows live, amazon, salesforce, widget, reddit, twitter share, social connect, login, facebook share, google login, openid connect, google social login, facebook login, login with facebook, social network login, social network share, accesspress, linkedin login, login with linkedin, woocommerce connect, post to social networks, login with microsoft,login with amazon, social sharing widget, openid connect,login with google,login with openid connect,login widget,user auto register,autologin,auto login,auto user registration, facebook connect, openid connect sso,salesforce login,salesforce openid connect,login with salesforce, social provider
+Tags: accesspress, amazon, auto user registration, User Profile Data, auto-login, autologin, Facebook, facebook connect, Facebook Login, facebook share, floating buttons, free social sharing, google, Google Login, google social login, increase shares, instagram, linkedin, linkedin login, login, login widget, login with amazon, login with facebook, login with google, login with linkedin, login with microsoft, login with openid connect, login with salesforce, microsoft, oauth, openid, OpenID Connect, openid connect sso, post to social networks, Reddit, salesforce, salesforce login, salesforce openid connect, Share, share button, share buttons, share links, social connect, social login, social network login, social network share, social provider, social share, social sharing, social sharing widget, twitter, twitter share, user auto register, widget, windows live, woocommerce, woocommerce connect, comments, yahoo, twitter,plugin,wordpress multisite, SSO technology,social sign-in,Social Plugins, social media tools,social commenting,social authentication,social app, social api, Social Analytics, single sign-on, share post,OpenID integration,Online Identity, multisite, mailchimp, LoginRadius, Oneall, Login Radius, One all, Hubspot,capture social data, captcha, bbPress, buddypress
 Requires at least: 2.0.2
 Tested up to: 4.3
 Stable tag: 4.0
@@ -11,21 +11,27 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Social Login, Social Sharing allows login, share, comment using any social networks like Twitter, Facebook, Google and more. No app setup required.
 
 == Description ==
+= Social Login, Social Sharing =
+Social Login, Social Sharing plugin is professionally developed by miniOrange and is a WordPress (BuddyPress compatible) plugin that allows your visitors to comment, login and register with many Social Networks like for example Facebook, Twitter, Google, LinkedIn, WindowsLive, Instagram, Salesforce and Amazon.
 
 = Social Login =
-Allow your visitors to choose from their favorite social login apps to login, comment, share and auto-register with your website or blog. 
+This plugin enables Social Login. Allow your visitors to choose from their favorite social login apps to login, comment, share and auto-register with your website or blog. 
 
 One-click login to your WordPress site using social login applications like Google, Facebook, LinkedIn, Instagram, Amazon, Salesforce, Windows Live. This means, if your user is logged in to Google, user can comment on any blog or site by simply clicking the `google icon` - no username or password is explicitly required! Simply enable Social Login, *no setup* of application is required and you are done.
-
-Options to add Social login on login page, registration page and comments section. Add `miniOrange - Social Login` widget to add social login in widget area.
 
 = Social Sharing =
 Allow anyone to easily share your website content using their favorite social sharing applications. Social Sharing applications include Facebook, Twitter, Google+, Pinterest, Reddit. Customize your social sharing buttons to suit to your website's theme.
 
-Easy integration with your website with options to add social sharing applications to home page, posts, content pages and anywhere on your site using widgets. For Social Sharing, use `miniOrange Sharing - Vertical` for floating vertical widget and `miniOrange Sharing - Horizontal` for horizontal widgets are available.
+See the Screenshots section for visuals on social sharing.
+
+= Easy Integration =
+Easy integration with your website with options to add Social login on login page, registration page and comments section. Add `miniOrange - Social Login` widget to add social login in widget area. Add social sharing applications to home page, posts, content pages and anywhere on your site using widgets. For Social Sharing, use `miniOrange Sharing - Vertical` for floating vertical widget and `miniOrange Sharing - Horizontal` for horizontal widget to add social sharing in widget area.
 
 = Beautiful customizations =
 Customize Social Login and Social Sharing icons using a range of UI options like shape, size and theme.
+
+= Single sign-on =
+Single Sign-On using Social Login creates a single authentication system for multiple web properties allowing users to navigate websites with a single account.
 
 All other Social Login and Social Sharing applications are supported through a simple email to info@miniorange.com.
 
@@ -48,10 +54,15 @@ All other Social Login and Social Sharing applications are supported through a s
 *	Automatic user registration after social login if the user is not already registered with your site.
 *	**Support** using email and in-plugin support form
 
-= Registration - How it makes us better =
+= Registration - How is this plugin better than other plugins available =
 Our very simple and easy registration lets you register with miniOrange. miniOrange takes care of creating applications for you in Social Login. In any other social login plugin, if you are providing login with a social application, facebook for example, you will need an App ID for which you will need to create an entire application in facebook. So if you want to provide login with 10 different social applications then you need to go and create 10 applications in those social platforms. Using our plugin, Social Login, Social Sharing by miniOrange, you do not need to do that. Just by creating one registration with us, you get Social login plus other features.
 
 = Website - =
+These additional features are available upon request. Send an email to info@miniorange.com if you need any of these features. 
+
+User Profile Data, integration with external softwares like salesforce, box, office 365, mailchimp etc, and Social Analytics.
+This can also captures users’ profile data, with their permission, and automatically creates a profile in miniOrange database and you can download it using a CSV file or a PDF file.
+
 Check out our website for other plugins <a href="http://miniorange.com/plugins" >http://miniorange.com/plugins</a> or <a href="https://wordpress.org/plugins/search.php?q=miniorange" >click here</a> to see all our listed WordPress plugins.
 For more support or info email us at info@miniorange.com or <a href="http://miniorange.com/contact" >Contact us</a>. You can also submit your query from the plugin's configuration page.
 
@@ -87,6 +98,9 @@ Once you have registered with a valid email-address, you will be able to enable 
 
 = I tried to login with Facebook using Social Login but I got logged in with my Google Account. =
 This might happen during Social Login with Facebook if your primary email address registered with Facebook is of a Google Account.
+
+= I have added miniOrange Sharing - Vertical widget to my page. How can I change its position in the page?  =
+The vertical sharing widget for Social Sharing gives a couple of options to change its position in the page and also the space between icons. You can align the social sharing widget on the left or right side of the page. You can view these options from Appearance->Widgets or editing the widget options in Customizer.
 
 = For any other query/problem/request =
 Please email us at info@miniorange.com or <a href="http://miniorange.com/contact">Contact us</a>. You can also submit your query from the Social plugin's configuration page.
