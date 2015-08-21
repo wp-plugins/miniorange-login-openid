@@ -12,7 +12,7 @@ Social Login, Social Sharing allows login, share, comment using any social netwo
 
 == Description ==
 = Social Login, Social Sharing =
-Social Login, Social Sharing plugin is professionally developed by miniOrange and is a WordPress (BuddyPress compatible) plugin that allows your visitors to comment, login and register with many Social Networks like for example Facebook, Twitter, Google, LinkedIn, WindowsLive, Instagram, Salesforce and Amazon.
+Social Login, Social Sharing plugin is professionally developed by miniOrange and is a WordPress (BuddyPress compatible) plugin that allows your visitors to comment, share, login and register with many Social Networks like for example Facebook, Twitter, Google, LinkedIn, WindowsLive, Instagram, Salesforce and Amazon.
 
 = Social Login =
 This plugin enables Social Login. Allow your visitors to choose from their favorite social login apps to login, comment, share and auto-register with your website or blog. 
@@ -22,7 +22,7 @@ One-click login to your WordPress site using social login applications like Goog
 = Social Sharing =
 Allow anyone to easily share your website content using their favorite social sharing applications. Social Sharing applications include Facebook, Twitter, Google+, Pinterest, Reddit. Customize your social sharing buttons to suit to your website's theme.
 
-See the Screenshots section for visuals on social sharing.
+See the <a href="https://wordpress.org/plugins/miniorange-login-openid/screenshots/">Screenshots</a> section for visuals on social sharing.
 
 = Easy Integration =
 Easy integration with your website with options to add Social login on login page, registration page and comments section. Add `miniOrange - Social Login` widget to add social login in widget area. Add social sharing applications to home page, posts, content pages and anywhere on your site using widgets. For Social Sharing, use `miniOrange Sharing - Vertical` for floating vertical widget and `miniOrange Sharing - Horizontal` for horizontal widget to add social sharing in widget area.
