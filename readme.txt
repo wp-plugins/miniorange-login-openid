@@ -8,7 +8,7 @@ Stable tag: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Social Login, Social Sharing allows login, share, comment using any social networks like Twitter, Facebook, Google and more. No app setup required.
+Social Login, Social Sharing allows login, share, comment using any social network like Google, Facebook, LinkedIn, Instagram etc. EASIEST to configure.
 
 == Description ==
 = Social Login, Social Sharing =
