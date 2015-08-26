@@ -4,7 +4,7 @@
 * Plugin Name: miniOrange Social Login
 * Plugin URI: http://miniorange.com
 * Description: This plugin enables login, comment, share and auto-register with social apps.
-* Version: 4.0
+* Version: 4.0.1
 * Author: miniOrange
 * Author URI: http://miniorange.com
 * License: GPL2
@@ -53,6 +53,7 @@ class Miniorange_OpenID_SSO {
 			}
 			
 			add_filter( 'the_content', array( $this, 'mo_openid_add_social_share_links' ) );
+			add_filter( 'the_excerpt', array( $this, 'mo_openid_add_social_share_links' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'mo_openid_plugin_settings_style' ) );
 			
 			remove_action( 'admin_notices', array( $this, 'mo_openid_success_message') );
@@ -96,14 +97,13 @@ class Miniorange_OpenID_SSO {
 			delete_option('mo_openid_verify_customer');
 			delete_option('mo_openid_message');
 	}
-		
 	
 		
 		
 	
 	function mo_openid_add_social_login(){
 
-		if(!is_user_logged_in()){
+		if(!is_user_logged_in() && mo_openid_is_customer_registered()){
 				$mo_login_widget = new mo_openid_login_wid();
 				$mo_login_widget->openidloginForm();
 		}
@@ -159,8 +159,8 @@ class Miniorange_OpenID_SSO {
 		
 
 	function mo_openid_plugin_settings_style() {
-			wp_enqueue_style( 'mo_openid_admin_settings_style', plugins_url('includes/css/mo_openid_style.css', __FILE__));
-			wp_enqueue_style( 'mo_openid_admin_settings_phone_style', plugins_url('includes/css/phone.css', __FILE__));				
+			wp_enqueue_style( 'mo_openid_admin_settings_style', plugins_url('includes/css/mo_openid_style.css', __FILE__));	
+			wp_enqueue_style( 'mo_openid_admin_settings_phone_style', plugins_url('includes/css/phone.css', __FILE__));
 			wp_enqueue_style( 'mo-wp-bootstrap-social',plugins_url('includes/css/bootstrap-social.css', __FILE__), false );
 			wp_enqueue_style( 'mo-wp-bootstrap-main',plugins_url('includes/css/bootstrap.min-preview.css', __FILE__), false );
 			wp_enqueue_style( 'mo-wp-font-awesome',plugins_url('includes/css/font-awesome.min.css', __FILE__), false );
@@ -170,7 +170,8 @@ class Miniorange_OpenID_SSO {
 
 	function mo_openid_plugin_settings_script() {
 		wp_enqueue_script( 'mo_openid_admin_settings_phone_script', plugins_url('includes/js/phone.js', __FILE__ ));
-				wp_enqueue_script( 'mo_openid_admin_settings_color_script', plugins_url('includes/jscolor/jscolor.js', __FILE__ ));
+		wp_enqueue_script( 'mo_openid_admin_settings_color_script', plugins_url('includes/jscolor/jscolor.js', __FILE__ ));
+		wp_enqueue_script( 'mo_openid_admin_settings_script', plugins_url('includes/js/settings.js', __FILE__ ), array('jquery'));
 	}
 
 	private function mo_openid_show_success_message() {
@@ -490,7 +491,6 @@ class Miniorange_OpenID_SSO {
 					}
 
 	}
-
 
 	function miniorange_openid_menu() {
 

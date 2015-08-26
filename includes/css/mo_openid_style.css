@@ -1,3 +1,16 @@
+ .mo_openid_help_title {
+	font-size:13px;
+	width:100%;
+	color:#1B79AE;
+	cursor:pointer;
+	font-weight: bold;
+}
+.mo_openid_help_desc {
+	font-size:13px;
+	border-left:solid 2px rgba(128, 128, 128, 0.65);
+	margin-top:10px;
+	padding-left:10px;
+}
  .mo_openid_support_layout{
        width: 93%;
        background-color:#FFFFFF; 

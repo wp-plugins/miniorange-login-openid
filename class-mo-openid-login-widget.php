@@ -400,7 +400,7 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 	/** Widget edit form at admin panel */ 
 	function form( $instance ) { 
 		/* Set up default widget settings. */ 
-		$defaults = array('alignment' => 'left', 'left_offset' => '20', 'right_offset' => '0', 'top_offset' => '100' , 'space_icons' => '0');
+		$defaults = array('alignment' => 'left', 'left_offset' => '20', 'right_offset' => '0', 'top_offset' => '100' , 'space_icons' => '10');
 		
 		foreach( $instance as $key => $value ){
 			$instance[ $key ] = esc_attr( $value );
@@ -499,11 +499,12 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 		if( isset( $_REQUEST['option'] ) and strpos( $_REQUEST['option'], 'moopenid' ) !== false ){
 
 			//do stuff after returning from oAuth processing
-
-			$user_email = $_POST['email'];
+			$user_email = '';
 			if( isset( $_POST['username']  )){
 				$user_name = $_POST['username'];
 				$user_email = $user_name.'@instagram.com';
+			} else if( isset( $_POST['email']  ) ) {
+				$user_email = $_POST['email'];
 			}
 
 			if( $user_email ) {

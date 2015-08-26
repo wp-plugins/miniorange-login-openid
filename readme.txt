@@ -4,11 +4,11 @@ Donate link: http://miniorange.com
 Tags: accesspress, amazon, auto user registration, User Profile Data, auto-login, autologin, Facebook, facebook connect, Facebook Login, facebook share, floating buttons, free social sharing, google, Google Login, google social login, increase shares, instagram, linkedin, linkedin login, login, login widget, login with amazon, login with facebook, login with google, login with linkedin, login with microsoft, login with openid connect, login with salesforce, microsoft, oauth, openid, OpenID Connect, openid connect sso, post to social networks, Reddit, salesforce, salesforce login, salesforce openid connect, Share, share button, share buttons, share links, social connect, social login, social network login, social network share, social provider, social share, social sharing, social sharing widget, twitter, twitter share, user auto register, widget, windows live, woocommerce, woocommerce connect, comments, yahoo, twitter,plugin,wordpress multisite, SSO technology,social sign-in,Social Plugins, social media tools,social commenting,social authentication,social app, social api, Social Analytics, single sign-on, share post,OpenID integration,Online Identity, multisite, mailchimp, LoginRadius, Oneall, Login Radius, One all, Hubspot,capture social data, captcha, bbPress, buddypress
 Requires at least: 2.0.2
 Tested up to: 4.3
-Stable tag: 4.0
+Stable tag: 4.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Social Login, Social Sharing allows login, share, comment using any social network like Google, Facebook, LinkedIn, Instagram etc. EASIEST to configure.
+Social Login, Social Sharing allows login, share, comment using any social network like Google, Facebook, LinkedIn, Instagram. EASIEST to configure.
 
 == Description ==
 = Social Login, Social Sharing =
@@ -120,6 +120,11 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 
 == Changelog ==
 
+= 4.0.1 =
+*	Added support for excerpt in Social Sharing
+*	Improved Social Login functionality and optimization
+*	Improved theme compatibility
+
 = 4.0 =
 *	Set Redirect URL for Social Login
 *	Vertical floating sharing widget and horizontal sharing widget for Social Sharing
@@ -158,6 +163,11 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 * First version of Social Login, Social Sharing plugin.
 
 == Upgrade Notice ==
+
+= 4.0.1 =
+*	Added support for excerpt in Social Sharing
+*	Improved Social Login functionality and optimization
+*	Improved theme compatibility
 
 = 4.0 =
 *	Set Redirect URL for Social Login

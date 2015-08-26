@@ -158,6 +158,7 @@ class CustomerOpenID {
 				'customerKey' => $customerKey,
 				'email' => $username,
 				'authType' => 'EMAIL',
+				'transactionName' => 'WordPress miniOrange Social Login, Social Sharing'
 			);
 			$field_string = json_encode($fields);
 

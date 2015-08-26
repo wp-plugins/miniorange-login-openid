@@ -13,7 +13,18 @@ function mo_register_openid() {
 		<p style="color:red;">(Warning: <a href="http://php.net/manual/en/curl.installation.php" target="_blank">PHP CURL extension</a> is not installed or disabled)</p>
 	<?php
 	}?>
-
+	<?php
+	if(!mo_openid_is_extension_installed('mcrypt')) { ?>
+		<div id="help_openid_mcrypt_title" class="mo_openid_title_panel">
+			<div style="color:red;" class="mo_openid_help_title">(Warning: PHP mcrypt extension is not installed or disabled) (Why we need it?)</div>
+		</div>
+		<div id="help_openid_mcrypt" class="mo_openid_help_desc" hidden>
+			PHP Mcrypt extension is required to Encrypt Social Login in such a way as to make it unreadable by anyone except those possessing special knowledge (usually referred to as a "key") that allows them to change the information back to its original, readable form.
+			<br/>
+			Encryption is important because it allows you to securely protect your users Social Login details that you don't want anyone else to have access to.
+		</div>
+	<?php
+	}?>
 <div id="tab">
 	<h2 class="nav-tab-wrapper">
 		<?php if(!mo_openid_is_customer_registered()) { ?>
@@ -1024,7 +1035,7 @@ function mo_openid_other_settings(){
 					var tempHorFontColor = '<?php echo get_option('mo_sharing_icon_custom_font')?>';
 					function moSharingIncrement(e,t,r,a,i){
 						var h,s,c=!1,_=a;s=function(){
-							"add"==t&&r.value<60?r.value++:"subtract"==t&&r.value>20&&r.value--,h=setTimeout(s,_),_>20&&(_*=i),c||(document.onmouseup=function(){clearTimeout(h),document.onmouseup=null,c=!1,_=a},c=!0)},e.onmousedown=s}
+							"add"==t&&r.value<60?r.value++:"subtract"==t&&r.value>10&&r.value--,h=setTimeout(s,_),_>20&&(_*=i),c||(document.onmouseup=function(){clearTimeout(h),document.onmouseup=null,c=!1,_=a},c=!0)},e.onmousedown=s}
 					
 					moSharingIncrement(document.getElementById('mo_sharing_size_plus'), "add", document.getElementById('mo_sharing_icon_size'), 300, 0.7);
 					moSharingIncrement(document.getElementById('mo_sharing_size_minus'), "subtract", document.getElementById('mo_sharing_icon_size'), 300, 0.7);
@@ -1349,7 +1360,7 @@ function miniorange_openid_support(){
 					</tr>
 					<tr>
 						<!--td><b>Phone:</b></td-->
-						<td><input type="tel" id="contact_us_phone" pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" placeholder="Enter your phone number" class="mo_openid_table_contact" name="mo_openid_contact_us_phone" value="<?php echo get_option('mo_openid_admin_phone');?>"></td>
+						<td><input type="tel" id="contact_us_phone" pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" placeholder="Enter your phone number with country code (+1)" class="mo_openid_table_contact" name="mo_openid_contact_us_phone" value="<?php echo get_option('mo_openid_admin_phone');?>"></td>
 					</tr>
 					<tr>
 						<!--td><b><font color="#FF0000">*</font>Query:</b></td-->
@@ -1373,7 +1384,7 @@ function miniorange_openid_support(){
 		}
 		
 		function moSharingSizeValidate(e){
-	var t=parseInt(e.value.trim());t>60?e.value=60:20>t&&(e.value=20)
+	var t=parseInt(e.value.trim());t>60?e.value=60:10>t&&(e.value=20)
 }
 function moSharingSpaceValidate(e){
 	var t=parseInt(e.value.trim());t>50?e.value=50:0>t&&(e.value=0)
@@ -1393,6 +1404,15 @@ function moLoginHeightValidate(e){
 
 	</script>
 <?php
+}
+
+function mo_openid_is_extension_installed($name) {
+	if  (in_array  ($name, get_loaded_extensions())) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 function mo_openid_is_curl_installed() {
