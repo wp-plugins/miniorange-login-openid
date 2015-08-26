@@ -36,7 +36,7 @@
 	padding-left: 10px;
 }
 .mo_openid_table_textbox {
-	width:80%;
+	width:80% !important;
 }
 .mo_openid_table_contact {
 	width:95%;
