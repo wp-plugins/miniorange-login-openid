@@ -1,7 +1,7 @@
 === Social Login, Social Sharing by miniOrange ===
 Contributors: miniOrange
 Donate link: http://miniorange.com
-Tags: accesspress, amazon, auto user registration, User Profile Data, auto-login, autologin, Facebook, facebook connect, Facebook Login, facebook share, floating buttons, free social sharing, google, Google Login, google social login, increase shares, instagram, linkedin, linkedin login, login, login widget, login with amazon, login with facebook, login with google, login with linkedin, login with microsoft, login with openid connect, login with salesforce, microsoft, oauth, openid, OpenID Connect, openid connect sso, post to social networks, Reddit, salesforce, salesforce login, salesforce openid connect, Share, share button, share buttons, share links, social connect, social login, social network login, social network share, social provider, social share, social sharing, social sharing widget, twitter, twitter share, user auto register, widget, windows live, woocommerce, woocommerce connect, comments, yahoo, twitter,plugin,wordpress multisite, SSO technology,social sign-in,Social Plugins, social media tools,social commenting,social authentication,social app, social api, Social Analytics, single sign-on, share post,OpenID integration,Online Identity, multisite, mailchimp, LoginRadius, Oneall, Login Radius, One all, Hubspot,capture social data, captcha, bbPress, buddypress
+Tags: accesspress, amazon, auto user registration, User Profile Data, auto-login, autologin, Facebook, facebook connect, Facebook Login, facebook share, floating buttons, free social sharing, google, google plus share, share page, Google Login, google social login, increase shares, instagram, linkedin, linkedin login, login, login widget, login with amazon, pinterest share, pinterest sharing, reddit share, reddit sharing, login with facebook, login with google, login with linkedin, login with microsoft, login with openid connect, login with salesforce, microsoft, oauth, openid, OpenID Connect, openid connect sso, post to social networks, Reddit, salesforce, salesforce login, salesforce openid connect, Share, share button, share buttons, share icons, share links, social connect, social login, social network login, social network share, social provider, social share, social sharing, social sharing widget, twitter, twitter share, user auto register, widget, windows live, woocommerce, woocommerce connect, comments, yahoo, twitter,plugin,wordpress multisite, SSO technology,social sign-in,Social Plugins, social media tools,social commenting,social authentication,social app, social api, Social Analytics, single sign-on, share post,OpenID integration,Online Identity, multisite, mailchimp, LoginRadius, Oneall, Login Radius, One all, Hubspot,capture social data, captcha, bbPress, buddypress
 Requires at least: 2.0.2
 Tested up to: 4.3
 Stable tag: 4.0.1
@@ -20,7 +20,7 @@ This plugin enables Social Login. Allow your visitors to choose from their favor
 One-click login to your WordPress site using social login applications like Google, Facebook, LinkedIn, Instagram, Amazon, Salesforce, Windows Live. This means, if your user is logged in to Google, user can comment on any blog or site by simply clicking the `google icon` - no username or password is explicitly required! Simply enable Social Login, *no setup* of application is required and you are done.
 
 = Social Sharing =
-Allow anyone to easily share your website content using their favorite social sharing applications. Social Sharing applications include Facebook, Twitter, Google+, Pinterest, Reddit. Customize your social sharing buttons to suit to your website's theme.
+Allow anyone to easily share your website content using their favorite social sharing applications. Social Sharing applications include Facebook, Twitter, Google+, Pinterest, Reddit. Customize your social sharing buttons to suit to your website's theme. Social sharing on homepage includes sharing with content or excerpt. Simply enable Social Login, and you are done.
 
 See the <a href="https://wordpress.org/plugins/miniorange-login-openid/screenshots/">Screenshots</a> section for visuals on social sharing.
 
@@ -38,19 +38,19 @@ All other Social Login and Social Sharing applications are supported through a s
 = Features - =
 
 *	Clean and easy to use WordPress admin UI
-*	**NO SETUP required for any social login application**
+*	**NO SETUP required for any social login or social sharing application**
 *	One-click login to your website using any social login app.
 *	Login to applications - Google, Facebook, LinkedIn, Instagram, Amazon, Salesforce, Windows Live.
 *	Set custom redirect option for social login to point your users to your desired page
-*   Choose where to add the Social Login Plugin: login page, registration page, comment form or anywhere on your site using our Social Login widget.
-*   Option to add social sharing plugin on homepage, posts, feeds, content pages, etc.
+*   Choose where to add the Social Login Icons: login page, registration page, comment form or anywhere on your site using our Social Login widget.
+*   Option to add social sharing icons on homepage, posts, feeds, content pages, etc.
 *	Option to add a horizontal social sharing widget and a floating vertical social sharing widget to website.
 *	Select from a range beautiful designs of social login buttons/icons and social sharing buttons/icons.
 *	Preview customization of selected social login and social sharing applications in WordPress admin panel.
-*	Horizontal Social Sharing widget
-*	Floating Vertical Social Sharing widget
+*	Horizontal Social Sharing widget for share icons
+*	Floating Vertical Social Sharing widget for share icons
 *	Customize social login and social sharing buttons to match your website's theme.
-*	Select your favourite theme for icons.
+*	Select your favourite theme for social sharing and social login icons.
 *	Automatic user registration after social login if the user is not already registered with your site.
 *	**Support** using email and in-plugin support form
 
