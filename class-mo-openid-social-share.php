@@ -28,6 +28,10 @@ if(!$url) {
 			$orientation = 'ver';
 		}
 	}
+	
+	if($orientation == 'ver') {
+		$url = get_site_url();
+	}
 ?>
 <script>
 	
@@ -50,7 +54,7 @@ if(!$url) {
 
 
 						 <a href="http://miniorange.com/single-sign-on-sso" hidden></a>
-						 <div class="app-icons circle ">
+						 <div class="mo-openid-app-icons circle ">
 						 <p><?php 
 							if( $orientation == 'hor' ) {
 								echo get_option('mo_openid_share_widget_customize_text');
@@ -59,138 +63,147 @@ if(!$url) {
 					<?php
 					
 						if($custom_theme == 'custom'){
-							if( get_option('mo_openid_google_share_enable') ) {
-							$link = 'https://plus.google.com/share?url='.$url;
-						?>
-						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-google-plus" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;margin-left : <?php echo $spaceBetweenIcons?>"></i></a>
-						<?php
-						}
 
 						if( get_option('mo_openid_facebook_share_enable') ) {
-
-							$link = 'https://www.facebook.com/dialog/feed?app_id=766555246789034&amp;link='.$url.'&amp;caption='.$title.'&amp;redirect_uri=http://miniorange.com/social_share_redirect';
+							$link = 'https://www.facebook.com/dialog/share?app_id=766555246789034&amp;display=popup&amp;href='.$url.'&amp;redirect_uri=http%3A%2F%2Fminiorange.com%2Fsocial_share_redirect';
 						?>
 						
 
-							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-facebook" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-facebook" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 
 						<?php
 						}
+						
+						if( get_option('mo_openid_twitter_share_enable') ) {
+								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
+								?>
+
+								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-twitter" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+						<?php
+						}
+						
+						if( get_option('mo_openid_google_share_enable') ) {
+							$link = 'https://plus.google.com/share?url='.$url;
+						?>
+						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-google-plus" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;"></i></a>
+						<?php
+						}
+						
 						if( get_option('mo_openid_linkedin_share_enable') ) {
 								$link = 'https://www.linkedin.com/shareArticle?mini=true&amp;title='.$title.'&amp;url='.$url.'&amp;summary='.$excerpt;
 								?>
 
-								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-linkedin" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
-						<?php
-						}if( get_option('mo_openid_twitter_share_enable') ) {
-								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
-								?>
-
-								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-twitter" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-linkedin" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}if( get_option('mo_openid_pinterest_share_enable') ) {
 								
 								?>
 
-								<a  href='javascript:pinIt();' class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-pinterest" style="padding-top:3px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-10); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a  href='javascript:pinIt();' class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-pinterest" style="padding-top:3px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-10); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}if( get_option('mo_openid_reddit_share_enable') ) {
 								$link = 'http://www.reddit.com/submit?url='.$url.'&amp;title='.$title;
 								?>
 
-								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-reddit" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-reddit" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}
 							
 						}
 						
 						else if($custom_theme == 'customFont'){
-							if( get_option('mo_openid_google_share_enable') ) {
-							$link = 'https://plus.google.com/share?url='.$url;
-						?>
-						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-google-plus" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
-						<?php
-						}
-
 						if( get_option('mo_openid_facebook_share_enable') ) {
-
-							$link = 'https://www.facebook.com/dialog/feed?app_id=766555246789034&amp;link='.$url.'&amp;caption='.$title.'&amp;redirect_uri=http://miniorange.com/social_share_redirect';
+							$link = 'https://www.facebook.com/dialog/share?app_id=766555246789034&amp;display=popup&amp;href='.$url.'&amp;redirect_uri=http%3A%2F%2Fminiorange.com%2Fsocial_share_redirect';
 						?>
 						
 
-							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-facebook" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-facebook" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 
 						<?php
 						}
+						
+						if( get_option('mo_openid_twitter_share_enable') ) {
+								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
+								?>
+
+								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-twitter" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-4; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+						<?php
+						}
+						
+						if( get_option('mo_openid_google_share_enable') ) {
+							$link = 'https://plus.google.com/share?url='.$url;
+						?>
+						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-google-plus" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+						<?php
+						}
+						
 						if( get_option('mo_openid_linkedin_share_enable') ) {
 								$link = 'https://www.linkedin.com/shareArticle?mini=true&amp;title='.$title.'&amp;url='.$url.'&amp;summary='.$excerpt;
 								?>
 
-								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-linkedin" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
-						<?php
-						}if( get_option('mo_openid_twitter_share_enable') ) {
-								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
-								?>
-
-								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-twitter" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-4; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-linkedin" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}if( get_option('mo_openid_pinterest_share_enable') ) {
 								
 								?>
 
-								<a  href='javascript:pinIt();' class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-pinterest" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-4; ?>px !important;width:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-4; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a  href='javascript:pinIt();' class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-pinterest" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-4; ?>px !important;width:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-4; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}if( get_option('mo_openid_reddit_share_enable') ) {
 								$link = 'http://www.reddit.com/submit?url='.$url.'&amp;title='.$title;
 								?>
 
-								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-reddit" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-4; ?>px !important;width:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-4; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-6?>px !important"><i class=" <?php echo $selected_theme; ?> fa fa-reddit" style="padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-4; ?>px !important;width:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-4; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}
 							
 						}
 						
 						else{
-						if( get_option('mo_openid_google_share_enable') ) {
-							$link = 'https://plus.google.com/share?url='.$url;
-						?>
-						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img  style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;background-color: <?php echo $selected_theme; ?>' src="<?php echo plugins_url( 'includes/images/icons/google.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
-						<?php
-						}
+						
 
 						if( get_option('mo_openid_facebook_share_enable') ) {
-
-							$link = 'https://www.facebook.com/dialog/feed?app_id=766555246789034&amp;link='.$url.'&amp;caption='.$title.'&amp;redirect_uri=http://miniorange.com/social_share_redirect';
+							$link = 'https://www.facebook.com/dialog/share?app_id=766555246789034&amp;display=popup&amp;href='.$url.'&amp;redirect_uri=http%3A%2F%2Fminiorange.com%2Fsocial_share_redirect';
 						?>
 						
 
-							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
+							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
 
 						<?php
 						}
+						
+						if( get_option('mo_openid_twitter_share_enable') ) {
+								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
+								?>
+
+								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/twitter.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
+						<?php
+						}
+						
+						if( get_option('mo_openid_google_share_enable') ) {
+							$link = 'https://plus.google.com/share?url='.$url;
+						?>
+						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img  style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;background-color: <?php echo $selected_theme; ?>' src="<?php echo plugins_url( 'includes/images/icons/google.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
+						<?php
+						}
+						
 						if( get_option('mo_openid_linkedin_share_enable') ) {
 								$link = 'https://www.linkedin.com/shareArticle?mini=true&amp;title='.$title.'&amp;url='.$url.'&amp;summary='.$excerpt;
 								?>
 
-								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/linkedin.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
-						<?php
-						}if( get_option('mo_openid_twitter_share_enable') ) {
-								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
-								?>
-
-								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/twitter.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
+								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/linkedin.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
 						<?php
 						}if( get_option('mo_openid_pinterest_share_enable') ) {
 								
 								?>
 
-								<a  href='javascript:pinIt();' class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/pininterest.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
+								<a  href='javascript:pinIt();' class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/pininterest.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
 						<?php
 						}if( get_option('mo_openid_reddit_share_enable') ) {
 								$link = 'http://www.reddit.com/submit?url='.$url.'&amp;title='.$title;
 								?>
 
-								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/reddit.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
+								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-left : <?php echo $spaceBetweenIcons-4?>px !important"><img style= 'height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/reddit.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
 						<?php
 						}}
 							?></p></div><?php }?>
@@ -210,92 +223,97 @@ if(!$url) {
 					<?php
 					
 						if($custom_theme == 'custom'){
-							if( get_option('mo_openid_google_share_enable') ) {
-							$link = 'https://plus.google.com/share?url='.$url;
-						?>
-						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" style="margin-bottom:<?php echo $space_icons?>px !important;"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-google-plus" style="margin-bottom:<?php echo $space_icons-4?>px!important; padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
-						<?php
-						}
+							
 
 						if( get_option('mo_openid_facebook_share_enable') ) {
-
-							$link = 'https://www.facebook.com/dialog/feed?app_id=766555246789034&amp;link='.$url.'&amp;caption='.$title.'&amp;redirect_uri=http://miniorange.com/social_share_redirect';
+							$link = 'https://www.facebook.com/dialog/share?app_id=766555246789034&amp;display=popup&amp;href='.$url.'&amp;redirect_uri=http%3A%2F%2Fminiorange.com%2Fsocial_share_redirect';
 						?>
 						
 
-							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="share-link" style="margin-bottom:<?php echo $space_icons?>px !important;"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-facebook" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="mo-openid-share-link" style="margin-bottom:<?php echo $space_icons?>px !important;"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-facebook" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 
 						<?php
 						}
+						
+						if( get_option('mo_openid_twitter_share_enable') ) {
+								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
+								?>
+
+								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="mo-openid-share-link" ><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-twitter" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+						<?php
+						}
+						
+						if( get_option('mo_openid_google_share_enable') ) {
+							$link = 'https://plus.google.com/share?url='.$url;
+						?>
+						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-bottom:<?php echo $space_icons?>px !important;"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-google-plus" style="margin-bottom:<?php echo $space_icons-4?>px!important; padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+						<?php
+						}
+						
 						if( get_option('mo_openid_linkedin_share_enable') ) {
 								$link = 'https://www.linkedin.com/shareArticle?mini=true&amp;title='.$title.'&amp;url='.$url.'&amp;summary='.$excerpt;
 								?>
 
-								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" ><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-linkedin" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
-						<?php
-						}if( get_option('mo_openid_twitter_share_enable') ) {
-								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
-								?>
-
-								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="share-link" ><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-twitter" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" ><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-linkedin" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}if( get_option('mo_openid_pinterest_share_enable') ) {
 								
 								?>
 
-								<a  href='javascript:pinIt();' class="share-link" ><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-pinterest" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:3px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-10); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a  href='javascript:pinIt();' class="mo-openid-share-link" ><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-pinterest" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:3px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-10); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}if( get_option('mo_openid_reddit_share_enable') ) {
 								$link = 'http://www.reddit.com/submit?url='.$url.'&amp;title='.$title;
 								?>
 
-								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" ><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-reddit" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" ><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-reddit" style="padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}
 							
 						}
 						
 						else if($custom_theme == 'customFont'){
-							if( get_option('mo_openid_google_share_enable') ) {
-							$link = 'https://plus.google.com/share?url='.$url;
-						?>
-						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link"><i class=" <?php echo $selected_theme; ?> fa fa-google-plus" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize-5; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
-						<?php
-						}
+							
 
 						if( get_option('mo_openid_facebook_share_enable') ) {
-
-							$link = 'https://www.facebook.com/dialog/feed?app_id=766555246789034&amp;link='.$url.'&amp;caption='.$title.'&amp;redirect_uri=http://miniorange.com/social_share_redirect';
+							$link = 'https://www.facebook.com/dialog/share?app_id=766555246789034&amp;display=popup&amp;href='.$url.'&amp;redirect_uri=http%3A%2F%2Fminiorange.com%2Fsocial_share_redirect';
 						?>
 						
 
-							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="share-link"><i class=" <?php echo $selected_theme; ?> fa fa-facebook" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top : 4px !important;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize-5; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="mo-openid-share-link"><i class=" <?php echo $selected_theme; ?> fa fa-facebook" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top : 4px !important;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 
+						<?php
+						}
+						if( get_option('mo_openid_twitter_share_enable') ) {
+								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
+								?>
+
+								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="mo-openid-share-link" ><i class=" <?php echo $selected_theme; ?> fa fa-twitter" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+						<?php
+						}
+						if( get_option('mo_openid_google_share_enable') ) {
+							$link = 'https://plus.google.com/share?url='.$url;
+						?>
+						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link"><i class=" <?php echo $selected_theme; ?> fa fa-google-plus" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}
 						if( get_option('mo_openid_linkedin_share_enable') ) {
 								$link = 'https://www.linkedin.com/shareArticle?mini=true&amp;title='.$title.'&amp;url='.$url.'&amp;summary='.$excerpt;
 								?>
 
-								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" ><i class=" <?php echo $selected_theme; ?> fa fa-linkedin" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:4px !important;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize-5; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
-						<?php
-						}if( get_option('mo_openid_twitter_share_enable') ) {
-								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
-								?>
-
-								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="share-link" ><i class=" <?php echo $selected_theme; ?> fa fa-twitter" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize-5; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" ><i class=" <?php echo $selected_theme; ?> fa fa-linkedin" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:4px !important;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}if( get_option('mo_openid_pinterest_share_enable') ) {
 								
 								?>
 
-								<a  href='javascript:pinIt();' class="share-link" ><i class=" <?php echo $selected_theme; ?> fa fa-pinterest" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-5; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a  href='javascript:pinIt();' class="mo-openid-share-link" ><i class=" <?php echo $selected_theme; ?> fa fa-pinterest" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize-5; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}if( get_option('mo_openid_reddit_share_enable') ) {
 								$link = 'http://www.reddit.com/submit?url='.$url.'&amp;title='.$title;
 								?>
 
-								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" ><i class=" <?php echo $selected_theme; ?> fa fa-reddit" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize-5; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
+								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" ><i class=" <?php echo $selected_theme; ?> fa fa-reddit" style="margin-bottom:<?php echo $space_icons-4?>px !important;padding-top:4px;text-align:center;color:#<?php echo $fontColor ?> !important;font-size:<?php echo $sharingSize; ?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
 						}
 							
@@ -303,46 +321,50 @@ if(!$url) {
 						
 						
 						else{
-						if( get_option('mo_openid_google_share_enable') ) {
-							$link = 'https://plus.google.com/share?url='.$url;
-						?>
-						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link"><img  style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;background-color: <?php echo $selected_theme; ?>' src="<?php echo plugins_url( 'includes/images/icons/google.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
-						<?php
-						}
+						
 
 						if( get_option('mo_openid_facebook_share_enable') ) {
-
-							$link = 'https://www.facebook.com/dialog/feed?app_id=766555246789034&amp;link='.$url.'&amp;caption='.$title.'&amp;redirect_uri=http://miniorange.com/social_share_redirect';
+							$link = 'https://www.facebook.com/dialog/share?app_id=766555246789034&amp;display=popup&amp;href='.$url.'&amp;redirect_uri=http%3A%2F%2Fminiorange.com%2Fsocial_share_redirect';
 						?>
 						
 
-							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="share-link"><img style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;background-color:white;' src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
+							<a onclick="popupCenter('<?php echo $link; ?>', 800, 400);" class="mo-openid-share-link"><img style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;background-color:white;' src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
 
 						<?php
 						}
+						
+						if( get_option('mo_openid_twitter_share_enable') ) {
+								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
+								?>
+
+								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="mo-openid-share-link" ><img style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;background-color:white;' src="<?php echo plugins_url( 'includes/images/icons/twitter.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
+						<?php
+						}
+						
+						if( get_option('mo_openid_google_share_enable') ) {
+							$link = 'https://plus.google.com/share?url='.$url;
+						?>
+						<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link"><img  style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;background-color: <?php echo $selected_theme; ?>' src="<?php echo plugins_url( 'includes/images/icons/google.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
+						<?php
+						}
+						
 						if( get_option('mo_openid_linkedin_share_enable') ) {
 								$link = 'https://www.linkedin.com/shareArticle?mini=true&amp;title='.$title.'&amp;url='.$url.'&amp;summary='.$excerpt;
 								?>
 
-								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" ><img style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;background-color:white;' src="<?php echo plugins_url( 'includes/images/icons/linkedin.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
-						<?php
-						}if( get_option('mo_openid_twitter_share_enable') ) {
-								$link = empty($twitter_username) ? 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url : 'https://twitter.com/intent/tweet?text='.$title.'&amp;url='.$url. '&amp;via='.$twitter_username;
-								?>
-
-								<a onclick="popupCenter('<?php echo $link; ?>', 600, 300);" class="share-link" ><img style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;background-color:white;' src="<?php echo plugins_url( 'includes/images/icons/twitter.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
+								<a onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" ><img style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;background-color:white;' src="<?php echo plugins_url( 'includes/images/icons/linkedin.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
 						<?php
 						}if( get_option('mo_openid_pinterest_share_enable') ) {
 								
 								?>
 
-								<a  href='javascript:pinIt();' class="share-link" ><img style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/pininterest.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
+								<a  href='javascript:pinIt();' class="mo-openid-share-link" ><img style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/pininterest.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
 						<?php
 						}if( get_option('mo_openid_reddit_share_enable') ) {
 								$link = 'http://www.reddit.com/submit?url='.$url.'&amp;title='.$title;
 								?>
 
-								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="share-link" ><img style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/reddit.png', __FILE__ )?>" class="app-share-icons <?php echo $selected_theme; ?>" ></a>
+								<a  onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" ><img style= 'margin-bottom:<?php echo $space_icons-6?>px !important;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important;' src="<?php echo plugins_url( 'includes/images/icons/reddit.png', __FILE__ )?>" class="mo-openid-app-share-icons <?php echo $selected_theme; ?>" ></a>
 						<?php
 						}}
 							?></p></div>

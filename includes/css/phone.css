@@ -260,10 +260,15 @@
 .f16 .zm { background-position: 0 -3872px; }
 .f16 .zw { background-position: 0 -3888px; }
 
-.intl-number-input input {
+/*#wrapper {
+  padding: 0 20px;
+  width: 700px;
+}*/
+
+/*#wrapper .intl-number-input input {
   border-radius: 0;
   width: 250px;
-}
+}*/
 
 .actions {
   margin-top: 20px;

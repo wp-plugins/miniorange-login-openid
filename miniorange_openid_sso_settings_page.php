@@ -10,7 +10,7 @@ function mo_register_openid() {
 	}
 	
 	if(mo_openid_is_curl_installed()==0){ ?>
-		<p style="color:red;">(Warning: <a href="http://php.net/manual/en/curl.installation.php" target="_blank">PHP CURL extension</a> is not installed or disabled)</p>
+		<p style="color:red;">(Warning: <a href="http://php.net/manual/en/curl.installation.php" target="_blank">PHP CURL extension</a> is not installed or disabled) Please go to Troubleshooting for steps to enable curl.</p>
 	<?php
 	}?>
 	<?php
@@ -32,6 +32,8 @@ function mo_register_openid() {
 		<?php } ?>
 		<a class="nav-tab <?php echo $active_tab == 'login' ? 'nav-tab-active' : ''; ?>" href="<?php echo add_query_arg( array('tab' => 'login'), $_SERVER['REQUEST_URI'] ); ?>">Social Login</a>
 		<a class="nav-tab <?php echo $active_tab == 'share' ? 'nav-tab-active' : ''; ?>" href="<?php echo add_query_arg( array('tab' => 'share'), $_SERVER['REQUEST_URI'] ); ?>">Social Sharing</a>
+		<a class="nav-tab <?php echo $active_tab == 'shortcode' ? 'nav-tab-active' : ''; ?>" href="<?php echo add_query_arg( array('tab' => 'shortcode'), $_SERVER['REQUEST_URI'] ); ?>">Shortcode</a>
+		<a class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>" href="<?php echo add_query_arg( array('tab' => 'help'), $_SERVER['REQUEST_URI'] ); ?>">Help & Troubleshooting</a>
 	</h2>
 </div>
 
@@ -56,9 +58,15 @@ function mo_register_openid() {
 									delete_option ( 'password_mismatch' );
 									mo_openid_show_new_registration_page();
 								}
-							} else {
+							} else if($active_tab == 'login'){
 								mo_openid_apps_config();
+							}else if($active_tab == 'shortcode') {
+								mo_openid_shortcode_info();
+							}else if($active_tab == 'help') {
+								mo_openid_troubleshoot_info();
 							}
+							
+							
 
 						?>
 					</td>
@@ -86,7 +94,7 @@ function mo_openid_show_new_registration_page() {
 
 										<h3>Register with miniOrange</h3>
 
-										<p>Please enter a valid email that you have access to. You will be able to move forward after verifying an OTP that we will be sending to this email.
+										<p>Please enter a valid email that you have access to. You will be able to move forward after verifying an OTP that we will be sending to this email. <b>OR</b> Login using your miniOrange credentials.
 										</p>
 										<table class="mo_openid_settings_table">
 											<tr>
@@ -139,31 +147,36 @@ function mo_openid_show_verify_password_page() {
 			<input type="hidden" name="option" value="mo_openid_connect_verify_customer" />
 			<div class="mo_openid_table_layout">
 				<h3>Login with miniOrange</h3>
-
-					</p>
-					<table class="mo_openid_settings_table">
-						<tr>
-							<td><b><font color="#FF0000">*</font>Email:</b></td>
-							<td><input class="mo_openid_table_textbox" type="email" name="email"
-								required placeholder="person@example.com"
-								value="<?php echo get_option('mo_openid_admin_email');?>" /></td>
-						</tr>
-						<td><b><font color="#FF0000">*</font>Password:</b></td>
-						<td><input class="mo_openid_table_textbox" required type="password"
-							name="password" placeholder="Choose your password" /></td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td><input type="submit" name="submit"
-								class="button button-primary button-large" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-								target="_blank"
-								href="<?php echo get_option('mo_openid_host_name') . "/moas/idp/userforgotpassword"; ?>">Forgot
-									your password?</a></td>
-						</tr>
-					</table>
-				
+				<p><b>It seems you already have an account with miniOrange. Please enter your miniOrange email and password. <a href="#forgot_password">Click here if you forgot your password?</a></b></p>
+				<table class="mo_openid_settings_table">
+					<tr>
+						<td><b><font color="#FF0000">*</font>Email:</b></td>
+						<td><input class="mo_openid_table_textbox" type="email" name="email"
+							required placeholder="person@example.com"
+							value="<?php echo get_option('mo_openid_admin_email');?>" /></td>
+					</tr>
+					<td><b><font color="#FF0000">*</font>Password:</b></td>
+					<td><input class="mo_openid_table_textbox" required type="password"
+						name="password" placeholder="Choose your password" /></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td><input type="submit" name="submit"
+							class="button button-primary button-large" />
+						</td>
+					</tr>
+				</table>
 			</div>
 		</form>
+		<form name="forgotpassword" method="post" action="" id="openidforgotpasswordform">
+			<input type="hidden" name="option" value="mo_openid_forgot_password"/>
+		</form>
+		<script>
+			jQuery('a[href=#forgot_password]').click(function(){
+				//alert('here');
+				jQuery('#openidforgotpasswordform').submit();
+			});
+		</script>
 		<?php
 }
 
@@ -197,36 +210,49 @@ function mo_openid_apps_config() {
 								<p>Select applications to enable social login</p>
 							
 								<tr>
-											<td class="mo_openid_table_td_checkbox"><input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> id="facebook_enable" class="app_enable" name="mo_openid_facebook_enable" value="1" onchange="previewLoginIcons();"
-										<?php checked( get_option('mo_openid_facebook_enable') == 1 );?> /><strong>Facebook</strong>
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										
-										<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> id="google_enable" class="app_enable" name="mo_openid_google_enable" value="1" onchange="previewLoginIcons();"
-										<?php checked( get_option('mo_openid_google_enable') == 1 );?> /><strong>Google</strong>
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										
-										<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
-										id="instagram_enable" class="app_enable" name="mo_openid_instagram_enable" value="1" onchange="previewLoginIcons();"
-										<?php checked( get_option('mo_openid_instagram_enable') == 1 );?> /><strong>Instagram</strong>
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										
-										<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> id="linkedin_enable" class="app_enable" name="mo_openid_linkedin_enable" value="1" onchange="previewLoginIcons();"
-										<?php checked( get_option('mo_openid_linkedin_enable') == 1 );?> /><strong>LinkedIn</strong>
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										
-										<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
-										id="amazon_enable" class="app_enable" name="mo_openid_amazon_enable" value="1" onchange="previewLoginIcons();"
-										<?php checked( get_option('mo_openid_amazon_enable') == 1 );?> /><strong>Amazon</strong>
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										
-										<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
-										id="salesforce_enable" class="app_enable" name="mo_openid_salesforce_enable" value="1" onchange="previewLoginIcons();"
-										<?php checked( get_option('mo_openid_salesforce_enable') == 1 );?> /><strong>Salesforce</strong>
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										
-										<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
-										id="windowslive_enable" class="app_enable" name="mo_openid_windowslive_enable" value="1" onchange="previewLoginIcons();"
-										<?php checked( get_option('mo_openid_windowslive_enable') == 1 );?> /><strong>Windows Live</strong>
+									<td class="mo_openid_table_td_checkbox">
+										<table style="width:100%">
+											<tr>
+												<td style="width:25%"><input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> id="facebook_enable" class="app_enable" name="mo_openid_facebook_enable" value="1" onchange="previewLoginIcons();"
+												<?php checked( get_option('mo_openid_facebook_enable') == 1 );?> /><strong>Facebook</strong>
+												</td>
+												<td style="width:25%">
+												<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> id="google_enable" class="app_enable" name="mo_openid_google_enable" value="1" onchange="previewLoginIcons();"
+												<?php checked( get_option('mo_openid_google_enable') == 1 );?> /><strong>Google</strong>
+												</td>
+												<td style="width:25%">
+												<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
+												id="twitter_enable" class="app_enable" name="mo_openid_twitter_enable" value="1" onchange="previewLoginIcons();"
+												<?php checked( get_option('mo_openid_twitter_enable') == 1 );?> /><strong>Twitter</strong>
+												</td>
+												<td style="width:25%">
+												<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
+												id="instagram_enable" class="app_enable" name="mo_openid_instagram_enable" value="1" onchange="previewLoginIcons();"
+												<?php checked( get_option('mo_openid_instagram_enable') == 1 );?> /><strong>Instagram</strong>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> id="linkedin_enable" class="app_enable" name="mo_openid_linkedin_enable" value="1" onchange="previewLoginIcons();"
+												<?php checked( get_option('mo_openid_linkedin_enable') == 1 );?> /><strong>LinkedIn</strong>
+												</td>
+												<td>
+												<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
+												id="amazon_enable" class="app_enable" name="mo_openid_amazon_enable" value="1" onchange="previewLoginIcons();"
+												<?php checked( get_option('mo_openid_amazon_enable') == 1 );?> /><strong>Amazon</strong>
+												</td>
+												<td>
+												<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
+												id="salesforce_enable" class="app_enable" name="mo_openid_salesforce_enable" value="1" onchange="previewLoginIcons();"
+												<?php checked( get_option('mo_openid_salesforce_enable') == 1 );?> /><strong>Salesforce</strong>
+												</td>
+												<td>
+												<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
+												id="windowslive_enable" class="app_enable" name="mo_openid_windowslive_enable" value="1" onchange="previewLoginIcons();"
+												<?php checked( get_option('mo_openid_windowslive_enable') == 1 );?> /><strong>Windows Live</strong>
+												</td>
+											</tr>
+										</table>
 									</td>
 								</td>
 								<tr>
@@ -328,8 +354,9 @@ function mo_openid_apps_config() {
 				<div>
 					<img class="mo_login_icon_preview" id="mo_login_icon_preview_google" src="<?php echo plugins_url( 'includes/images/icons/google.png', __FILE__ )?>" />
 					<img class="mo_login_icon_preview" id="mo_login_icon_preview_facebook" src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" />
-					<img class="mo_login_icon_preview" id="mo_login_icon_preview_linkedin" src="<?php echo plugins_url( 'includes/images/icons/linkedin.png', __FILE__ )?>" />
+					<img class="mo_login_icon_preview" id="mo_login_icon_preview_twitter" src="<?php echo plugins_url( 'includes/images/icons/twitter.png', __FILE__ )?>" />
 					<img class="mo_login_icon_preview" id="mo_login_icon_preview_instagram" src="<?php echo plugins_url( 'includes/images/icons/instagram.png', __FILE__ )?>" />
+					<img class="mo_login_icon_preview" id="mo_login_icon_preview_linkedin" src="<?php echo plugins_url( 'includes/images/icons/linkedin.png', __FILE__ )?>" />
 					<img class="mo_login_icon_preview" id="mo_login_icon_preview_amazon" src="<?php echo plugins_url( 'includes/images/icons/amazon.png', __FILE__ )?>" />
 					<img class="mo_login_icon_preview" id="mo_login_icon_preview_salesforce" src="<?php echo plugins_url( 'includes/images/icons/salesforce.png', __FILE__ )?>" />
 					<img class="mo_login_icon_preview" id="mo_login_icon_preview_windowslive" src="<?php echo plugins_url( 'includes/images/icons/windowslive.png', __FILE__ )?>" />
@@ -340,26 +367,31 @@ function mo_openid_apps_config() {
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Google</a>
 					<a id="mo_login_button_preview_facebook" class="btn btn-block btn-defaulttheme btn-social btn-facebook btn-custom-size"> <i class="fa fa-facebook"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Facebook</a>
-					<a id="mo_login_button_preview_linkedin" class="btn btn-block btn-defaulttheme btn-social btn-linkedin btn-custom-size"> <i class="fa fa-linkedin"></i><?php
-									echo get_option('mo_openid_login_button_customize_text'); 	?> LinkedIn</a>
+					<a id="mo_login_button_preview_twitter" class="btn btn-block btn-defaulttheme btn-social btn-twitter btn-custom-size"> <i class="fa fa-twitter"></i><?php
+									echo get_option('mo_openid_login_button_customize_text'); 	?> Twitter</a>
 					<a id="mo_login_button_preview_instagram" class="btn btn-block btn-defaulttheme btn-social btn-instagram btn-custom-size"> <i class="fa fa-instagram"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Instagram</a>
+					<a id="mo_login_button_preview_linkedin" class="btn btn-block btn-defaulttheme btn-social btn-linkedin btn-custom-size"> <i class="fa fa-linkedin"></i><?php
+									echo get_option('mo_openid_login_button_customize_text'); 	?> LinkedIn</a>
 					<a id="mo_login_button_preview_amazon" class="btn btn-block btn-defaulttheme btn-social btn-soundcloud btn-custom-size"> <i class="fa fa-amazon"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Amazon</a>
 					<a id="mo_login_button_preview_salesforce" class="btn btn-block btn-defaulttheme btn-social btn-vimeo btn-custom-size"> <i class="fa fa-cloud"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Salesforce</a>
 					<a id="mo_login_button_preview_windowslive" class="btn btn-block btn-defaulttheme btn-social btn-microsoft btn-custom-size"> <i class="fa fa-windows"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Windows</a>
+					
 				</div>
 				
 				<div>
 					<i class="mo_custom_login_icon_preview fa fa-google-plus" id="mo_custom_login_icon_preview_google"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_login_icon_preview fa fa-facebook" id="mo_custom_login_icon_preview_facebook"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
-					<i class="mo_custom_login_icon_preview fa fa-linkedin" id="mo_custom_login_icon_preview_linkedin" style="color:#ffffff;text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_login_icon_preview fa fa-twitter" id="mo_custom_login_icon_preview_twitter" style="color:#ffffff;text-align:center;margin-top:5px;" ></i>
 					<i class="mo_custom_login_icon_preview fa fa-instagram" id="mo_custom_login_icon_preview_instagram" style="color:#ffffff;text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_login_icon_preview fa fa-linkedin" id="mo_custom_login_icon_preview_linkedin" style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_login_icon_preview fa fa-amazon" id="amazoncustom" style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_login_icon_preview fa fa-cloud" id="salesforcecustom" style="margin-bottom:-10px;color:#ffffff;text-align:center;margin-top:5px;" ></i>
 					<i class="mo_custom_login_icon_preview fa fa-windows" id="mo_custom_login_icon_preview_windows" style="color:#ffffff;text-align:center;margin-top:5px;" ></i>
+					
 				</div>
 				
 				<div>
@@ -367,16 +399,19 @@ function mo_openid_apps_config() {
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Google</a>
 					<a id="mo_custom_login_button_preview_facebook" class="btn btn-block btn-customtheme btn-social  btn-custom-size"> <i class="fa fa-facebook"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Facebook</a>
-					<a id="mo_custom_login_button_preview_linkedin" class="btn btn-block btn-customtheme btn-social  btn-custom-size"> <i class="fa fa-linkedin"></i><?php
-									echo get_option('mo_openid_login_button_customize_text'); 	?> LinkedIn</a>
+					<a id="mo_custom_login_button_preview_twitter" class="btn btn-block btn-customtheme btn-social  btn-custom-size"> <i class="fa fa-twitter"></i><?php
+									echo get_option('mo_openid_login_button_customize_text'); 	?> Twitter</a>
 					<a id="mo_custom_login_button_preview_instagram" class="btn btn-block btn-customtheme btn-social  btn-custom-size"> <i class="fa fa-instagram"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Instagram</a>
+					<a id="mo_custom_login_button_preview_linkedin" class="btn btn-block btn-customtheme btn-social  btn-custom-size"> <i class="fa fa-linkedin"></i><?php
+									echo get_option('mo_openid_login_button_customize_text'); 	?> LinkedIn</a>
 					<a id="mo_custom_login_button_preview_amazon" class="btn btn-block btn-customtheme btn-social  btn-custom-size"><i class="fa fa-amazon"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Amazon</a>
 					<a id="mo_custom_login_button_preview_salesforce" class="btn btn-block btn-customtheme btn-social  btn-custom-size"> <i class="fa fa-cloud"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Salesforce</a>
 					<a id="mo_custom_login_button_preview_windows" class="btn btn-block btn-customtheme btn-social  btn-custom-size"> <i class="fa fa-windows"></i><?php
 									echo get_option('mo_openid_login_button_customize_text'); 	?> Windows</a>
+					
 				</div>
 		</td>
 	</tr>
@@ -441,6 +476,39 @@ function mo_openid_apps_config() {
 										<input type="url" id="login_redirect_url" style="width:50%" name="mo_openid_login_redirect_url" value="<?php echo get_option('mo_openid_login_redirect_url')?>" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>/>
 									</td>
 								</tr>
+								<tr><td>&nbsp;</td></tr>
+								<tr>
+									<td>
+										<b>Redirect URL after logout:</b>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="radio" id="logout_redirect_home" name="mo_openid_logout_redirect" value="homepage"
+										<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_logout_redirect') == 'homepage' );?> />Home Page
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="radio" id="logout_redirect_current" name="mo_openid_logout_redirect" value="currentpage"
+										<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_logout_redirect') == 'currentpage' );?> />Current Page
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="radio" id="logout_redirect_login" name="mo_openid_logout_redirect" value="login"
+										<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_logout_redirect') == 'login' );?> />Login Page
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="radio" id="logout_redirect_customurl" name="mo_openid_logout_redirect" value="custom"
+										<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_logout_redirect') == 'custom' );?> />Relative URL
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<?php echo site_url();?>
+										<input type="text" id="logout_redirect_url" style="width:50%" name="mo_openid_logout_redirect_url" value="<?php echo get_option('mo_openid_logout_redirect_url')?>" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>/>
+									</td>
+								</tr>
 				<script>
 					var tempHorSize = '<?php echo get_option('mo_login_icon_custom_size') ?>';
 					var tempHorTheme = '<?php echo get_option('mo_openid_login_theme') ?>';
@@ -481,10 +549,8 @@ function mo_openid_apps_config() {
 					function setSizeOfIcons(){
 							
 								if((jQuery('input[name=mo_openid_login_theme]:checked', '#form-apps').val()) == 'longbutton'){
-									//alert(document.getElementById('mo_login_icon_width').value);
 									return document.getElementById('mo_login_icon_width').value;
 								}else{
-									//alert(document.getElementById('mo_login_icon_size').value);
 									return document.getElementById('mo_login_icon_size').value;
 								}
 					}
@@ -494,15 +560,12 @@ function mo_openid_apps_config() {
 									if(l == 'default'){
 										if(r == 'longbutton'){
 											var a = "btn-defaulttheme";
-										//jQuery("."+a).css("padding-left",(t-138)+"px");
-										//jQuery("."+a).css("padding-right",(t-138)+"px");
 										jQuery("."+a).css("width",t+"px");
 										jQuery("."+a).css("padding-top",(h-29)+"px");
 										jQuery("."+a).css("padding-bottom",(h-29)+"px");
 										jQuery(".fa").css("padding-top",(h-35)+"px");
 										jQuery("."+a).css("margin-bottom",(n-5)+"px");
 										}else{
-											//alert("njkvdf");
 											var a="mo_login_icon_preview";
 											jQuery("."+a).css("margin-left",(n-4)+"px");
 											
@@ -522,8 +585,6 @@ function mo_openid_apps_config() {
 										if(r == 'longbutton'){
 											
 												var a = "btn-customtheme";
-												//jQuery("."+a).css("padding-left",(t-138)+"px");
-												//jQuery("."+a).css("padding-right",(t-138)+"px");
 												jQuery("."+a).css("width",(t)+"px");
 												jQuery("."+a).css("padding-top",(h-29)+"px");
 												jQuery("."+a).css("padding-bottom",(h-29)+"px");
@@ -709,6 +770,24 @@ function mo_openid_apps_config() {
 									jQuery("#mo_custom_login_icon_preview_windows").hide();
 									jQuery("#mo_login_button_preview_windowslive").hide();
 									jQuery("#mo_custom_login_button_preview_windows").hide();
+								}
+								
+								
+								if (document.getElementById('twitter_enable').checked) {
+									flag = 1;
+									if(document.getElementById('mo_openid_login_default_radio').checked && !document.getElementById('iconwithtext').checked)
+										jQuery("#mo_login_icon_preview_twitter").show();
+									if(document.getElementById('mo_openid_login_custom_radio').checked && !document.getElementById('iconwithtext').checked)
+										jQuery("#mo_custom_login_icon_preview_twitter").show();
+									if(document.getElementById('mo_openid_login_default_radio').checked && document.getElementById('iconwithtext').checked)
+										jQuery("#mo_login_button_preview_twitter").show();
+									if(document.getElementById('mo_openid_login_custom_radio').checked && document.getElementById('iconwithtext').checked)
+										jQuery("#mo_custom_login_button_preview_twitter").show();
+								}else if(!document.getElementById('twitter_enable').checked){
+									jQuery("#mo_login_icon_preview_twitter").hide();
+									jQuery("#mo_custom_login_icon_preview_twitter").hide();
+									jQuery("#mo_login_button_preview_twitter").hide();
+									jQuery("#mo_custom_login_button_preview_twitter").hide();
 								}
 								
 								if(flag) {
@@ -992,8 +1071,8 @@ function mo_openid_other_settings(){
 		
 				<div>
 					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_facebook" src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" />
-					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_google" src="<?php echo plugins_url( 'includes/images/icons/google.png', __FILE__ )?>" />
 					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_twitter" src="<?php echo plugins_url( 'includes/images/icons/twitter.png', __FILE__ )?>" />
+					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_google" src="<?php echo plugins_url( 'includes/images/icons/google.png', __FILE__ )?>" />
 					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_linkedin" src="<?php echo plugins_url( 'includes/images/icons/linkedin.png', __FILE__ )?>" />
 					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_pinterest" src="<?php echo plugins_url( 'includes/images/icons/pininterest.png', __FILE__ )?>" />
 					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_reddit" src="<?php echo plugins_url( 'includes/images/icons/reddit.png', __FILE__ )?>" />
@@ -1002,8 +1081,8 @@ function mo_openid_other_settings(){
 		
 				<div>
 					<i class="mo_custom_sharing_icon_preview fa fa-facebook" id="mo_custom_sharing_icon_preview_facebook"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
-					<i class="mo_custom_sharing_icon_preview fa fa-google-plus" id="mo_custom_sharing_icon_preview_google"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_preview fa fa-twitter" id="mo_custom_sharing_icon_preview_twitter" style="color:#ffffff;text-align:center;margin-top:5px;" ></i>
+					<i class="mo_custom_sharing_icon_preview fa fa-google-plus" id="mo_custom_sharing_icon_preview_google"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_preview fa fa-linkedin" id="mo_custom_sharing_icon_preview_linkedin" style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_preview fa fa-pinterest" id="mo_custom_sharing_icon_preview_pinterest"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_preview fa fa-reddit" id="mo_custom_sharing_icon_preview_reddit"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
@@ -1012,16 +1091,13 @@ function mo_openid_other_settings(){
 											
 				<div>
 					<i class="mo_custom_sharing_icon_font_preview fa fa-facebook" id="mo_custom_sharing_icon_font_preview_facebook"  style="text-align:center;margin-top:5px;"></i>
-					<i class="mo_custom_sharing_icon_font_preview fa fa-google" id="mo_custom_sharing_icon_font_preview_google"  style="text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_font_preview fa fa-twitter" id="mo_custom_sharing_icon_font_preview_twitter" style="text-align:center;margin-top:5px;" ></i>
+					<i class="mo_custom_sharing_icon_font_preview fa fa-google-plus" id="mo_custom_sharing_icon_font_preview_google"  style="text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_font_preview fa fa-linkedin" id="mo_custom_sharing_icon_font_preview_linkedin" style="text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_font_preview fa fa-pinterest" id="mo_custom_sharing_icon_font_preview_pinterest"  style="text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_font_preview fa fa-reddit" id="mo_custom_sharing_icon_font_preview_reddit"  style="text-align:center;margin-top:5px;"></i>
 					
 				</div>
-				<!--	<img id="mo_sharing_icon_preview" src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" />-->
-					
-				<!--	<i class="fa fa-facebook" style="color:#ffffff;text-align:center;margin-top:5px;" id="mo_custom_sharing_icon_preview" />-->
 	
 			</td>
 		</tr>
@@ -1106,7 +1182,7 @@ function mo_openid_other_settings(){
 								jQuery('.mo_sharing_icon_preview').hide();
 								jQuery('.mo_custom_sharing_icon_preview').hide();
 								jQuery('.mo_custom_sharing_icon_font_preview').show();
-								jQuery("."+a).css("font-size",(t-5)+"px");
+								jQuery("."+a).css("font-size",t+"px");
 								jQuery('.mo_custom_sharing_icon_font_preview').css("color","#"+x);
 								jQuery("."+a).css("margin-left",(n-4)+"px");
 								
@@ -1250,9 +1326,17 @@ function mo_openid_other_settings(){
 		</tr>
 		<tr>
 			<td>
-			<input type="checkbox" id="mo_apps_posts"  name="mo_share_options_post" value="1" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
-			<?php checked( get_option('mo_share_options_enable_post') == 1 );?>>
+				<input type="checkbox" id="mo_apps_posts"  name="mo_share_options_post" value="1" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_share_options_enable_post') == '1' );?>>
 				Blog Post
+				<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="mo_apps_posts_options"  name="mo_share_options_enable_post_position" value="before" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_share_options_enable_post_position') == 'before' );?>>
+				Before content
+				<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="mo_apps_posts_options"  name="mo_share_options_enable_post_position" value="after" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_share_options_enable_post_position') == 'after' );?>>
+				After content
+				<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="mo_apps_posts_options"  name="mo_share_options_enable_post_position" value="both" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_share_options_enable_post_position') == 'both' );?>>
+				Both before and after content
 			</td>		
 		</tr>
 		<tr>
@@ -1333,6 +1417,203 @@ jQuery(function() {
 </script>
 <?php
 }
+function mo_openid_shortcode_info(){
+?>
+	<div class="mo_openid_table_layout">
+		
+								<table>
+									<tr>
+										<td colspan="2">
+											<h3>Shortcode</h3>
+											<b>If you are using Social login, Social Sharing by miniOrange plugin,  follow the steps mentioned below to enable social login/social sharing in the content of individual page/post/frontend login form.</b>
+											
+												
+										</td>
+										
+									</tr>
+									
+									<tr>
+										<td>
+											<h3><a id="openid_login_shortcode_title"  aria-expanded="false" >Social Login Shortcode</a></h3>
+											
+											<div hidden="" id="openid_login_shortcode" style="font-size:13px !important">
+											Use social login Shortcode in the content of required page/post where you want to display Social Login Icons.<br>
+											<b>Example:</b> <code>[miniorange_social_login]</code>
+										
+											<h4 style="margin-bottom:0 !important">For Icons</h4>
+											You can use  different attribute to customize social login icons. All attributes are optional.<br>
+											<b>Example:</b> <code>[miniorange_social_login  shape="square" theme="default" space="4" size="35"]</code><br>
+									
+											<h4 style="margin-bottom:0 !important">For Long-Buttons</h4>
+											You can use different attribute to customize social login buttons. All attributes are optional.<br>
+											<b>Example:</b> <code>[miniorange_social_login  shape="square" theme="default" space="4" width="160" height="50"]</code>
+											<br>
+											
+											<h4 style="margin-bottom:0 !important">Available values for attributes</h4>
+											<b>shape</b>: round, roundededges, square, buttonwithtext<br>
+											<b>theme</b>: default, custombackground<br>
+											<b>size</b>: Any value between 20 to 100<br> 
+											<b>space</b>: Any value between 0 to 100<br>
+											<b>width</b>: Any value between 200 to 1000<br>
+											<b>height</b>: Any value between 35 to 50<br></div>
+											<hr>
+										</td>
+									</tr>
+									
+									<tr>
+										<td>
+											<h3><a   id="openid_sharing_shortcode_title"  >Social Sharing Shortcode</a></h3>
+											<div hidden="" id="openid_sharing_shortcode" style="font-size:13px !important">
+											<b>Horizontal</b> --> <code>[miniorange_social_sharing]</code><br>
+											<b>Vertical</b> --> <code>[miniorange_social_sharing_vertical]</code>
+											<!--Use [miniorange_social_sharing] Shortcode in the content of required page/post where you want to display horizontal Social Sharing Icons. Use [miniorange_social_sharing_vertical] shortcode for vertical Social Sharing Icons.--><br>
+											
+										
+											<h4>For Sharing Icons</h4>
+											You can use  different attribute to customize social sharing icons. All attributes are optional.<br>
+											<b>Example:</b> <code>[miniorange_social_sharing  shape="square" theme="default" space="4" space="10"]</code>
+											<br>
+											
+											<h4 style="margin-bottom:0 !important">Common attributes - horizontal and vertical</h4>
+											<b>shape</b>: round, roundededges, square<br>
+											<b>theme</b>: default, custombackground, nobackground<br>
+											<b>size</b>: Any value between 20 to 100<br> 
+											<b>space</b>: Any value between 0 to 50<br>
+											<br>
+											<b>Vertical attributes</b><br>
+											<b>alignment</b>: left,right<br>
+											<b>top</b>: Any value(height from top) between 0 to 1000<br> 
+											<b>right(Applicable if alignment is right)</b>: Any value between 0 to 200<br>
+											<b>left(Applicable if alignment is left)</b>: Any value between 0 to 200<br>
+											</div>
+											<hr>
+										</td>
+									</tr>
+															
+									
+									<tr>
+										<td>
+											<h3><a id="openid_shortcode_inphp_title">Shortcode in php file</a></h3>
+											<div hidden="" id = "openid_shortcode_inphp" style="font-size:13px !important">
+											You can use shortcode in PHP file as following: &nbsp;&nbsp;
+											&nbsp;
+											<code>&lt;&#63;php echo do_shortcode(‘SHORTCODE’) /&#63;&gt;</code>
+											<br>
+											Replace SHORTCODE in above code with the required shortcode like [miniorange_social_login theme="default"], so the final code looks like following :
+											<br> 
+											<code>&lt;&#63;php echo do_shortcode('[miniorange_social_login theme="default"]') &#63;&gt;</code></div>
+											<hr>
+											
+										</td>
+									</tr>
+										
+								</table>
+	</div>
+<?php	
+}
+
+function mo_openid_troubleshoot_info(){ ?>
+	<div class="mo_openid_table_layout">
+		<table width="100%">
+		<tbody>
+		 <tr><td>
+					<h3><a  id="openid_question1" class="mo_openid_title_panel" >How to enable PHP cURL extension? (Pre-requisite)</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question1_desc">
+					<ol>
+						 cURL is enabled by default but in case you have disabled it, follow the steps to enable
+						<li>Open php.ini(it's usually in /etc/ or in php folder on the server).</li>
+						<li>Search for extension=php_curl.dll. Uncomment it by removing the semi-colon( ; ) in front of it.</li>
+						<li>Restart the Apache Server.</li>
+						</ol>
+						For any further queries, please submit a query on right hand side in our <b>Support Section</b>.
+					
+					</div>
+						<hr>
+			</td></tr>
+			<tr><td>
+					<h3><a  id="openid_question9" class="mo_openid_title_panel" >I am getting error - curl_setopt(): CURLOPT_FOLLOWLOCATION cannot be activated when an open_basedir is set</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question9_desc">
+						Just setsafe_mode = Off in your php.ini file (it's usually in /etc/ on the server). If that's already off, then look around for the open_basedir in the php.ini file, and change it to open_basedir = .
+					</div>
+					<hr>
+		</td></tr>
+		 <tr><td>
+					<h3><a  id="openid_question7" class="mo_openid_title_panel" >I did not recieve OTP. What should I do?</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question7_desc">
+						The OTP is sent as an email to your email address with which you have registered with miniOrange. If you can't see the email from miniOrange in your mails, please make sure to check your SPAM folder. If you don't see an email even in SPAM folder, contact us as <b>info@miniorange.com</b>.
+					</div>
+					<hr>
+		</td></tr>
+		<tr><td>
+					<h3><a  id="openid_question8" class="mo_openid_title_panel" >After entering OTP, I get Invalid OTP. What should I do?</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question8_desc">
+						You should click on <b>Resend OTP</b> link to get another OTP. Now enter this OTP to validate. If it still does not work, contact us as <b>info@miniorange.com</b>.
+					</div>
+					<hr>
+		</td></tr>
+		<tr><td>
+					<h3><a  id="openid_question5" class="mo_openid_title_panel" >I forgot the password of my miniOrange account. How can I reset it?</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question5_desc">
+						There are two cases according to the page you see -<br>
+						1. <b>Login with miniOrange</b> screen: You should click on <b>forgot password</b> link. You will get your new password on your email address which you have registered with miniOrange . Now you can login with the new password.<br>
+						2. <b>Register with miniOrange</b> screen: Enter your email ID and any random password in <b>password</b> and <b>confirm password</b> input box. This will redirect you to <b>Login with miniOrange</b> screen. Now follow first step.
+					</div>
+					<hr>
+		</td></tr>
+		<tr><td>
+					<h3><a  id="openid_question10" class="mo_openid_title_panel" >When I click on Facebook sharing icon, the dialog opens and does nothing. Why is it not working?</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question10_desc">
+						This issue arises if your website is not publicly hosted. Facebook does not recognize your URL if it has localhost. You need to test on a publicly hosted website.
+					</div>
+					<hr>
+		</td></tr>
+		
+				<tr><td>
+					<h3><a  id="openid_question2" class="mo_openid_title_panel" >How to add login icons to frontend login page?</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question2_desc">
+					You can add social login icons to frontend login page using our shortcode [miniorange_social_login]. Refer to 'Shortcode' tab to add customizations to Shortcode.
+						
+					
+					</div>
+					<hr>
+		</td></tr>
+		
+		<tr><td>
+					<h3><a  id="openid_question4" class="mo_openid_title_panel" >How can I put social login icons on a page without using widgets?</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question4_desc">
+					You can add social login icons to any page or custom login page using 'social login shortcode' [miniorange_social_login]. Refer to 'Shortcode' tab to add customizations to Shortcode.
+					</div>
+					<hr>
+		</td></tr>
+		
+		<tr><td>
+					<h3><a  id="openid_question6" class="mo_openid_title_panel" >Is it possible to show sharing icons below the post content?</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question6_desc">
+						You can put social sharing icons before the content, after the content or both before and after the content. Go to <b>Sharing tab</b> , check <b>Blog post</b> checkbox and select one of three(before, after, both) options available. Save settings.
+					</div>
+					<hr>
+		</td></tr>
+		<tr><td>
+					<h3><a  id="openid_question3" class="mo_openid_title_panel" >How can I redirect to my blog page after login?</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question3_desc">
+					You can select one of the options from <b>Redirect URL after login</b> of <b>Display Option</b> section under <b>Social Login</b> tab. <br>
+					1. Same page where user logged in <br>
+					2. Homepage <br>
+					3. Account Dsahboard <br>
+					4. Custom URL - Example: https://www.example.com <br>
+					</div>
+					<hr>
+		</td></tr>
+		
+		
+		</tbody>
+		</table>
+	</div>
+	
+	
+<?php	
+}	
+
 function mo_openid_is_customer_registered() {
 			$email 			= get_option('mo_openid_admin_email');
 			$customerKey 	= get_option('mo_openid_admin_customer_key');
@@ -1355,15 +1636,12 @@ function miniorange_openid_support(){
 				<input type="hidden" name="option" value="mo_openid_contact_us_query_option" />
 				<table class="mo_openid_settings_table">
 					<tr>
-						<!--td><b><font color="#FF0000">*</font>Email:</b></td-->
 						<td><input type="email" class="mo_openid_table_contact" required placeholder="Enter your Email" name="mo_openid_contact_us_email" value="<?php echo get_option("mo_openid_admin_email"); ?>"></td>
 					</tr>
 					<tr>
-						<!--td><b>Phone:</b></td-->
 						<td><input type="tel" id="contact_us_phone" pattern="[\+]\d{11,14}|[\+]\d{1,4}[\s]\d{9,10}" placeholder="Enter your phone number with country code (+1)" class="mo_openid_table_contact" name="mo_openid_contact_us_phone" value="<?php echo get_option('mo_openid_admin_phone');?>"></td>
 					</tr>
 					<tr>
-						<!--td><b><font color="#FF0000">*</font>Query:</b></td-->
 						<td><textarea class="mo_openid_table_contact" onkeypress="mo_openid_valid_query(this)" onkeyup="mo_openid_valid_query(this)" placeholder="Write your query here" onblur="mo_openid_valid_query(this)" required name="mo_openid_contact_us_query" rows="4" style="resize: vertical;"></textarea></td>
 					</tr>
 				</table>
@@ -1384,7 +1662,7 @@ function miniorange_openid_support(){
 		}
 		
 		function moSharingSizeValidate(e){
-	var t=parseInt(e.value.trim());t>60?e.value=60:10>t&&(e.value=20)
+	var t=parseInt(e.value.trim());t>60?e.value=60:10>t&&(e.value=10)
 }
 function moSharingSpaceValidate(e){
 	var t=parseInt(e.value.trim());t>50?e.value=50:0>t&&(e.value=0)

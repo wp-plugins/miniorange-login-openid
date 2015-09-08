@@ -36,7 +36,7 @@
 	padding-left: 10px;
 }
 .mo_openid_table_textbox {
-	width:80% !important;
+	width:80%;
 }
 .mo_openid_table_contact {
 	width:95%;
@@ -55,40 +55,32 @@
 .mo_openid_display_table .mo_openid_table_textbox {
 	width:70%;
 }
-.openid_login_wid li{
+.mo_openid_login_wid li{
 	margin:5px;
+	list-style-type:none;
 }
 
-.app-icons>a>img{
+.mo-openid-app-icons>a>img{
 	width:35px !important; 
 	height:35px !important;
 	margin:8px 0px;
 	display: inline !important;
-	
-	
 }
 
-.app-share-icons{
+.mo-openid-app-share-icons{
 width:35px !important; 
 height:35px !important;
 display:inline !important;
 }
 
-.app-share-icons-grey{
-width:28px !important; 
-height:28px !important;
-display:inline !important;
-}
-
-.share-link{
+.mo-openid-share-link{
 	     border-bottom: 0px !important;
 		box-sizing:border-box !important;
 }
 
 .circle{
-	width:40px !important; 
-    height:40px !important;
-	border-radius: 25px !important;
+	
+	border-radius: 999px !important;
 }
 
 
@@ -96,50 +88,39 @@ display:inline !important;
 border-radius: 4px !important;
 }
 
+.round{
+	
+	border-radius: 999px !important;
+}
 
 
-.app-icons>p{
+.roundededges{
+border-radius: 4px !important;
+}
+
+.mo-openid-app-icons>p{
 margin:0px !important;
 
 }
 
-.app-icons{
+.mo-openid-app-icons{
 	display:inline !important;
-}
-
-
-.openid_login_wid li{
-list-style-type:none;
-
 }
 
 .theme-checkbox{
 	vertical-align :super !important;
-}
-
-
-
-  
+} 
 
 a{
 	cursor:pointer;
 	
 }
 
-.disabledTab{
-    pointer-events: none;
-}
-
-
-.grey{
-	  -webkit-filter:grayscale(100%);
-}
-
 .mo_openid_display_interface{
 	width:100%;
 }
 
-.vertical{
+.mo_openid_vertical{
 	display:inline-block !important;
 	 overflow: visible;
     z-index: 10000000;
@@ -164,6 +145,23 @@ a{
 	   box-sizing: border-box !important;
 }
 
+.btn-custom-dec{
+text-decoration:none !important;	
+}
+
 .mo-custom-share-icon{
 	box-sizing:border-box !important;
 }
+
+.mo_openid_help_desc {
+	font-size:13px;
+	border-left:solid 2px rgba(128, 128, 128, 0.65);
+	margin-top:10px;
+	padding-left:10px;
+}
+.mo_openid_title_panel{
+	width: 100%;
+    color: #1B79AE;
+    cursor: pointer;
+    font-weight: bold;
+	}

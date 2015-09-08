@@ -273,4 +273,57 @@ class CustomerOpenID {
 
 			return true;
 	}
+	
+	function forgot_password($email){
+		
+		$url = get_option('mo_openid_host_name') . '/moas/rest/customer/password-reset';
+		$ch = curl_init($url);
+		
+		/* The customer Key provided to you */
+		$customerKey = get_option('mo_openid_admin_customer_key');
+	
+		/* The customer API Key provided to you */
+		$apiKey = get_option('mo_openid_admin_api_key');
+	
+		/* Current time in milliseconds since midnight, January 1, 1970 UTC. */
+		$currentTimeInMillis = round(microtime(true) * 1000);
+	
+		/* Creating the Hash using SHA-512 algorithm */
+		$stringToHash = $customerKey . number_format($currentTimeInMillis, 0, '', '') . $apiKey;
+		$hashValue = hash("sha512", $stringToHash);
+	
+		$customerKeyHeader = "Customer-Key: " . $customerKey;
+		$timestampHeader = "Timestamp: " . $currentTimeInMillis;
+		$authorizationHeader = "Authorization: " . $hashValue;
+		
+		$fields = '';
+	
+			//*check for otp over sms/email
+			$fields = array(
+				'email' => $email
+			);
+		
+		$field_string = json_encode($fields);
+		
+		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+		curl_setopt( $ch, CURLOPT_ENCODING, "" );
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		curl_setopt( $ch, CURLOPT_AUTOREFERER, true );
+		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
+		
+		curl_setopt( $ch, CURLOPT_MAXREDIRS, 10 );
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", $customerKeyHeader, 
+											$timestampHeader, $authorizationHeader));
+		curl_setopt( $ch, CURLOPT_POST, true);
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
+		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$content = curl_exec($ch);
+		
+		if(curl_errno($ch)){
+			return null;
+		}
+		curl_close($ch);
+		return $content;
+	}
 }?>
