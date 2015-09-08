@@ -1426,7 +1426,7 @@ function mo_openid_shortcode_info(){
 										<td colspan="2">
 											<h3>Shortcode</h3>
 											<b>If you are using Social login, Social Sharing by miniOrange plugin,  follow the steps mentioned below to enable social login/social sharing in the content of individual page/post/frontend login form.</b>
-											
+											<p>If any section is not opening, press CTRL + F5 to clear cache.<p>
 												
 										</td>
 										
@@ -1517,6 +1517,7 @@ function mo_openid_troubleshoot_info(){ ?>
 		<table width="100%">
 		<tbody>
 		 <tr><td>
+		 <p>If any section is not opening, press CTRL + F5 to clear cache.<p>
 					<h3><a  id="openid_question1" class="mo_openid_title_panel" >How to enable PHP cURL extension? (Pre-requisite)</a></h3>
 					<div class="mo_openid_help_desc" hidden="" id="openid_question1_desc">
 					<ol>
@@ -1540,14 +1541,14 @@ function mo_openid_troubleshoot_info(){ ?>
 		 <tr><td>
 					<h3><a  id="openid_question7" class="mo_openid_title_panel" >I did not recieve OTP. What should I do?</a></h3>
 					<div class="mo_openid_help_desc" hidden="" id="openid_question7_desc">
-						The OTP is sent as an email to your email address with which you have registered with miniOrange. If you can't see the email from miniOrange in your mails, please make sure to check your SPAM folder. If you don't see an email even in SPAM folder, contact us as <b>info@miniorange.com</b>.
+						The OTP is sent as an email to your email address with which you have registered with miniOrange. If you can't see the email from miniOrange in your mails, please make sure to check your SPAM folder. If you don't see an email even in SPAM folder, contact us at <b>info@miniorange.com</b>.
 					</div>
 					<hr>
 		</td></tr>
 		<tr><td>
 					<h3><a  id="openid_question8" class="mo_openid_title_panel" >After entering OTP, I get Invalid OTP. What should I do?</a></h3>
 					<div class="mo_openid_help_desc" hidden="" id="openid_question8_desc">
-						You should click on <b>Resend OTP</b> link to get another OTP. Now enter this OTP to validate. If it still does not work, contact us as <b>info@miniorange.com</b>.
+						You should click on <b>Resend OTP</b> link to get another OTP. Now enter this OTP to validate. If it still does not work, contact us at <b>info@miniorange.com</b>.
 					</div>
 					<hr>
 		</td></tr>
