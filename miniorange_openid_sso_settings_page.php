@@ -1446,11 +1446,11 @@ function mo_openid_shortcode_info(){
 									
 											<h4 style="margin-bottom:0 !important">For Long-Buttons</h4>
 											You can use different attribute to customize social login buttons. All attributes are optional.<br>
-											<b>Example:</b> <code>[miniorange_social_login  shape="square" theme="default" space="4" width="160" height="50"]</code>
+											<b>Example:</b> <code>[miniorange_social_login  shape="longbuttonwithtext" theme="default" space="4" width="160" height="50"]</code>
 											<br>
 											
 											<h4 style="margin-bottom:0 !important">Available values for attributes</h4>
-											<b>shape</b>: round, roundededges, square, buttonwithtext<br>
+											<b>shape</b>: round, roundededges, square, longbuttonwithtext<br>
 											<b>theme</b>: default, custombackground<br>
 											<b>size</b>: Any value between 20 to 100<br> 
 											<b>space</b>: Any value between 0 to 100<br>
@@ -1482,9 +1482,9 @@ function mo_openid_shortcode_info(){
 											<br>
 											<b>Vertical attributes</b><br>
 											<b>alignment</b>: left,right<br>
-											<b>top</b>: Any value(height from top) between 0 to 1000<br> 
-											<b>right(Applicable if alignment is right)</b>: Any value between 0 to 200<br>
-											<b>left(Applicable if alignment is left)</b>: Any value between 0 to 200<br>
+											<b>topoffset</b>: Any value(height from top) between 0 to 1000<br> 
+											<b>rightoffset(Applicable if alignment is right)</b>: Any value between 0 to 200<br>
+											<b>leftoffset(Applicable if alignment is left)</b>: Any value between 0 to 200<br>
 											</div>
 											<hr>
 										</td>
