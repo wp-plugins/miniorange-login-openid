@@ -468,13 +468,18 @@ class mo_openid_login_wid extends WP_Widget {
 						$http =  "http://";
 					}
 					if ( strpos($_SERVER['REQUEST_URI'],'wp-login.php') !== FALSE){
-							$redirect_url = site_url() . '/wp-login.php';
+							$redirect_url = site_url() . '/wp-login.php?option=getMoSocialLogin&app_name=';
 
 					}else{
 					    	$redirect_url = $http . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+							if(strpos($redirect_url, '?') !== false) {
+								$redirect_url .= '&option=getMoSocialLogin&app_name=';
+							} else {
+								$redirect_url .= '?option=getMoSocialLogin&app_name=';
+							}
     				}
     			?>
-					window.location.href = '<?php echo $redirect_url; ?>' + '/?option=getMoSocialLogin&app_name=' + app_name;
+					window.location.href = '<?php echo $redirect_url; ?>' + app_name;
 				}
 			</script>
 			<?php
@@ -718,11 +723,13 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 					  do_action( 'wp_login', $user->user_login, $user );
 					  wp_set_auth_cookie( $user_id, true );
 				} else { // this user is a guest
-					  $random_password 	= wp_generate_password( 10, false );
-					  $user_id 			= wp_create_user( $user_email, $random_password, $user_email );
-					  $user 	= get_user_by('email', $user_email );
-					  do_action( 'wp_login', $user->user_login, $user );
-					  wp_set_auth_cookie( $user_id, true );
+					if(get_option('mo_openid_auto_register_enable')) {
+						  $random_password 	= wp_generate_password( 10, false );
+						  $user_id 			= wp_create_user( $user_email, $random_password, $user_email );
+						  $user 	= get_user_by('email', $user_email );
+						  do_action( 'wp_login', $user->user_login, $user );
+						  wp_set_auth_cookie( $user_id, true );
+					}
 				}
 			}
 			
@@ -731,6 +738,26 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 			exit;
 
 		}
+		
+		if(isset($_REQUEST['redirect']) and strpos($_REQUEST['redirect'],'true') !== false) {
+			if(!is_user_logged_in() && !get_option('mo_openid_auto_register_enable')) {
+				mo_openid_disabled_register_message();
+			}
+		}
+	}
+	
+	function mo_openid_disabled_register_message() {
+		wp_enqueue_script('thickbox');
+		wp_enqueue_style('thickbox');
+		wp_enqueue_script( 'mo-wp-settings-script',plugins_url('includes/js/settings_popup.js', __FILE__), array('jquery'));
+		add_thickbox();
+		$script = '<script>
+						function getAutoRegisterDisabledMessage() {
+							var disabledMessage = "' . get_option('mo_openid_register_disabled_message') . '";
+							return disabledMessage;
+						}
+					</script>';
+		echo $script;
 	}
 		
 	function mo_openid_get_redirect_url() {
@@ -752,6 +779,11 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 			$redirect_url = admin_url();
 		} else if( $option == 'custom' ) {
 			$redirect_url = get_option('mo_openid_login_redirect_url');
+		}
+		if(strpos($redirect_url,'?') !== FALSE) {
+			$redirect_url .= '&redirect=true';
+		} else{
+			$redirect_url .= '?redirect=true';
 		}
 		return $redirect_url;
 	}

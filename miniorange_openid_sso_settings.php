@@ -1,10 +1,10 @@
 <?php
 
 /**
-* Plugin Name: miniOrange Social Login
+* Plugin Name: Social Login, Social Sharing by miniOrange
 * Plugin URI: http://miniorange.com
-* Description: This plugin enables login, comment, share and auto-register with social apps.
-* Version: 4.1.1
+* Description: Allow your users to login, comment and share with Facebook, Google, Twitter, LinkedIn etc using customizable buttons.
+* Version: 4.2
 * Author: miniOrange
 * Author URI: http://miniorange.com
 * License: GPL2
@@ -32,6 +32,7 @@ class Miniorange_OpenID_SSO {
 			add_action( 'wp_enqueue_scripts', array( $this, 'mo_openid_plugin_settings_style' ) ,5);
 			
 			register_deactivation_hook(__FILE__, array( $this, 'mo_openid_deactivate'));
+			register_activation_hook( __FILE__, array( $this, 'mo_openid_activate' ) );
 			
 			// add social login icons to default login form
 			if(get_option('mo_openid_default_login_enable') == 1){
@@ -91,6 +92,8 @@ class Miniorange_OpenID_SSO {
 			add_option( 'mo_openid_login_custom_theme', 'default' );
 			add_option( 'mo_login_icon_custom_color', '2B41FF' );
 			add_option( 'mo_openid_logout_redirect', 'currentpage' );
+			add_option( 'mo_openid_auto_register_enable', '1');
+			add_option( 'mo_openid_register_disabled_message', 'Registration is disabled for this website. Please contact the administrator for any queries.' );
 	}
 		
 	function mo_openid_deactivate() {
@@ -107,7 +110,9 @@ class Miniorange_OpenID_SSO {
 			delete_option('mo_openid_message');
 	}
 	
-		
+	function mo_openid_activate() {
+		add_option('Activated_Plugin','Plugin-Slug');	
+	}	
 		
 	
 	function mo_openid_add_social_login(){
@@ -182,7 +187,6 @@ class Miniorange_OpenID_SSO {
 			wp_enqueue_style( 'mo-wp-bootstrap-main',plugins_url('includes/css/bootstrap.min-preview.css', __FILE__), false );
 			wp_enqueue_style( 'mo-wp-font-awesome',plugins_url('includes/css/font-awesome.min.css', __FILE__), false );
 			wp_enqueue_style( 'mo-wp-font-awesome',plugins_url('includes/css/font-awesome.css', __FILE__), false );
-				
 	}
 
 	function mo_openid_plugin_settings_script() {
@@ -212,7 +216,6 @@ class Miniorange_OpenID_SSO {
 	function  mo_login_widget_openid_options() {
 		global $wpdb;
 		update_option( 'mo_openid_host_name', 'https://auth.miniorange.com' );
-
 		mo_register_openid();
 	}
 
@@ -223,6 +226,23 @@ class Miniorange_OpenID_SSO {
 	}
 
 	function miniorange_openid_save_settings(){
+		if(is_admin() && get_option('Activated_Plugin')=='Plugin-Slug') {
+			update_option( 'mo_openid_host_name', 'https://auth.miniorange.com' );
+			
+			delete_option('Activated_Plugin');
+			$customer = new CustomerOpenID();
+			global $current_user;
+			get_currentuserinfo();
+			$email = $current_user->user_email;
+			$phone='+1';
+			$query='User activated Social login, Social sharing by miniOrange.';
+			$submitted = $customer->submit_contact_us( $email, $phone, $query );
+			if($submitted) {
+				update_option('mo_openid_message','Go to plugin <b><a href="admin.php?page=mo_openid_settings">settings</a></b> to enable Social Login, Social Sharing by miniOrange.');
+				$this->mo_openid_show_success_message();
+			}
+		}
+		
 		if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_register_customer" ) {	//register the admin to miniOrange
 
 			//validation and sanitization
@@ -261,7 +281,7 @@ class Miniorange_OpenID_SSO {
 				if( strcasecmp( $content['status'], 'CUSTOMER_NOT_FOUND') == 0 ){
 					$content = json_decode($customer->send_otp_token(), true);
 										if(strcasecmp($content['status'], 'SUCCESS') == 0) {
-											update_option( 'mo_openid_message', ' A one time passcode is sent to ' . get_option('mo_openid_admin_email') . '. Please enter the otp here to verify your email.');
+											update_option( 'mo_openid_message', ' A passcode is sent to ' . get_option('mo_openid_admin_email') . '. Please enter the otp here to verify your email.');
 											update_option('mo_openid_transactionId',$content['txId']);
 											update_option('mo_openid_registration_status','MO_OTP_DELIVERED_SUCCESS');
 
@@ -286,7 +306,7 @@ class Miniorange_OpenID_SSO {
 			//validation and sanitization
 			$otp_token = '';
 			if( $this->mo_openid_check_empty_or_null( $_POST['otp_token'] ) ) {
-				update_option( 'mo_openid_message', 'Please enter a value in otp field.');
+				update_option( 'mo_openid_message', 'Please enter a value in OTP field.');
 				update_option('mo_openid_registration_status','MO_OTP_VALIDATION_FAILURE');
 				$this->mo_openid_show_error_message();
 				return;
@@ -305,7 +325,7 @@ class Miniorange_OpenID_SSO {
 
 					$this->create_customer();
 			}else{
-				update_option( 'mo_openid_message','Invalid one time passcode. Please enter a valid otp.');
+				update_option( 'mo_openid_message','Invalid one time passcode. Please enter a valid passcode.');
 				update_option('mo_openid_registration_status','MO_OTP_VALIDATION_FAILURE');
 				$this->mo_openid_show_error_message();
 			}
@@ -386,6 +406,10 @@ class Miniorange_OpenID_SSO {
 				//Logout Url
 				update_option( 'mo_openid_logout_redirect', $_POST['mo_openid_logout_redirect']);
 				update_option( 'mo_openid_logout_redirect_url', $_POST['mo_openid_logout_redirect_url'] );
+				
+				//auto register
+				update_option( 'mo_openid_auto_register_enable', isset( $_POST['mo_openid_auto_register_enable']) ? $_POST['mo_openid_auto_register_enable'] : 0);
+				update_option( 'mo_openid_register_disabled_message', $_POST['mo_openid_register_disabled_message']);
 				
 			    update_option('mo_openid_login_widget_customize_text',$_POST['mo_openid_login_widget_customize_text'] );
 			    update_option( 'mo_openid_login_button_customize_text',$_POST['mo_openid_login_button_customize_text'] );
@@ -533,7 +557,7 @@ class Miniorange_OpenID_SSO {
 	function miniorange_openid_menu() {
 
 		//Add miniOrange plugin to the menu
-		$page = add_menu_page( 'MO OpenID Settings ' . __( 'Configure OpenID', 'mo_openid_settings' ), 'miniOrange Social Login', 'administrator',
+		$page = add_menu_page( 'MO OpenID Settings ' . __( 'Configure OpenID', 'mo_openid_settings' ), 'miniOrange Social Login, Sharing', 'administrator',
 		'mo_openid_settings', array( $this, 'mo_login_widget_openid_options' ),plugin_dir_url(__FILE__) . 'includes/images/miniorange_icon.png');
 	}
 	

@@ -509,6 +509,24 @@ function mo_openid_apps_config() {
 										<input type="text" id="logout_redirect_url" style="width:50%" name="mo_openid_logout_redirect_url" value="<?php echo get_option('mo_openid_logout_redirect_url')?>" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>/>
 									</td>
 								</tr>
+								<tr>
+									<td>
+										<br>
+										<hr>
+										<h3>Registration Options</h3>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										For auto-regitser users unchecked, users will not be able to register using Social Login. The users who already have an account will be able to login.  This setting stands true only when users are registering using Social Login. This will not interfere with users registering through the regular WordPress.
+										<br/><br/>
+										<input type="checkbox" id="auto_register_enable" name="mo_openid_auto_register_enable" value="1"
+										<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>	<?php checked( get_option('mo_openid_auto_register_enable') == 1 );?> /><b>Auto-register users</b>
+										<br/><br/>
+										<b>Registration disabled message: </b>
+										<textarea id="auto_register_disabled_message" style="width:80%" name="mo_openid_register_disabled_message" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>><?php echo get_option('mo_openid_register_disabled_message')?></textarea>
+									</td>
+								</tr>
 				<script>
 					var tempHorSize = '<?php echo get_option('mo_login_icon_custom_size') ?>';
 					var tempHorTheme = '<?php echo get_option('mo_openid_login_theme') ?>';
@@ -1520,8 +1538,8 @@ function mo_openid_troubleshoot_info(){ ?>
 		 <p>If any section is not opening, press CTRL + F5 to clear cache.<p>
 					<h3><a  id="openid_question1" class="mo_openid_title_panel" >How to enable PHP cURL extension? (Pre-requisite)</a></h3>
 					<div class="mo_openid_help_desc" hidden="" id="openid_question1_desc">
+					cURL is enabled by default but in case you have disabled it, follow the steps to enable it
 					<ol>
-						 cURL is enabled by default but in case you have disabled it, follow the steps to enable
 						<li>Open php.ini(it's usually in /etc/ or in php folder on the server).</li>
 						<li>Search for extension=php_curl.dll. Uncomment it by removing the semi-colon( ; ) in front of it.</li>
 						<li>Restart the Apache Server.</li>
@@ -1562,9 +1580,9 @@ function mo_openid_troubleshoot_info(){ ?>
 					<hr>
 		</td></tr>
 		<tr><td>
-					<h3><a  id="openid_question10" class="mo_openid_title_panel" >When I click on Facebook sharing icon, the dialog opens and does nothing. Why is it not working?</a></h3>
+					<h3><a  id="openid_question10" class="mo_openid_title_panel" >Why is sharing with Facebook and Google+ is not working?</a></h3>
 					<div class="mo_openid_help_desc" hidden="" id="openid_question10_desc">
-						This issue arises if your website is not publicly hosted. Facebook does not recognize your URL if it has localhost. You need to test on a publicly hosted website.
+						This issue arises if your website is not publicly hosted. Facebook and Google+ look for the URL to generate its preview for sharing. That does not work on localhost or any privately hosted URL.
 					</div>
 					<hr>
 		</td></tr>

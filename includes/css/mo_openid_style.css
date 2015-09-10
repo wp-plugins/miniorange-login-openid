@@ -165,3 +165,7 @@ text-decoration:none !important;
     cursor: pointer;
     font-weight: bold;
 	}
+	
+#TB_window, #TB_window #TB_ajaxContent {
+	width:500px!important;
+}

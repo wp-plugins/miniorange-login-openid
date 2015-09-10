@@ -4,7 +4,7 @@ Donate link: http://miniorange.com
 Tags: accesspress, amazon, auto user registration, User Profile Data, auto-login, autologin, Facebook, facebook connect, Facebook Login, facebook share, floating buttons, free social sharing, google, google plus share, share page, Google Login, google social login, login with twitter, twitter social login, twitter login, increase shares, instagram, linkedin, linkedin login, login, login widget, login with amazon, pinterest share, pinterest sharing, reddit share, reddit sharing, login with facebook, login with google, login with linkedin, login with microsoft, login with openid connect, login with salesforce, microsoft, oauth, openid, OpenID Connect, openid connect sso, post to social networks, Reddit, salesforce, salesforce login, salesforce openid connect, Share, share button, share buttons, share icons, share links, social connect, social login, social network login, social network share, social provider, social share, social sharing, social sharing widget, twitter, twitter share, user auto register, widget, windows live, woocommerce, woocommerce connect, comments, yahoo, twitter,plugin,wordpress multisite, SSO technology,social sign-in,Social Plugins, social media tools,social commenting,social authentication,social app, social api, Social Analytics, single sign-on, share post,OpenID integration,Online Identity, multisite, mailchimp, LoginRadius, Oneall, Login Radius, One all, Hubspot,capture social data, captcha, bbPress, buddypress, shortcode
 Requires at least: 2.0.2
 Tested up to: 4.3
-Stable tag: 4.1.1
+Stable tag: 4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ Social Login, Social Sharing allows login, share, comment using any social netwo
 Social Login, Social Sharing plugin is professionally developed by miniOrange and is a WordPress (BuddyPress compatible) plugin that allows your visitors to comment, share, login and register with many Social Networks like for example Facebook, Twitter, Google, LinkedIn, WindowsLive, Instagram, Salesforce and Amazon.
 
 = Social Login =
-This plugin enables Social Login. Allow your visitors to choose from their favorite social login apps to login, comment, share and auto-register with your website or blog. 
+This plugin enables Social Login. Allow your visitors to choose from their favorite social login apps to login, comment, share and optionally auto-register with your website or blog.
 
 One-click login to your WordPress site using social login applications like Google, Twitter, Facebook, LinkedIn, Instagram, Amazon, Salesforce, Windows Live. This means, if your user is logged in to Google, user can comment on any blog or site by simply clicking the `google icon` - no username or password is explicitly required! Simply enable Social Login, *no setup* of application is required and you are done.
 
@@ -53,7 +53,7 @@ All other Social Login and Social Sharing applications are supported through a s
 *	Floating Vertical Social Sharing widget for share icons
 *	Customize social login and social sharing buttons to match your website's theme.
 *	Select your favourite theme for social sharing and social login icons.
-*	Automatic user registration after social login if the user is not already registered with your site.
+*	Optional automatic user registration after social login if the user is not already registered with your site.
 *	Variety of troubleshooting topics in plugin.
 *	**Support** using email and in-plugin support form
 
@@ -124,6 +124,10 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 
 == Changelog ==
 
+= 4.2 =
+*	Added feature of disabling User Auto registration in Social Login
+*	Change in troubleshooting instructions
+
 = 4.1.1 =
 *	Change in shortcode instructions
 *	Change in troubleshooting instructions
@@ -182,6 +186,10 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 * First version of Social Login, Social Sharing plugin.
 
 == Upgrade Notice ==
+
+= 4.2 =
+*	Added feature of disabling User Auto registration in Social Login
+*	Change in troubleshooting instructions
 
 = 4.1.1 =
 *	Change in shortcode instructions

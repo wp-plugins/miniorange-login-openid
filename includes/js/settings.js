@@ -43,5 +43,4 @@ jQuery(document).ready(function () {
 	jQuery("#openid_question10").click(function () {
     	jQuery("#openid_question10_desc").slideToggle(400);
     });
-	//if(jQuery("#mo_apps_posts").checked)
 });
