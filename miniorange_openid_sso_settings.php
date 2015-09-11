@@ -4,7 +4,7 @@
 * Plugin Name: Social Login, Social Sharing by miniOrange
 * Plugin URI: http://miniorange.com
 * Description: Allow your users to login, comment and share with Facebook, Google, Twitter, LinkedIn etc using customizable buttons.
-* Version: 4.2
+* Version: 4.2.1
 * Author: miniOrange
 * Author URI: http://miniorange.com
 * License: GPL2

@@ -91,6 +91,11 @@ function mo_openid_show_new_registration_page() {
 								
 								
 								<div class="mo_openid_table_layout">
+									<?php if(!mo_openid_is_customer_registered()) { ?>
+										<div style="display:block;margin-top:10px;color:red;background-color:rgba(251, 232, 0, 0.15);padding:5px;border:solid 1px rgba(255, 0, 9, 0.36);">
+										Please <a href="<?php echo add_query_arg( array('tab' => 'register'), $_SERVER['REQUEST_URI'] ); ?>">Register or Login with miniOrange</a> to enable Social Login and Social Sharing. miniOrange takes care of creating applications for you so that you don't have to worry about creating applications in each social network.
+										</div>
+									<?php } ?>
 
 										<h3>Register with miniOrange</h3>
 
@@ -146,6 +151,12 @@ function mo_openid_show_verify_password_page() {
 		<form name="f" method="post" action="">
 			<input type="hidden" name="option" value="mo_openid_connect_verify_customer" />
 			<div class="mo_openid_table_layout">
+				<?php if(!mo_openid_is_customer_registered()) { ?>
+					<div style="display:block;margin-top:10px;color:red;background-color:rgba(251, 232, 0, 0.15);padding:5px;border:solid 1px rgba(255, 0, 9, 0.36);">
+					Please <a href="<?php echo add_query_arg( array('tab' => 'register'), $_SERVER['REQUEST_URI'] ); ?>">Register or Login with miniOrange</a> to enable Social Login and Social Sharing. miniOrange takes care of creating applications for you so that you don't have to worry about creating applications in each social network.
+					</div>
+				<?php } ?>
+			
 				<h3>Login with miniOrange</h3>
 				<p><b>It seems you already have an account with miniOrange. Please enter your miniOrange email and password. <a href="#forgot_password">Click here if you forgot your password?</a></b></p>
 				<table class="mo_openid_settings_table">
@@ -188,6 +199,12 @@ function mo_openid_apps_config() {
 					
 					
 					<div class="mo_openid_table_layout">
+						
+						<?php if(!mo_openid_is_customer_registered()) { ?>
+							<div style="display:block;margin-top:10px;color:red;background-color:rgba(251, 232, 0, 0.15);padding:5px;border:solid 1px rgba(255, 0, 9, 0.36);">
+							Please <a href="<?php echo add_query_arg( array('tab' => 'register'), $_SERVER['REQUEST_URI'] ); ?>">Register or Login with miniOrange</a> to enable Social Login and Social Sharing. miniOrange takes care of creating applications for you so that you don't have to worry about creating applications in each social network.
+							</div>
+						<?php } ?>
 							
 							<table>
 									<tr>
@@ -932,6 +949,12 @@ function mo_openid_other_settings(){
 	<input type="hidden" name="option" value="mo_openid_save_other_settings" />
 	<div class="mo_openid_table_layout">
 	
+	<?php if(!mo_openid_is_customer_registered()) { ?>
+		<div style="display:block;margin-top:10px;color:red;background-color:rgba(251, 232, 0, 0.15);padding:5px;border:solid 1px rgba(255, 0, 9, 0.36);">
+		Please <a href="<?php echo add_query_arg( array('tab' => 'register'), $_SERVER['REQUEST_URI'] ); ?>">Register or Login with miniOrange</a> to enable Social Login and Social Sharing. miniOrange takes care of creating applications for you so that you don't have to worry about creating applications in each social network.
+		</div>
+	<?php } ?>
+	
 								<table>
 									<tr>
 										<td colspan="2">
@@ -1438,6 +1461,12 @@ jQuery(function() {
 function mo_openid_shortcode_info(){
 ?>
 	<div class="mo_openid_table_layout">
+	
+	<?php if(!mo_openid_is_customer_registered()) { ?>
+		<div style="display:block;margin-top:10px;color:red;background-color:rgba(251, 232, 0, 0.15);padding:5px;border:solid 1px rgba(255, 0, 9, 0.36);">
+		Please <a href="<?php echo add_query_arg( array('tab' => 'register'), $_SERVER['REQUEST_URI'] ); ?>">Register or Login with miniOrange</a> to enable Social Login and Social Sharing. miniOrange takes care of creating applications for you so that you don't have to worry about creating applications in each social network.
+		</div>
+	<?php } ?>
 		
 								<table>
 									<tr>
@@ -1532,6 +1561,12 @@ function mo_openid_shortcode_info(){
 
 function mo_openid_troubleshoot_info(){ ?>
 	<div class="mo_openid_table_layout">
+	
+	<?php if(!mo_openid_is_customer_registered()) { ?>
+		<div style="display:block;margin-top:10px;color:red;background-color:rgba(251, 232, 0, 0.15);padding:5px;border:solid 1px rgba(255, 0, 9, 0.36);">
+		Please <a href="<?php echo add_query_arg( array('tab' => 'register'), $_SERVER['REQUEST_URI'] ); ?>">Register or Login with miniOrange</a> to enable Social Login and Social Sharing. miniOrange takes care of creating applications for you so that you don't have to worry about creating applications in each social network.
+		</div>
+	<?php } ?>
 		<table width="100%">
 		<tbody>
 		 <tr><td>
