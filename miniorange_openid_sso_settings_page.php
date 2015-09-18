@@ -535,7 +535,7 @@ function mo_openid_apps_config() {
 								</tr>
 								<tr>
 									<td>
-										For auto-regitser users unchecked, users will not be able to register using Social Login. The users who already have an account will be able to login.  This setting stands true only when users are registering using Social Login. This will not interfere with users registering through the regular WordPress.
+										If Auto-register users is unchecked, users will not be able to register using Social Login. The users who already have an account will be able to login.  This setting stands true only when users are registering using Social Login. This will not interfere with users registering through the regular WordPress.
 										<br/><br/>
 										<input type="checkbox" id="auto_register_enable" name="mo_openid_auto_register_enable" value="1"
 										<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>	<?php checked( get_option('mo_openid_auto_register_enable') == 1 );?> /><b>Auto-register users</b>
@@ -561,7 +561,7 @@ function mo_openid_apps_config() {
 					
 						function moLoginWidthIncrement(e,t,r,a,i){
 						var h,s,c=!1,_=a;s=function(){
-							"add"==t&&r.value<1000?r.value++:"subtract"==t&&r.value>200&&r.value--,h=setTimeout(s,_),_>20&&(_*=i),c||(document.onmouseup=function(){clearTimeout(h),document.onmouseup=null,c=!1,_=a},c=!0)},e.onmousedown=s}
+							"add"==t&&r.value<1000?r.value++:"subtract"==t&&r.value>140&&r.value--,h=setTimeout(s,_),_>20&&(_*=i),c||(document.onmouseup=function(){clearTimeout(h),document.onmouseup=null,c=!1,_=a},c=!0)},e.onmousedown=s}
 					
 						function moLoginHeightIncrement(e,t,r,a,i){
 						var h,s,c=!1,_=a;s=function(){
@@ -1728,7 +1728,7 @@ function moLoginSpaceValidate(e){
 	var t=parseInt(e.value.trim());t>60?e.value=60:0>t&&(e.value=0)
 }
 function moLoginWidthValidate(e){
-	var t=parseInt(e.value.trim());t>1000?e.value=1000:200>t&&(e.value=200)
+	var t=parseInt(e.value.trim());t>1000?e.value=1000:140>t&&(e.value=140)
 }
 function moLoginHeightValidate(e){
 	var t=parseInt(e.value.trim());t>50?e.value=50:35>t&&(e.value=35)
