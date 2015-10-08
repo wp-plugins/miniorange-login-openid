@@ -43,4 +43,25 @@ jQuery(document).ready(function () {
 	jQuery("#openid_question10").click(function () {
     	jQuery("#openid_question10_desc").slideToggle(400);
     });
+	jQuery("#openid_question11").click(function () {
+    	jQuery("#openid_question11_desc").slideToggle(400);
+    });
+	jQuery("#openid_question12").click(function () {
+    	jQuery("#openid_question12_desc").slideToggle(400);
+    });
+	jQuery("#openid_question_curl").click(function () {
+    	jQuery("#openid_question_curl_desc").slideToggle(400);
+    });
+	jQuery("#openid_question_otp").click(function () {
+    	jQuery("#openid_question_otp_desc").slideToggle(400);
+    });
+	jQuery("#openid_question_login").click(function () {
+    	jQuery("#openid_question_login_desc").slideToggle(400);
+    });
+	jQuery("#openid_question_sharing").click(function () {
+    	jQuery("#openid_question_sharing_desc").slideToggle(400);
+    });
+	jQuery("#openid_question_logout").click(function () {
+    	jQuery("#openid_question_logout_desc").slideToggle(400);
+    });
 });

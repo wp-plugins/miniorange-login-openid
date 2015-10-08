@@ -496,7 +496,9 @@ function mo_openid_apps_config() {
 								<tr><td>&nbsp;</td></tr>
 								<tr>
 									<td>
-										<b>Redirect URL after logout:</b>
+										<input type="checkbox" id="logout_redirection_enable" name="mo_openid_logout_redirection_enable" value="1"
+												<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>	<?php checked( get_option('mo_openid_logout_redirection_enable') == 1 );?> />
+										<b>Enable Logout Redirection</b>
 									</td>
 								</tr>
 								<tr>
@@ -973,37 +975,84 @@ function mo_openid_other_settings(){
 		<p>Select applications to enable social sharing</p>
 		<tr>
 			<td class="mo_openid_table_td_checkbox">
-				<input type="checkbox" id="facebook_share_enable" class="app_enable" name="mo_openid_facebook_share_enable" value="1" 
-				onclick="addSelectedApps();" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_facebook_share_enable') == 1 );?> />
-				<strong>Facebook</strong>
-				&nbsp;&nbsp;&nbsp;&nbsp;
+				<table style="width:100%">
+					<tr>
+						<td style="width:20%">
+							<input type="checkbox" id="facebook_share_enable" class="app_enable" name="mo_openid_facebook_share_enable" value="1" 
+							onclick="addSelectedApps();" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_facebook_share_enable') == 1 );?> />
+							<strong>Facebook</strong>
+						</td>
+						<td style="width:20%">
+							<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
+									id="twitter_share_enable" class="app_enable" name="mo_openid_twitter_share_enable" value="1" onclick="addSelectedApps();"
+								<?php checked( get_option('mo_openid_twitter_share_enable') == 1 );?> />
+							<strong>Twitter </strong>
+						</td>
+						<td style="width:20%">
+							<input type="checkbox" id="google_share_enable" class="app_enable" name="mo_openid_google_share_enable" value="1" onclick="addSelectedApps();"
+							<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_google_share_enable') == 1 );?> />
+							<strong>Google</strong>
+						</td>
+						
+						<td style="width:20%">
+							<input type="checkbox" id="vkontakte_share_enable" class="app_enable" name="mo_openid_vkontakte_share_enable" value="1" 
+							onclick="addSelectedApps();" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_vkontakte_share_enable') == 1 );?> />
+							<strong>Vkontakte</strong>
+						</td>
+						<td style="width:20%">
+							<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
+							id="tumblr_share_enable" class="app_enable" name="mo_openid_tumblr_share_enable" value="1" onclick="addSelectedApps();"
+							<?php checked( get_option('mo_openid_tumblr_share_enable') == 1 );?> />
+							<strong>Tumblr </strong>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:20%">
+							<input type="checkbox" id="stumble_share_enable" class="app_enable" name="mo_openid_stumble_share_enable" value="1" onclick="addSelectedApps();" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_stumble_share_enable') == 1 );?> />
+							<strong>StumbleUpon</strong>
+						</td>
+						<td style="width:20%">
+							<input type="checkbox" id="linkedin_share_enable" class="app_enable" name="mo_openid_linkedin_share_enable" value="1" onclick="addSelectedApps();" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
+							<?php checked( get_option('mo_openid_linkedin_share_enable') == 1 );?> />
+							<strong>LinkedIn</strong>
+						</td>
+						<td style="width:20%">
+							<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
+							id="reddit_share_enable" class="app_enable" name="mo_openid_reddit_share_enable" value="1" onclick="addSelectedApps();"
+							<?php checked( get_option('mo_openid_reddit_share_enable') == 1 );?> />
+							<strong>Reddit </strong>
+						</td>
+						<td style="width:20%">
+							<input type="checkbox" id="pinterest_share_enable" class="app_enable" name="mo_openid_pinterest_share_enable" value="1" onclick="addSelectedApps();"
+							<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
+							<?php checked( get_option('mo_openid_pinterest_share_enable') == 1 );?> />
+							<strong>Pinterest </strong>
+						</td>
+						<td style="width:20%">
+							<input type="checkbox" id="pocket_share_enable" class="app_enable" name="mo_openid_pocket_share_enable" value="1" onclick="addSelectedApps();" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_pocket_share_enable') == 1 );?> />
+							<strong>Pocket</strong>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:20%">
+							<input type="checkbox" id="digg_share_enable" class="app_enable" name="mo_openid_digg_share_enable" value="1" 
+							onclick="addSelectedApps();" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_digg_share_enable') == 1 );?> />
+							<strong>Digg</strong>
+						</td>
+						<td style="width:20%">
+						<input type="checkbox" id="delicious_share_enable" class="app_enable" name="mo_openid_delicious_share_enable" value="1" 
+						onclick="addSelectedApps();" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php 	checked( get_option('mo_openid_delicious_share_enable') == 1 );?> />
+						<strong>Delicious</strong></td>
+						<td style="width:20%">
+							<input type="checkbox" id="odnoklassniki_share_enable" class="app_enable" name="mo_openid_odnoklassniki_share_enable" value="1" 
+							onclick="addSelectedApps();" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_odnoklassniki_share_enable') == 1 );?> />
+							<strong>Odnoklassniki</strong>
+						</td>
+					</tr>
+					</table>
 				
-				<input type="checkbox" id="google_share_enable" class="app_enable" name="mo_openid_google_share_enable" value="1" onclick="addSelectedApps();"
-				<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?> <?php checked( get_option('mo_openid_google_share_enable') == 1 );?> />
-				<strong>Google</strong>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-			
-				<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
-				id="twitter_share_enable" class="app_enable" name="mo_openid_twitter_share_enable" value="1" onclick="addSelectedApps();"
-				<?php checked( get_option('mo_openid_twitter_share_enable') == 1 );?> />
-				<strong>Twitter </strong>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-			
-					<input type="checkbox" id="linkedin_share_enable" class="app_enable" name="mo_openid_linkedin_share_enable" value="1" onclick="addSelectedApps();" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
-					<?php checked( get_option('mo_openid_linkedin_share_enable') == 1 );?> />
-					<strong>LinkedIn</strong>
-					&nbsp;&nbsp;&nbsp;&nbsp;
 				
-				<input type="checkbox" id="pinterest_share_enable" class="app_enable" name="mo_openid_pinterest_share_enable" value="1" onclick="addSelectedApps();"
-				<?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
-				<?php checked( get_option('mo_openid_pinterest_share_enable') == 1 );?> />
-				<strong>Pinterest </strong>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-			
-				<input type="checkbox" <?php if(!mo_openid_is_customer_registered()) echo 'disabled'?>
-				id="reddit_share_enable" class="app_enable" name="mo_openid_reddit_share_enable" value="1" onclick="addSelectedApps();"
-				<?php checked( get_option('mo_openid_reddit_share_enable') == 1 );?> />
-				<strong>Reddit </strong>
+				
 			</td>
 		</tr>
 			
@@ -1114,9 +1163,16 @@ function mo_openid_other_settings(){
 					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_facebook" src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" />
 					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_twitter" src="<?php echo plugins_url( 'includes/images/icons/twitter.png', __FILE__ )?>" />
 					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_google" src="<?php echo plugins_url( 'includes/images/icons/google.png', __FILE__ )?>" />
+					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_vk" src="<?php echo plugins_url( 'includes/images/icons/vk.png', __FILE__ )?>" />
+					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_tumblr" src="<?php echo plugins_url( 'includes/images/icons/tumblr.png', __FILE__ )?>" />
+					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_stumble" src="<?php echo plugins_url( 'includes/images/icons/stumble.png', __FILE__ )?>" />
 					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_linkedin" src="<?php echo plugins_url( 'includes/images/icons/linkedin.png', __FILE__ )?>" />
-					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_pinterest" src="<?php echo plugins_url( 'includes/images/icons/pininterest.png', __FILE__ )?>" />
 					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_reddit" src="<?php echo plugins_url( 'includes/images/icons/reddit.png', __FILE__ )?>" />
+					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_pinterest" src="<?php echo plugins_url( 'includes/images/icons/pininterest.png', __FILE__ )?>" />
+					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_pocket" src="<?php echo plugins_url( 'includes/images/icons/pocket.png', __FILE__ )?>" />
+					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_digg" src="<?php echo plugins_url( 'includes/images/icons/digg.png', __FILE__ )?>" />
+					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_delicious" src="<?php echo plugins_url( 'includes/images/icons/delicious.png', __FILE__ )?>" />
+					<img class="mo_sharing_icon_preview" id="mo_sharing_icon_preview_odnoklassniki" src="<?php echo plugins_url( 'includes/images/icons/odnoklassniki.png', __FILE__ )?>" />
 					
 				</div>
 		
@@ -1124,20 +1180,32 @@ function mo_openid_other_settings(){
 					<i class="mo_custom_sharing_icon_preview fa fa-facebook" id="mo_custom_sharing_icon_preview_facebook"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_preview fa fa-twitter" id="mo_custom_sharing_icon_preview_twitter" style="color:#ffffff;text-align:center;margin-top:5px;" ></i>
 					<i class="mo_custom_sharing_icon_preview fa fa-google-plus" id="mo_custom_sharing_icon_preview_google"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_preview fa fa-vk" id="mo_custom_sharing_icon_preview_vk"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_preview fa fa-tumblr" id="mo_custom_sharing_icon_preview_tumblr"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_preview fa fa-stumbleupon" id="mo_custom_sharing_icon_preview_stumble"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_preview fa fa-linkedin" id="mo_custom_sharing_icon_preview_linkedin" style="color:#ffffff;text-align:center;margin-top:5px;"></i>
-					<i class="mo_custom_sharing_icon_preview fa fa-pinterest" id="mo_custom_sharing_icon_preview_pinterest"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_preview fa fa-reddit" id="mo_custom_sharing_icon_preview_reddit"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
-					
+					<i class="mo_custom_sharing_icon_preview fa fa-pinterest" id="mo_custom_sharing_icon_preview_pinterest"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_preview fa fa-get-pocket" id="mo_custom_sharing_icon_preview_pocket"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_preview fa fa-digg" id="mo_custom_sharing_icon_preview_digg"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_preview fa fa-delicious" id="mo_custom_sharing_icon_preview_delicious"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_preview fa fa-odnoklassniki" id="mo_custom_sharing_icon_preview_odnoklassniki"  style="color:#ffffff;text-align:center;margin-top:5px;"></i>
 				</div>
 											
 				<div>
 					<i class="mo_custom_sharing_icon_font_preview fa fa-facebook" id="mo_custom_sharing_icon_font_preview_facebook"  style="text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_font_preview fa fa-twitter" id="mo_custom_sharing_icon_font_preview_twitter" style="text-align:center;margin-top:5px;" ></i>
 					<i class="mo_custom_sharing_icon_font_preview fa fa-google-plus" id="mo_custom_sharing_icon_font_preview_google"  style="text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_font_preview fa fa-vk" id="mo_custom_sharing_icon_font_preview_vk"  style="text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_font_preview fa fa-tumblr" id="mo_custom_sharing_icon_font_preview_tumblr"  style="text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_font_preview fa fa-stumbleupon" id="mo_custom_sharing_icon_font_preview_stumble"  style="text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_font_preview fa fa-linkedin" id="mo_custom_sharing_icon_font_preview_linkedin" style="text-align:center;margin-top:5px;"></i>
-					<i class="mo_custom_sharing_icon_font_preview fa fa-pinterest" id="mo_custom_sharing_icon_font_preview_pinterest"  style="text-align:center;margin-top:5px;"></i>
 					<i class="mo_custom_sharing_icon_font_preview fa fa-reddit" id="mo_custom_sharing_icon_font_preview_reddit"  style="text-align:center;margin-top:5px;"></i>
-					
+					<i class="mo_custom_sharing_icon_font_preview fa fa-pinterest" id="mo_custom_sharing_icon_font_preview_pinterest"  style="text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_font_preview fa fa-get-pocket" id="mo_custom_sharing_icon_font_preview_pocket"  style="text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_font_preview fa fa-digg" id="mo_custom_sharing_icon_font_preview_digg"  style="text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_font_preview fa fa-delicious" id="mo_custom_sharing_icon_font_preview_delicious"  style="text-align:center;margin-top:5px;"></i>
+					<i class="mo_custom_sharing_icon_font_preview fa fa-odnoklassniki" id="mo_custom_sharing_icon_font_preview_odnoklassniki"  style="text-align:center;margin-top:5px;"></i>
 				</div>
 	
 			</td>
@@ -1332,7 +1400,109 @@ function mo_openid_other_settings(){
 									jQuery("#mo_custom_sharing_icon_font_preview_reddit").hide();
 								}
 								
-								if(flag) {
+								if (document.getElementById('vkontakte_share_enable').checked) {
+									flag = 1;
+									if(document.getElementById('mo_openid_default_background_radio').checked)
+										jQuery("#mo_sharing_icon_preview_vk").show();
+									if(document.getElementById('mo_openid_custom_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_preview_vk").show();
+									if(document.getElementById('mo_openid_no_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_font_preview_vk").show();
+									//}
+								} else if(!document.getElementById('vkontakte_share_enable').checked){
+									jQuery("#mo_sharing_icon_preview_vk").hide();
+									jQuery("#mo_custom_sharing_icon_preview_vk").hide();
+									jQuery("#mo_custom_sharing_icon_font_preview_vk").hide();
+								}
+								
+								if (document.getElementById('stumble_share_enable').checked) {
+									flag = 1;
+									if(document.getElementById('mo_openid_default_background_radio').checked)
+										jQuery("#mo_sharing_icon_preview_stumble").show();
+									if(document.getElementById('mo_openid_custom_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_preview_stumble").show();
+									if(document.getElementById('mo_openid_no_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_font_preview_stumble").show();
+									//}
+								} else if(!document.getElementById('stumble_share_enable').checked){
+									jQuery("#mo_sharing_icon_preview_stumble").hide();
+									jQuery("#mo_custom_sharing_icon_preview_stumble").hide();
+									jQuery("#mo_custom_sharing_icon_font_preview_stumble").hide();
+								}
+								
+								if (document.getElementById('tumblr_share_enable').checked) {
+									flag = 1;
+									if(document.getElementById('mo_openid_default_background_radio').checked)
+										jQuery("#mo_sharing_icon_preview_tumblr").show();
+									if(document.getElementById('mo_openid_custom_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_preview_tumblr").show();
+									if(document.getElementById('mo_openid_no_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_font_preview_tumblr").show();
+									//}
+								} else if(!document.getElementById('tumblr_share_enable').checked){
+									jQuery("#mo_sharing_icon_preview_tumblr").hide();
+									jQuery("#mo_custom_sharing_icon_preview_tumblr").hide();
+									jQuery("#mo_custom_sharing_icon_font_preview_tumblr").hide();
+								}
+								
+								if (document.getElementById('pocket_share_enable').checked) {
+									flag = 1;
+									if(document.getElementById('mo_openid_default_background_radio').checked)
+										jQuery("#mo_sharing_icon_preview_pocket").show();
+									if(document.getElementById('mo_openid_custom_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_preview_pocket").show();
+									if(document.getElementById('mo_openid_no_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_font_preview_pocket").show();
+									//}
+								} else if(!document.getElementById('pocket_share_enable').checked){
+									jQuery("#mo_sharing_icon_preview_pocket").hide();
+									jQuery("#mo_custom_sharing_icon_preview_pocket").hide();
+									jQuery("#mo_custom_sharing_icon_font_preview_pocket").hide();
+								}
+								if (document.getElementById('digg_share_enable').checked) {
+									flag = 1;
+									if(document.getElementById('mo_openid_default_background_radio').checked)
+										jQuery("#mo_sharing_icon_preview_digg").show();
+									if(document.getElementById('mo_openid_custom_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_preview_digg").show();
+									if(document.getElementById('mo_openid_no_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_font_preview_digg").show();
+									//}
+								} else if(!document.getElementById('digg_share_enable').checked){
+									jQuery("#mo_sharing_icon_preview_digg").hide();
+									jQuery("#mo_custom_sharing_icon_preview_digg").hide();
+									jQuery("#mo_custom_sharing_icon_font_preview_digg").hide();
+								}
+								if (document.getElementById('delicious_share_enable').checked) {
+									flag = 1;
+									if(document.getElementById('mo_openid_default_background_radio').checked)
+										jQuery("#mo_sharing_icon_preview_delicious").show();
+									if(document.getElementById('mo_openid_custom_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_preview_delicious").show();
+									if(document.getElementById('mo_openid_no_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_font_preview_delicious").show();
+									//}
+								} else if(!document.getElementById('delicious_share_enable').checked){
+									jQuery("#mo_sharing_icon_preview_delicious").hide();
+									jQuery("#mo_custom_sharing_icon_preview_delicious").hide();
+									jQuery("#mo_custom_sharing_icon_font_preview_delicious").hide();
+								}
+								if (document.getElementById('odnoklassniki_share_enable').checked) {
+									flag = 1;
+									if(document.getElementById('mo_openid_default_background_radio').checked)
+										jQuery("#mo_sharing_icon_preview_odnoklassniki").show();
+									if(document.getElementById('mo_openid_custom_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_preview_odnoklassniki").show();
+									if(document.getElementById('mo_openid_no_background_radio').checked)
+										jQuery("#mo_custom_sharing_icon_font_preview_odnoklassniki").show();
+									//}
+								} else if(!document.getElementById('odnoklassniki_share_enable').checked){
+									jQuery("#mo_sharing_icon_preview_odnoklassniki").hide();
+									jQuery("#mo_custom_sharing_icon_preview_odnoklassniki").hide();
+									jQuery("#mo_custom_sharing_icon_font_preview_odnoklassniki").hide();
+								}
+								
+									if(flag) {
 									jQuery("#no_apps_text").hide();
 								} else {
 									jQuery("#no_apps_text").show();
@@ -1518,7 +1688,7 @@ function mo_openid_shortcode_info(){
 										
 											<h4>For Sharing Icons</h4>
 											You can use  different attribute to customize social sharing icons. All attributes are optional.<br>
-											<b>Example:</b> <code>[miniorange_social_sharing  shape="square" theme="default" space="4" space="10"]</code>
+											<b>Example:</b> <code>[miniorange_social_sharing  shape="square" theme="default" space="4" size="30"]</code>
 											<br>
 											
 											<h4 style="margin-bottom:0 !important">Common attributes - horizontal and vertical</h4>
@@ -1567,12 +1737,16 @@ function mo_openid_troubleshoot_info(){ ?>
 		Please <a href="<?php echo add_query_arg( array('tab' => 'register'), $_SERVER['REQUEST_URI'] ); ?>">Register or Login with miniOrange</a> to enable Social Login and Social Sharing. miniOrange takes care of creating applications for you so that you don't have to worry about creating applications in each social network.
 		</div>
 	<?php } ?>
-		<table width="100%">
+				<table width="100%">
 		<tbody>
 		 <tr><td>
 		 <p>If any section is not opening, press CTRL + F5 to clear cache.<p>
-					<h3><a  id="openid_question1" class="mo_openid_title_panel" >How to enable PHP cURL extension? (Pre-requisite)</a></h3>
-					<div class="mo_openid_help_desc" hidden="" id="openid_question1_desc">
+					
+					<h3><a  id="openid_question_curl" class="mo_openid_title_panel" >cURL</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question_curl_desc">
+					
+					<h4><a  id="openid_question1"  >How to enable PHP cURL extension? (Pre-requisite)</a></h4>
+					<div  id="openid_question1_desc">
 					cURL is enabled by default but in case you have disabled it, follow the steps to enable it
 					<ol>
 						<li>Open php.ini(it's usually in /etc/ or in php folder on the server).</li>
@@ -1583,81 +1757,110 @@ function mo_openid_troubleshoot_info(){ ?>
 					
 					</div>
 						<hr>
-			</td></tr>
-			<tr><td>
-					<h3><a  id="openid_question9" class="mo_openid_title_panel" >I am getting error - curl_setopt(): CURLOPT_FOLLOWLOCATION cannot be activated when an open_basedir is set</a></h3>
-					<div class="mo_openid_help_desc" hidden="" id="openid_question9_desc">
+			
+					<h4><a  id="openid_question9"  >I am getting error - curl_setopt(): CURLOPT_FOLLOWLOCATION cannot be activated when an open_basedir is set</a></h4>
+					<div   id="openid_question9_desc">
 						Just setsafe_mode = Off in your php.ini file (it's usually in /etc/ on the server). If that's already off, then look around for the open_basedir in the php.ini file, and change it to open_basedir = .
 					</div>
-					<hr>
+					
+		
+		</div>
+		<hr>
 		</td></tr>
+		
 		 <tr><td>
-					<h3><a  id="openid_question7" class="mo_openid_title_panel" >I did not recieve OTP. What should I do?</a></h3>
-					<div class="mo_openid_help_desc" hidden="" id="openid_question7_desc">
+				<h3><a  id="openid_question_otp" class="mo_openid_title_panel" >OTP and Forgot Password</a></h3>
+				  <div class="mo_openid_help_desc" hidden="" id="openid_question_otp_desc">
+					<h4><a  id="openid_question7"  >I did not recieve OTP. What should I do?</a></h4>
+					<div  id="openid_question7_desc">
 						The OTP is sent as an email to your email address with which you have registered with miniOrange. If you can't see the email from miniOrange in your mails, please make sure to check your SPAM folder. If you don't see an email even in SPAM folder, contact us at <b>info@miniorange.com</b>.
 					</div>
 					<hr>
-		</td></tr>
-		<tr><td>
-					<h3><a  id="openid_question8" class="mo_openid_title_panel" >After entering OTP, I get Invalid OTP. What should I do?</a></h3>
-					<div class="mo_openid_help_desc" hidden="" id="openid_question8_desc">
+		
+					<h4><a  id="openid_question8"  >After entering OTP, I get Invalid OTP. What should I do?</a></h4>
+					<div  id="openid_question8_desc">
 						You should click on <b>Resend OTP</b> link to get another OTP. Now enter this OTP to validate. If it still does not work, contact us at <b>info@miniorange.com</b>.
 					</div>
 					<hr>
-		</td></tr>
-		<tr><td>
-					<h3><a  id="openid_question5" class="mo_openid_title_panel" >I forgot the password of my miniOrange account. How can I reset it?</a></h3>
-					<div class="mo_openid_help_desc" hidden="" id="openid_question5_desc">
+		
+					<h4><a  id="openid_question5" >I forgot the password of my miniOrange account. How can I reset it?</a></h4>
+					<div  id="openid_question5_desc">
 						There are two cases according to the page you see -<br>
 						1. <b>Login with miniOrange</b> screen: You should click on <b>forgot password</b> link. You will get your new password on your email address which you have registered with miniOrange . Now you can login with the new password.<br>
 						2. <b>Register with miniOrange</b> screen: Enter your email ID and any random password in <b>password</b> and <b>confirm password</b> input box. This will redirect you to <b>Login with miniOrange</b> screen. Now follow first step.
 					</div>
-					<hr>
-		</td></tr>
-		<tr><td>
-					<h3><a  id="openid_question10" class="mo_openid_title_panel" >Why is sharing with Facebook and Google+ is not working?</a></h3>
-					<div class="mo_openid_help_desc" hidden="" id="openid_question10_desc">
-						This issue arises if your website is not publicly hosted. Facebook and Google+ look for the URL to generate its preview for sharing. That does not work on localhost or any privately hosted URL.
-					</div>
-					<hr>
+					
+				</div>
+				<hr>
 		</td></tr>
 		
+		
 				<tr><td>
-					<h3><a  id="openid_question2" class="mo_openid_title_panel" >How to add login icons to frontend login page?</a></h3>
-					<div class="mo_openid_help_desc" hidden="" id="openid_question2_desc">
+					<h3><a  id="openid_question_login" class="mo_openid_title_panel" >Social Login</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question_login_desc">
+					<h4><a  id="openid_question2"  >How to add login icons to frontend login page?</a></h4>
+					<div   id="openid_question2_desc">
 					You can add social login icons to frontend login page using our shortcode [miniorange_social_login]. Refer to 'Shortcode' tab to add customizations to Shortcode.
 						
 					
 					</div>
 					<hr>
-		</td></tr>
 		
-		<tr><td>
-					<h3><a  id="openid_question4" class="mo_openid_title_panel" >How can I put social login icons on a page without using widgets?</a></h3>
-					<div class="mo_openid_help_desc" hidden="" id="openid_question4_desc">
+					<h4><a  id="openid_question4"  >How can I put social login icons on a page without using widgets?</a></h4>
+					<div  id="openid_question4_desc">
 					You can add social login icons to any page or custom login page using 'social login shortcode' [miniorange_social_login]. Refer to 'Shortcode' tab to add customizations to Shortcode.
 					</div>
 					<hr>
-		</td></tr>
 		
-		<tr><td>
-					<h3><a  id="openid_question6" class="mo_openid_title_panel" >Is it possible to show sharing icons below the post content?</a></h3>
-					<div class="mo_openid_help_desc" hidden="" id="openid_question6_desc">
-						You can put social sharing icons before the content, after the content or both before and after the content. Go to <b>Sharing tab</b> , check <b>Blog post</b> checkbox and select one of three(before, after, both) options available. Save settings.
+					<h4><a  id="openid_question12" >Social Login icons are not added to login/registration form.</a></h3>
+					<div  id="openid_question12_desc">
+					Your login/registration form may not be wordpress's default login/registration form. In this case you can add social login icons to custom login/registration form using 'social login shortcode' [miniorange_social_login]. Refer to 'Shortcode' tab to add customizations to Shortcode.  
 					</div>
 					<hr>
-		</td></tr>
-		<tr><td>
-					<h3><a  id="openid_question3" class="mo_openid_title_panel" >How can I redirect to my blog page after login?</a></h3>
-					<div class="mo_openid_help_desc" hidden="" id="openid_question3_desc">
+					<h4><a  id="openid_question3"  >How can I redirect to my blog page after login?</a></h4>
+					<div  id="openid_question3_desc">
 					You can select one of the options from <b>Redirect URL after login</b> of <b>Display Option</b> section under <b>Social Login</b> tab. <br>
 					1. Same page where user logged in <br>
 					2. Homepage <br>
 					3. Account Dsahboard <br>
 					4. Custom URL - Example: https://www.example.com <br>
 					</div>
+					
+				</div>
 					<hr>
 		</td></tr>
+		<tr><td>
+				<h3><a  id="openid_question_sharing" class="mo_openid_title_panel" >Social Sharing</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question_sharing_desc">
+					<h4><a  id="openid_question6"  >Is it possible to show sharing icons below the post content?</a></h4>
+					<div  id="openid_question6_desc">
+						You can put social sharing icons before the content, after the content or both before and after the content. Go to <b>Sharing tab</b> , check <b>Blog post</b> checkbox and select one of three(before, after, both) options available. Save settings.
+					</div>
+					<hr>
+					
+					<h4><a  id="openid_question10" >Why is sharing with some applications not working?</a></h4>
+					<div  id="openid_question10_desc">
+						This issue arises if your website is not publicly hosted. Facebook, for example looks for the URL to generate its preview for sharing. That does not work on localhost or any privately hosted URL.
+					</div>
+					</div>
+					<hr>
+		</td></tr>
+		
+					
+		
+		
+		<tr><td>
+			<h3><a  id="openid_question_logout" class="mo_openid_title_panel" >Logout Redirection</a></h3>
+					<div class="mo_openid_help_desc" hidden="" id="openid_question_logout_desc">
+					<h4><a  id="openid_question11"  >After logout I am redirected to blank page</a></h4>
+					<div  id="openid_question11_desc">
+					Your theme and Social Login plugin may conflict during logout. To resolve it you need to uncheck <b>Enable Logout Redirection</b> checkbox under <b>Display Option</b> of <b>Social Login</b> tab. 
+					</div>
+				</div>
+					<hr>
+		</td></tr>
+		
+		
 		
 		
 		</tbody>
@@ -1666,7 +1869,7 @@ function mo_openid_troubleshoot_info(){ ?>
 	
 	
 <?php	
-}	
+}
 
 function mo_openid_is_customer_registered() {
 			$email 			= get_option('mo_openid_admin_email');
