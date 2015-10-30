@@ -20,11 +20,14 @@
 	delete_option('mo_openid_instagram_enable');
 	delete_option('mo_openid_amazon_enable');
 	delete_option('mo_openid_windowslive_enable');
+	delete_option('mo_openid_vkontakte_enable');
 	delete_option('mo_openid_default_login_enable');
 	delete_option('mo_openid_default_register_enable');
 	delete_option('mo_openid_default_comment_enable');
 	delete_option('mo_openid_login_redirect');
 	delete_option('mo_openid_login_redirect_url');
+	delete_option('moopenid_social_login_avatar');
+	delete_option('moopenid_user_attributes');
 
 	delete_option('mo_share_options_enable_post');
 	delete_option('mo_share_options_enable_home_page');
@@ -34,6 +37,8 @@
 	delete_option( 'mo_openid_login_widget_customize_text');
 	delete_option( 'mo_openid_share_widget_customize_text' );
 	delete_option( 'mo_openid_login_button_customize_text');
+	delete_option('mo_share_options_wc_sp_summary_top');
+	delete_option('mo_share_options_wc_sp_summary');
 	delete_option( 'mo_openid_google_share_enable');
 	delete_option( 'mo_openid_facebook_share_enable');
 	delete_option( 'mo_openid_linkedin_share_enable' );
@@ -67,5 +72,6 @@
 	delete_option('mo_openid_logout_redirect');
 	delete_option('mo_openid_logout_redirection_enable');
 	delete_option('mo_openid_logout_redirect_url');
-
+	delete_option('mo_openid_sms_otp_count');
+	delete_option('mo_openid_email_otp_count');
 ?>

@@ -4,7 +4,7 @@
 * Plugin Name: Social Login, Social Sharing by miniOrange
 * Plugin URI: http://miniorange.com
 * Description: Allow your users to login, comment and share with Facebook, Google, Twitter, LinkedIn etc using customizable buttons.
-* Version: 4.3
+* Version: 4.5
 * Author: miniOrange
 * Author URI: http://miniorange.com
 * License: GPL2
@@ -14,7 +14,6 @@ require('miniorange_openid_sso_settings_page.php');
 include_once dirname( __FILE__ ) . '/class-mo-openid-login-widget.php';
 require('class-mo-openid-sso-customer.php');
 require('class-mo-openid-sso-shortcode-buttons.php');
-
 
 
 class Miniorange_OpenID_SSO {
@@ -57,10 +56,25 @@ class Miniorange_OpenID_SSO {
 				add_action('comment_form_must_log_in_after', array($this, 'mo_openid_add_social_login')); 
 			   add_action('comment_form_top', array($this, 'mo_openid_add_social_login'));
 			}
+
+			if(get_option('mo_openid_logout_redirection_enable') == 0){
+				remove_filter( 'logout_url', 'mo_openid_redirect_after_logout');
+			}
 			
+			if(get_option('mo_share_options_wc_sp_summary') == 1){
+				add_action('woocommerce_after_single_product_summary', array( $this, 'mo_openid_social_share' ));
+			}
+
+			if(get_option('mo_share_options_wc_sp_summary_top') == 1){
+				add_action('woocommerce_single_product_summary', array( $this, 'mo_openid_social_share' ));
+			}
+
 			add_filter( 'the_content', array( $this, 'mo_openid_add_social_share_links' ) );
 			add_filter( 'the_excerpt', array( $this, 'mo_openid_add_social_share_links' ) );
-						
+			
+			//custom avatar
+			add_filter( 'get_avatar', array( $this, 'mo_social_login_custom_avatar' ), 10, 5 );
+			
 			remove_action( 'admin_notices', array( $this, 'mo_openid_success_message') );
 		    remove_action( 'admin_notices', array( $this, 'mo_openid_error_message') );
 			
@@ -85,10 +99,12 @@ class Miniorange_OpenID_SSO {
 			add_option('mo_login_icon_custom_height','35');
 			add_option( 'mo_openid_login_custom_theme', 'default' );
 			add_option( 'mo_login_icon_custom_color', '2B41FF' );
-			add_option( 'mo_openid_logout_redirection_enable', '1' );
+			add_option( 'mo_openid_logout_redirection_enable', '0' );
 			add_option( 'mo_openid_logout_redirect', 'currentpage' );
 			add_option( 'mo_openid_auto_register_enable', '1');
 			add_option( 'mo_openid_register_disabled_message', 'Registration is disabled for this website. Please contact the administrator for any queries.' );
+			add_option('moopenid_social_login_avatar','1');
+			add_option('moopenid_user_attributes','0');
 	}
 		
 	function mo_openid_deactivate() {
@@ -152,23 +168,19 @@ class Miniorange_OpenID_SSO {
             				 
 	}
 	
+	
 
-	function mo_openid_success_message() {
-		$class = "error";
-		$message = get_option('mo_openid_message');
-		echo "<div class='" . $class . "'> <p>" . $message . "</p></div>";
+	function mo_openid_social_share(){
+		global $post;
+		$title = str_replace('+', '%20', urlencode($post->post_title));
+		echo mo_openid_share_shortcode('', $title);	
 	}
 
-	function mo_openid_error_message() {
-			$class = "updated";
-			$message = get_option('mo_openid_message');
-			echo "<div class='" . $class . "'> <p>" . $message . "</p></div>";
-	}
 		
 	function mo_custom_login_stylesheet()
 	{
 					   
-						 wp_enqueue_style( 'mo-wp-style',plugins_url('includes/css/mo_openid_style.css', __FILE__), false );
+						 wp_enqueue_style( 'mo-wp-style',plugins_url('includes/css/mo_openid_style.css?version=2.0', __FILE__), false );
 						  wp_enqueue_style( 'mo-wp-bootstrap-social',plugins_url('includes/css/bootstrap-social.css', __FILE__), false );
 						  wp_enqueue_style( 'mo-wp-bootstrap-main',plugins_url('includes/css/bootstrap.min.css', __FILE__), false );
 						  wp_enqueue_style( 'mo-wp-font-awesome',plugins_url('includes/css/font-awesome.min.css', __FILE__), false );
@@ -176,7 +188,7 @@ class Miniorange_OpenID_SSO {
 	}	
 		
 	function mo_openid_plugin_settings_style() {
-			wp_enqueue_style( 'mo_openid_admin_settings_style', plugins_url('includes/css/mo_openid_style.css', __FILE__));
+			wp_enqueue_style( 'mo_openid_admin_settings_style', plugins_url('includes/css/mo_openid_style.css?version=2.0', __FILE__));
 			wp_enqueue_style( 'mo_openid_admin_settings_phone_style', plugins_url('includes/css/phone.css', __FILE__));				
 			wp_enqueue_style( 'mo-wp-bootstrap-social',plugins_url('includes/css/bootstrap-social.css', __FILE__), false );
 			wp_enqueue_style( 'mo-wp-bootstrap-main',plugins_url('includes/css/bootstrap.min-preview.css', __FILE__), false );
@@ -190,6 +202,28 @@ class Miniorange_OpenID_SSO {
 		wp_enqueue_script( 'mo_openid_admin_settings_script', plugins_url('includes/js/settings.js', __FILE__ ), array('jquery'));
 		wp_enqueue_script( 'mo_openid_admin_settings_phone_script', plugins_url('includes/js/bootstrap.min.js', __FILE__ ));
 	}
+	
+	function mo_openid_success_message() {
+		$message = get_option('mo_openid_message'); ?>
+		
+		<script> 
+		
+		jQuery(document).ready(function() {	
+			var message = "<?php echo $message; ?>";
+			jQuery('#mo_openid_msgs').append("<div class='error notice is-dismissible mo_openid_error_container'> <p class='mo_openid_msgs'>" + message + "</p></div>");
+		});
+		</script>
+	<?php }
+
+	function mo_openid_error_message() {
+			$message = get_option('mo_openid_message'); ?>
+		<script> 
+		jQuery(document).ready(function() {
+			var message = "<?php echo $message; ?>";
+			jQuery('#mo_openid_msgs').append("<div class='updated notice is-dismissible mo_openid_success_container'> <p class='mo_openid_msgs'>" + message + "</p></div>");
+		});
+		</script>
+	<?php }
 
 	private function mo_openid_show_success_message() {
 			remove_action( 'admin_notices', array( $this, 'mo_openid_success_message') );
@@ -219,7 +253,7 @@ class Miniorange_OpenID_SSO {
 	function mo_login_widget_text_domain(){
 		load_plugin_textdomain('flw', FALSE, basename( dirname( __FILE__ ) ) .'/languages');
 	}
-
+	
 	function miniorange_openid_save_settings(){
 		if(is_admin() && get_option('Activated_Plugin')=='Plugin-Slug') {
 			
@@ -264,11 +298,17 @@ class Miniorange_OpenID_SSO {
 				$customer = new CustomerOpenID();
 				$content = json_decode($customer->check_customer(), true);
 				if( strcasecmp( $content['status'], 'CUSTOMER_NOT_FOUND') == 0 ){
-					$content = json_decode($customer->send_otp_token(), true);
-										if(strcasecmp($content['status'], 'SUCCESS') == 0) {
-											update_option( 'mo_openid_message', ' A passcode is sent to ' . get_option('mo_openid_admin_email') . '. Please enter the otp here to verify your email.');
-											update_option('mo_openid_transactionId',$content['txId']);
-											update_option('mo_openid_registration_status','MO_OTP_DELIVERED_SUCCESS');
+					$content = json_decode($customer->send_otp_token('EMAIL'), true);
+								if(strcasecmp($content['status'], 'SUCCESS') == 0) {
+									if(get_option('mo_openid_email_otp_count')){
+									update_option('mo_openid_email_otp_count',get_option('mo_openid_email_otp_count') + 1);
+									update_option('mo_openid_message', 'Another One Time Passcode has been sent <b>( ' . get_option('mo_openid_email_otp_count') . ' )</b> for verification to ' . get_option('mo_openid_admin_email'));
+								}else{
+									update_option( 'mo_openid_message', ' A passcode is sent to ' . get_option('mo_openid_admin_email') . '. Please enter the otp here to verify your email.');
+									update_option('mo_openid_email_otp_count',1);
+								}
+								update_option('mo_openid_transactionId',$content['txId']);
+								update_option('mo_openid_registration_status','MO_OTP_DELIVERED_SUCCESS');
 
 											$this->mo_openid_show_success_message();
 										}else{
@@ -313,6 +353,37 @@ class Miniorange_OpenID_SSO {
 				update_option( 'mo_openid_message','Invalid one time passcode. Please enter a valid passcode.');
 				update_option('mo_openid_registration_status','MO_OTP_VALIDATION_FAILURE');
 				$this->mo_openid_show_error_message();
+			}
+		}
+		else if( isset($_POST['option']) and $_POST['option'] == 'mo_openid_phone_verification'){ //at registration time
+					$phone = sanitize_text_field($_POST['phone_number']);
+				
+					$phone = str_replace(' ', '', $phone);
+					update_option('mo_openid_admin_phone',$phone);
+					$auth_type = 'SMS';
+					$customer = new CustomerOpenID();
+					$send_otp_response = json_decode($customer->send_otp_token($auth_type),true);
+					if(strcasecmp($send_otp_response['status'], 'SUCCESS') == 0){
+						//Save txId
+					
+						update_option('mo_openid_transactionId',$send_otp_response['txId']);
+						update_option( 'mo_openid_registration_status','MO_OTP_DELIVERED_SUCCESS');
+						if(get_option('mo_openid_sms_otp_count')){
+							update_option('mo_openid_sms_otp_count',get_option('mo_openid_sms_otp_count') + 1);
+							update_option('mo_openid_message', 'Another One Time Passcode has been sent <b>( ' . get_option('mo_openid_sms_otp_count') . ' )</b> for verification to ' . $phone);
+						}else{
+								
+								update_option('mo_openid_message', 'One Time Passcode has been sent for verification to ' . $phone);
+								update_option('mo_openid_sms_otp_count',1);
+						}
+		
+						$this->mo_openid_show_success_message();
+					
+					}else{
+				update_option('mo_openid_message','There was an error in sending sms. Please click on Resend OTP link next to phone number textbox.');
+				update_option('mo_openid_registration_status','MO_OTP_DELIVERED_FAILURE');
+				$this->mo_openid_show_error_message();
+			
 			}
 		}
         else if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_verify_customer" ) {	//register the admin to miniOrange
@@ -379,6 +450,7 @@ class Miniorange_OpenID_SSO {
 				update_option( 'mo_openid_amazon_enable', isset( $_POST['mo_openid_amazon_enable']) ? $_POST['mo_openid_amazon_enable'] : 0);
 				update_option( 'mo_openid_instagram_enable', isset( $_POST['mo_openid_instagram_enable']) ? $_POST['mo_openid_instagram_enable'] : 0);
 				update_option( 'mo_openid_twitter_enable', isset( $_POST['mo_openid_twitter_enable']) ? $_POST['mo_openid_twitter_enable'] : 0);
+				update_option( 'mo_openid_vkontakte_enable', isset( $_POST['mo_openid_vkontakte_enable']) ? $_POST['mo_openid_vkontakte_enable'] : 0);
 				
 				update_option( 'mo_openid_default_login_enable', isset( $_POST['mo_openid_default_login_enable']) ? $_POST['mo_openid_default_login_enable'] : 0);
 			    update_option( 'mo_openid_default_register_enable', isset( $_POST['mo_openid_default_register_enable']) ? $_POST['mo_openid_default_register_enable'] : 0);
@@ -410,6 +482,12 @@ class Miniorange_OpenID_SSO {
 				update_option('mo_openid_login_custom_theme',$_POST['mo_openid_login_custom_theme'] );
 				update_option( 'mo_login_icon_custom_color', $_POST['mo_login_icon_custom_color'] );
 			
+				// avatar
+				update_option( 'moopenid_social_login_avatar', isset( $_POST['moopenid_social_login_avatar']) ? $_POST['moopenid_social_login_avatar'] : 0);
+				
+				//Attribute collection
+				update_option( 'moopenid_user_attributes', isset( $_POST['moopenid_user_attributes']) ? $_POST['moopenid_user_attributes'] : 0);
+				
 				
 						$this->mo_openid_show_success_message();
 						
@@ -440,9 +518,15 @@ class Miniorange_OpenID_SSO {
 		else if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_resend_otp" ) {
 
 					    $customer = new CustomerOpenID();
-						$content = json_decode($customer->send_otp_token(), true);
+						$content = json_decode($customer->send_otp_token('EMAIL'), true);
 									if(strcasecmp($content['status'], 'SUCCESS') == 0) {
-											update_option( 'mo_openid_message', ' A one time passcode is sent to ' . get_option('mo_openid_admin_email') . ' again. Please check if you got the otp and enter it here.');
+											if(get_option('mo_openid_email_otp_count')){
+									update_option('mo_openid_email_otp_count',get_option('mo_openid_email_otp_count') + 1);
+									update_option('mo_openid_message', 'Another One Time Passcode has been sent <b>( ' . get_option('mo_openid_email_otp_count') . ' )</b> for verification to ' . get_option('mo_openid_admin_email'));
+								}else{
+									update_option( 'mo_openid_message', ' A passcode is sent to ' . get_option('mo_openid_admin_email') . '. Please enter the otp here to verify your email.');
+									update_option('mo_openid_email_otp_count',1);
+								}
 											update_option('mo_openid_transactionId',$content['txId']);
 											update_option('mo_openid_registration_status','MO_OTP_DELIVERED_SUCCESS');
 											$this->mo_openid_show_success_message();
@@ -456,6 +540,8 @@ class Miniorange_OpenID_SSO {
 				update_option('mo_openid_registration_status','');
 				delete_option('mo_openid_new_registration');
 				delete_option('mo_openid_admin_email');
+				delete_option('mo_openid_sms_otp_count');
+				delete_option('mo_openid_email_otp_count');
 
 		}else if( isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_save_other_settings" ){
 			if(mo_openid_is_customer_registered()) {
@@ -475,6 +561,8 @@ class Miniorange_OpenID_SSO {
 				update_option('mo_share_options_enable_home_page',isset( $_POST['mo_share_options_home_page']) ? $_POST['mo_share_options_home_page'] : 0);
 				update_option('mo_share_options_enable_post',isset( $_POST['mo_share_options_post']) ? $_POST['mo_share_options_post'] : 0);
 				update_option('mo_share_options_enable_static_pages',isset( $_POST['mo_share_options_static_pages']) ? $_POST['mo_share_options_static_pages'] : 0);
+				update_option('mo_share_options_wc_sp_summary',isset( $_POST['mo_share_options_wc_sp_summary']) ? $_POST['mo_share_options_wc_sp_summary'] : 0);
+				update_option('mo_share_options_wc_sp_summary_top',isset( $_POST['mo_share_options_wc_sp_summary_top']) ? $_POST['mo_share_options_wc_sp_summary_top'] : 0);
 				update_option('mo_share_options_enable_post_position',$_POST['mo_share_options_enable_post_position'] );
 				update_option('mo_openid_share_theme',$_POST['mo_openid_share_theme'] );
 				
@@ -502,6 +590,8 @@ class Miniorange_OpenID_SSO {
 	}
 
 	function create_customer(){
+		delete_option('mo_openid_sms_otp_count');
+		delete_option('mo_openid_email_otp_count');
 		$customer = new CustomerOpenID();
 		$customerKey = json_decode( $customer->create_customer(), true );
 		if( strcasecmp( $customerKey['status'], 'CUSTOMER_USERNAME_ALREADY_EXISTS') == 0 ) {
@@ -516,6 +606,7 @@ class Miniorange_OpenID_SSO {
 										delete_option('mo_openid_verify_customer');
 										delete_option('mo_openid_new_registration');
 										$this->mo_openid_show_success_message();
+										header('Location: admin.php?page=mo_openid_settings&tab=pricing');
 		}
 		update_option('mo_openid_admin_password', '');
 	}
@@ -583,6 +674,33 @@ class Miniorange_OpenID_SSO {
 		}
 	}
 	
+	
+	
+	function mo_social_login_custom_avatar( $avatar, $mixed, $size, $default, $alt = '' ) {
+        $user = false;
+		
+        if ( is_numeric( $mixed ) AND $mixed > 0 ) {	//Check if we have an user identifier
+            $user_id = $mixed;
+        } elseif ( is_string( $mixed ) AND ( $user = get_user_by( 'email', $mixed )) ) {	//Check if we have an user email
+        	$user_id = $user->ID;
+        } elseif ( is_object( $mixed ) AND property_exists( $mixed, 'user_id' ) AND is_numeric( $mixed->user_id ) ) {		//Check if we have an user object
+            $user_id = $mixed->user_id;
+        } else {		//None found
+            $user_id = null;
+        }
+
+        if (  !empty( $user_id ) ) {	//User found?
+			$override_avatar = true;	//Override current avatar ?
+			$user_meta_thumbnail = get_user_meta( $user_id, 'moopenid_user_avatar', true );		//Read the avatar
+			$user_meta_name = get_user_meta( $user_id, 'user_name', true );		//read user details
+			// if ( $options['apsl_user_avatar_options'] == 'social' ) {
+            $user_picture = (!empty( $user_meta_thumbnail ) ? $user_meta_thumbnail : '');
+			if ( $user_picture !== false AND strlen( trim( $user_picture ) ) > 0 ) {	//Avatar found?
+                return '<img alt="' . $user_meta_name . '" src="' . $user_picture . '" class="avatar apsl-avatar-social-login avatar-' . $size . ' photo" height="' . $size . '" width="' . $size . '" />';
+            }
+        }
+        return $avatar;
+	}	
 }
 
 new Miniorange_OpenID_SSO;

@@ -18,11 +18,11 @@ class mo_openid_login_wid extends WP_Widget {
 	public function widget( $args, $instance ) {
 		extract( $args );
 
-		$wid_title = apply_filters( 'widget_title', $instance['wid_title'] );
+		//$wid_title = apply_filters( 'widget_title', $instance['wid_title'] );
 
 		echo $args['before_widget'];
-		if ( ! empty( $wid_title ) )
-			echo $args['before_title'] . $wid_title . $args['after_title'];
+		//if ( ! empty( $wid_title ) )
+		//	echo $args['before_title'] . $wid_title . $args['after_title'];
 			$this->openidloginForm();
 
 		echo $args['after_widget'];
@@ -39,7 +39,7 @@ class mo_openid_login_wid extends WP_Widget {
 		global $post;
 				$this->error_message();
 				$selected_theme = get_option('mo_openid_login_theme');
-				$appsConfigured = get_option('mo_openid_google_enable') | get_option('mo_openid_salesforce_enable') | get_option('mo_openid_facebook_enable') | get_option('mo_openid_linkedin_enable') | get_option('mo_openid_instagram_enable') | get_option('mo_openid_amazon_enable') | get_option('mo_openid_windowslive_enable') | get_option('mo_openid_twitter_enable');
+				$appsConfigured = get_option('mo_openid_google_enable') | get_option('mo_openid_salesforce_enable') | get_option('mo_openid_facebook_enable') | get_option('mo_openid_linkedin_enable') | get_option('mo_openid_instagram_enable') | get_option('mo_openid_amazon_enable') | get_option('mo_openid_windowslive_enable') | get_option('mo_openid_twitter_enable') | get_option('mo_openid_vkontakte_enable');
 				$spacebetweenicons = get_option('mo_login_icon_space');
 				$customWidth = get_option('mo_login_icon_custom_width');
 				$customHeight = get_option('mo_login_icon_custom_height');
@@ -61,6 +61,18 @@ class mo_openid_login_wid extends WP_Widget {
 						</p>
 					<?php
 						if($customTheme == 'default'){
+						if( get_option('mo_openid_facebook_enable') ) {
+							if($selected_theme == 'longbutton'){
+						?> <a  onClick="moOpenIdLogin('facebook');" style="width:<?php echo $customWidth ?>px !important;padding-top:<?php echo $customHeight-29 ?>px !important;padding-bottom:<?php echo $customHeight-29 ?>px !important;margin-bottom:<?php echo $spacebetweenicons-5 ?>px !important" class="btn btn-block btn-social btn-facebook  btn-custom-size" > <i style="padding-top:<?php echo $customHeight-35 ?>px !important" class="fa fa-facebook"></i><?php
+									echo get_option('mo_openid_login_button_customize_text'); 	?> Facebook</a>
+						<?php }
+						else{ ?>
+
+							<a title="<?php echo $customTextofTitle ?> Facebook" onClick="moOpenIdLogin('facebook');"><img style="width:<?php echo $customSize?>px !important;height:<?php echo $customSize?>px !important;margin-left:<?php echo $spacebetweenicons-4?>px !important" src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" class="<?php echo $selected_theme; ?>" ></a>
+
+						<?php }
+
+						}
 						if( get_option('mo_openid_google_enable') ) {
 							if($selected_theme == 'longbutton'){
 						?>
@@ -74,18 +86,20 @@ class mo_openid_login_wid extends WP_Widget {
 						}
 						}
 
-						if( get_option('mo_openid_facebook_enable') ) {
+						if( get_option('mo_openid_vkontakte_enable') ) {
 							if($selected_theme == 'longbutton'){
-						?> <a  onClick="moOpenIdLogin('facebook');" style="width:<?php echo $customWidth ?>px !important;padding-top:<?php echo $customHeight-29 ?>px !important;padding-bottom:<?php echo $customHeight-29 ?>px !important;margin-bottom:<?php echo $spacebetweenicons-5 ?>px !important" class="btn btn-block btn-social btn-facebook  btn-custom-size" > <i style="padding-top:<?php echo $customHeight-35 ?>px !important" class="fa fa-facebook"></i><?php
-									echo get_option('mo_openid_login_button_customize_text'); 	?> Facebook</a>
+						?>
+							
+						<a  onClick="moOpenIdLogin('vkontakte');" style='width:<?php echo $customWidth ?>px !important;padding-top:<?php echo $customHeight-29 ?>px !important;padding-bottom:<?php echo $customHeight-29 ?>px !important;margin-bottom:<?php echo $spacebetweenicons-5 ?>px !important' class='btn btn-block btn-social btn-vk btn-custom-size' > <i style='padding-top:<?php echo $customHeight-35 ?>px !important' class='fa fa-vk'></i><?php
+									echo get_option('mo_openid_login_button_customize_text'); 	?> Vkontakte</a>
 						<?php }
 						else{ ?>
-
-							<a title="<?php echo $customTextofTitle ?> Facebook" onClick="moOpenIdLogin('facebook');"><img style="width:<?php echo $customSize?>px !important;height:<?php echo $customSize?>px !important;margin-left:<?php echo $spacebetweenicons-4?>px !important" src="<?php echo plugins_url( 'includes/images/icons/facebook.png', __FILE__ )?>" class="<?php echo $selected_theme; ?>" ></a>
-
-						<?php }
-
+						<a onClick="moOpenIdLogin('vkontakte');"  title="<?php echo $customTextofTitle ?> Vkontakte" ><img style="width:<?php echo $customSize?>px !important;height:<?php echo $customSize?>px !important;margin-left:<?php echo $spacebetweenicons-4?>px !important" src="<?php echo plugins_url( 'includes/images/icons/vk.png', __FILE__ )?>" class="<?php echo $selected_theme; ?>" ></a>
+						<?php
 						}
+						}
+
+						
 						if( get_option('mo_openid_twitter_enable') ) {
 							if($selected_theme == 'longbutton'){
 						?> <a  onClick="moOpenIdLogin('twitter');" style="width:<?php echo $customWidth ?>px !important;padding-top:<?php echo $customHeight-29 ?>px !important;padding-bottom:<?php echo $customHeight-29 ?>px !important;margin-bottom:<?php echo $spacebetweenicons-5 ?>px !important" class="btn btn-block btn-social btn-twitter btn-custom-size" > <i style="padding-top:<?php echo $customHeight-35 ?>px !important" class="fa fa-twitter"></i><?php
@@ -154,6 +168,19 @@ class mo_openid_login_wid extends WP_Widget {
 						
 						<?php
 						if($customTheme == 'custom'){
+						if( get_option('mo_openid_facebook_enable') ) {
+							if($selected_theme == 'longbutton'){
+						?> <a  onClick="moOpenIdLogin('facebook');" style="width:<?php echo $customWidth ?>px !important;padding-top:<?php echo $customHeight-29 ?>px !important;padding-bottom:<?php echo $customHeight-29 ?>px !important;margin-bottom:<?php echo $spacebetweenicons-5 ?>px !important;background:<?php echo "#".$customBackground?> !important" class="btn btn-block btn-social btn-facebook  btn-custom-size" > <i style="padding-top:<?php echo $customHeight-35 ?>px !important" class="fa fa-facebook"></i><?php
+									echo get_option('mo_openid_login_button_customize_text'); 	?> Facebook</a>
+						<?php }
+						else{ ?>
+
+							<a  onClick="moOpenIdLogin('facebook');" title="<?php echo $customTextofTitle ?> Facebook"><i style="width:<?php echo $customSize?>px !important;height:<?php echo $customSize?>px !important;margin-left:<?php echo $spacebetweenicons-4?>px !important;background:<?php echo "#".$customBackground?> !important;font-size:<?php echo $customSize-16?>px !important;" class="fa fa-facebook custom-login-button <?php echo $selected_theme; ?>" ></i></a>
+
+						<?php }
+
+						}
+
 						if( get_option('mo_openid_google_enable') ) {
 							if($selected_theme == 'longbutton'){
 						?>
@@ -167,18 +194,19 @@ class mo_openid_login_wid extends WP_Widget {
 						}
 						}
 
-						if( get_option('mo_openid_facebook_enable') ) {
+						if( get_option('mo_openid_vkontakte_enable') ) {
 							if($selected_theme == 'longbutton'){
-						?> <a  onClick="moOpenIdLogin('facebook');" style="width:<?php echo $customWidth ?>px !important;padding-top:<?php echo $customHeight-29 ?>px !important;padding-bottom:<?php echo $customHeight-29 ?>px !important;margin-bottom:<?php echo $spacebetweenicons-5 ?>px !important;background:<?php echo "#".$customBackground?> !important" class="btn btn-block btn-social btn-facebook  btn-custom-size" > <i style="padding-top:<?php echo $customHeight-35 ?>px !important" class="fa fa-facebook"></i><?php
-									echo get_option('mo_openid_login_button_customize_text'); 	?> Facebook</a>
+						?>
+							
+							<a   onClick="moOpenIdLogin('vkontakte');" style="width:<?php echo $customWidth ?>px !important;padding-top:<?php echo $customHeight-29 ?>px !important;padding-bottom:<?php echo $customHeight-29 ?>px !important;margin-bottom:<?php echo $spacebetweenicons-5 ?>px !important; background:<?php echo "#".$customBackground?> !important" class="btn btn-block btn-social btn-customtheme btn-custom-size" > <i style="padding-top:<?php echo $customHeight-35 ?>px !important" class="fa fa-vk"></i><?php
+									echo get_option('mo_openid_login_button_customize_text'); 	?> Vkontakte</a>
 						<?php }
 						else{ ?>
-
-							<a  onClick="moOpenIdLogin('facebook');" title="<?php echo $customTextofTitle ?> Facebook"><i style="width:<?php echo $customSize?>px !important;height:<?php echo $customSize?>px !important;margin-left:<?php echo $spacebetweenicons-4?>px !important;background:<?php echo "#".$customBackground?> !important;font-size:<?php echo $customSize-16?>px !important;" class="fa fa-facebook custom-login-button <?php echo $selected_theme; ?>" ></i></a>
-
-						<?php }
-
+						<a  onClick="moOpenIdLogin('vkontakte');" title="<?php echo $customTextofTitle ?> Vkontakte"><i style="width:<?php echo $customSize?>px !important;height:<?php echo $customSize?>px !important;margin-left:<?php echo $spacebetweenicons-4?>px !important;background:<?php echo "#".$customBackground?> !important;font-size:<?php echo $customSize-16?>px !important;"  class="fa fa-vk custom-login-button <?php echo $selected_theme; ?>" ></i></a>
+						<?php
 						}
+						}
+
 						if( get_option('mo_openid_twitter_enable') ) {
 							if($selected_theme == 'longbutton'){
 						?>
@@ -273,7 +301,7 @@ class mo_openid_login_wid extends WP_Widget {
 				$html = '';
 				$this->error_message();
 				$selected_theme = isset( $atts['shape'] )? $atts['shape'] : get_option('mo_openid_login_theme');
-				$appsConfigured = get_option('mo_openid_google_enable') | get_option('mo_openid_salesforce_enable') | get_option('mo_openid_facebook_enable') | get_option('mo_openid_linkedin_enable') | get_option('mo_openid_instagram_enable') | get_option('mo_openid_amazon_enable') | get_option('mo_openid_windowslive_enable') |get_option('mo_openid_twitter_enable');
+				$appsConfigured = get_option('mo_openid_google_enable') | get_option('mo_openid_salesforce_enable') | get_option('mo_openid_facebook_enable') | get_option('mo_openid_linkedin_enable') | get_option('mo_openid_instagram_enable') | get_option('mo_openid_amazon_enable') | get_option('mo_openid_windowslive_enable') |get_option('mo_openid_twitter_enable') | get_option('mo_openid_vkontakte_enable');
 				$spacebetweenicons = isset( $atts['space'] )? $atts['space'] : get_option('mo_login_icon_space');
 				$customWidth = isset( $atts['width'] )? $atts['width'] : get_option('mo_login_icon_custom_width');
 				$customHeight = isset( $atts['height'] )? $atts['height'] : get_option('mo_login_icon_custom_height');
@@ -303,6 +331,15 @@ class mo_openid_login_wid extends WP_Widget {
 						 <p> $customText</p>";
 						
 						if($customTheme == 'default'){
+						if( get_option('mo_openid_facebook_enable') ) {
+							if($selected_theme == 'longbutton'){
+						 $html .= "<a  style='width: " . $customWidth . "px !important;padding-top:" . ($customHeight-29) . "px !important;padding-bottom:" . ($customHeight-29) . "px !important;margin-bottom: " . ($spacebetweenicons-5)  . "px !important' class='btn btn-block btn-social btn-facebook btn-custom-dec' onClick='moOpenIdLogin(" . '"facebook"' . ");'> <i style='padding-top:" . ($customHeight-35) . "px !important' class='fa fa-facebook'></i>" . $buttonText . " Facebook</a>"; }
+						else{ 
+								$html .= "<a title= ' ".$customTextofTitle." Facebook' onClick='moOpenIdLogin(" . '"facebook"' . ");' ><img style='width:" . $customSize ."px !important;height: " . $customSize ."px !important;margin-left: " . ($spacebetweenicons-4) ."px !important' src='" . plugins_url( 'includes/images/icons/facebook.png', __FILE__ ) . "' class=' " .$selected_theme . "' ></a>";
+						}
+
+						}
+
 						if( get_option('mo_openid_google_enable') ) {
 							if($selected_theme == 'longbutton'){
 						 $html .= "<a  style='width: " . $customWidth . "px !important;padding-top:" . ($customHeight-29) . "px !important;padding-bottom:" . ($customHeight-29) . "px !important;margin-bottom: " . ($spacebetweenicons-5)  . "px !important' class='btn btn-block btn-social btn-google btn-custom-dec' onClick='moOpenIdLogin(" . '"google"' . ");'> <i style='padding-top:" . ($customHeight-35) . "px !important' class='fa fa-google-plus'></i>" . $buttonText . " Google</a>"; 
@@ -314,14 +351,17 @@ class mo_openid_login_wid extends WP_Widget {
 						}
 						}
 
-						if( get_option('mo_openid_facebook_enable') ) {
+						if( get_option('mo_openid_vkontakte_enable') ) {
 							if($selected_theme == 'longbutton'){
-						 $html .= "<a  style='width: " . $customWidth . "px !important;padding-top:" . ($customHeight-29) . "px !important;padding-bottom:" . ($customHeight-29) . "px !important;margin-bottom: " . ($spacebetweenicons-5)  . "px !important' class='btn btn-block btn-social btn-facebook btn-custom-dec' onClick='moOpenIdLogin(" . '"facebook"' . ");'> <i style='padding-top:" . ($customHeight-35) . "px !important' class='fa fa-facebook'></i>" . $buttonText . " Facebook</a>"; }
+						 $html .= "<a  style='width: " . $customWidth . "px !important;padding-top:" . ($customHeight-29) . "px !important;padding-bottom:" . ($customHeight-29) . "px !important;margin-bottom: " . ($spacebetweenicons-5)  . "px !important' class='btn btn-block btn-social btn-vk btn-custom-dec' onClick='moOpenIdLogin(" . '"vkontakte"' . ");'> <i style='padding-top:" . ($customHeight-35) . "px !important' class='fa fa-vk'></i>" . $buttonText . " Vkontakte</a>"; 
+						 }
 						else{ 
-								$html .= "<a title= ' ".$customTextofTitle." Facebook' onClick='moOpenIdLogin(" . '"facebook"' . ");' ><img style='width:" . $customSize ."px !important;height: " . $customSize ."px !important;margin-left: " . ($spacebetweenicons-4) ."px !important' src='" . plugins_url( 'includes/images/icons/facebook.png', __FILE__ ) . "' class=' " .$selected_theme . "' ></a>";
+						
+						$html .= "<a  onClick='moOpenIdLogin(" . '"vkontakte"' . ");' title= ' ".$customTextofTitle." Vkontakte'><img style='width:" . $customSize ."px !important;height: " . $customSize ."px !important;margin-left: " . ($spacebetweenicons-4) ."px !important' src='" . plugins_url( 'includes/images/icons/vk.png', __FILE__ ) . "' class=' " .$selected_theme . "' ></a>";
+						
+						}
 						}
 
-						}
 						if( get_option('mo_openid_twitter_enable') ) {
 							if($selected_theme == 'longbutton'){
 						 $html .= "<a  style='width: " . $customWidth . "px !important;padding-top:" . ($customHeight-29) . "px !important;padding-bottom:" . ($customHeight-29) . "px !important;margin-bottom: " . ($spacebetweenicons-5)  . "px !important' class='btn btn-block btn-social btn-twitter btn-custom-dec' onClick='moOpenIdLogin(" . '"twitter"' . ");'> <i style='padding-top:" . ($customHeight-35) . "px !important' class='fa fa-twitter'></i>" . $buttonText . " Twitter</a>"; }
@@ -371,6 +411,16 @@ class mo_openid_login_wid extends WP_Widget {
 						
 						
 						if($customTheme == 'custom'){
+						if( get_option('mo_openid_facebook_enable') ) {
+							if($selected_theme == 'longbutton'){
+						 $html .= "<a   onClick='moOpenIdLogin(" . '"facebook"' . ");' style='width:" . ($customWidth) . "px !important;padding-top:" . ($customHeight-29) . "px !important;padding-bottom:" . ($customHeight-29) . "px !important;margin-bottom:" . ($spacebetweenicons-5) . "px !important; background:#" . $customBackground . "!important;' class='btn btn-block btn-social btn-customtheme btn-custom-dec' > <i style='padding-top:" .($customHeight-35) . "px !important' class='fa fa-facebook'></i> " . $buttonText . " Facebook</a>"; 
+						 }
+						else{ 
+							$html .= "<a title= ' ".$customTextofTitle." Facebook' onClick='moOpenIdLogin(" . '"facebook"' . ");' ><i style='width:" . $customSize . "px !important;height:" . $customSize . "px !important;margin-left:" . ($spacebetweenicons-4) . "px !important;background:#" . $customBackground . " !important;font-size: " . ($customSize-16) . "px !important;'  class='fa fa-facebook custom-login-button  " . $selected_theme . "' ></i></a>";
+						}
+
+						}
+
 						if( get_option('mo_openid_google_enable') ) {
 							if($selected_theme == 'longbutton'){
 								$html .= "<a   onClick='moOpenIdLogin(" . '"google"' . ");' style='width:" . ($customWidth) . "px !important;padding-top:" . ($customHeight-29) . "px !important;padding-bottom:" . ($customHeight-29) . "px !important;margin-bottom:" . ($spacebetweenicons-5) . "px !important; background:#" . $customBackground . "!important;' class='btn btn-block btn-social btn-customtheme btn-custom-dec' > <i style='padding-top:" .($customHeight-35) . "px !important' class='fa fa-google-plus'></i> " . $buttonText . " Google</a>"; 
@@ -381,15 +431,16 @@ class mo_openid_login_wid extends WP_Widget {
 							}
 						}
 
-						if( get_option('mo_openid_facebook_enable') ) {
+						if( get_option('mo_openid_vkontakte_enable') ) {
 							if($selected_theme == 'longbutton'){
-						 $html .= "<a   onClick='moOpenIdLogin(" . '"facebook"' . ");' style='width:" . ($customWidth) . "px !important;padding-top:" . ($customHeight-29) . "px !important;padding-bottom:" . ($customHeight-29) . "px !important;margin-bottom:" . ($spacebetweenicons-5) . "px !important; background:#" . $customBackground . "!important;' class='btn btn-block btn-social btn-customtheme btn-custom-dec' > <i style='padding-top:" .($customHeight-35) . "px !important' class='fa fa-facebook'></i> " . $buttonText . " Facebook</a>"; 
-						 }
+								$html .= "<a   onClick='moOpenIdLogin(" . '"vkontakte"' . ");' style='width:" . ($customWidth) . "px !important;padding-top:" . ($customHeight-29) . "px !important;padding-bottom:" . ($customHeight-29) . "px !important;margin-bottom:" . ($spacebetweenicons-5) . "px !important; background:#" . $customBackground . "!important;' class='btn btn-block btn-social btn-customtheme btn-custom-dec' > <i style='padding-top:" .($customHeight-35) . "px !important' class='fa fa-vk'></i> " . $buttonText . " Vkontakte</a>"; 
+							}
 						else{ 
-							$html .= "<a title= ' ".$customTextofTitle." Facebook' onClick='moOpenIdLogin(" . '"facebook"' . ");' ><i style='width:" . $customSize . "px !important;height:" . $customSize . "px !important;margin-left:" . ($spacebetweenicons-4) . "px !important;background:#" . $customBackground . " !important;font-size: " . ($customSize-16) . "px !important;'  class='fa fa-facebook custom-login-button  " . $selected_theme . "' ></i></a>";
+								$html .= "<a title= ' ".$customTextofTitle." Vkontakte' onClick='moOpenIdLogin(" . '"vkontakte"' . ");' title= ' ". $customTextofTitle."  Vkontakte'><i style='width:" . $customSize . "px !important;height:" . $customSize . "px !important;margin-left:" . ($spacebetweenicons-4) . "px !important;background:#" . $customBackground . " !important;font-size: " . ($customSize-16) . "px !important;'  class='fa fa-vk custom-login-button  " . $selected_theme . "' ></i></a>";
+						
+							}
 						}
 
-						}
 						if( get_option('mo_openid_twitter_enable') ) {
 							if($selected_theme == 'longbutton'){
 						 $html .= "<a   onClick='moOpenIdLogin(" . '"twitter"' . ");' style='width:" . ($customWidth) . "px !important;padding-top:" . ($customHeight-29) . "px !important;padding-bottom:" . ($customHeight-29) . "px !important;margin-bottom:" . ($spacebetweenicons-5) . "px !important; background:#" . $customBackground . "!important;' class='btn btn-block btn-social btn-customtheme btn-custom-dec' > <i style='padding-top:" .($customHeight-35) . "px !important' class='fa fa-twitter'></i> " . $buttonText . " Twitter</a>"; 
@@ -515,11 +566,11 @@ class mo_openid_sharing_hor_wid extends WP_Widget {
 	public function widget( $args, $instance ) {
 		extract( $args );
 
-		$wid_title = apply_filters( 'widget_title', $instance['wid_title'] );
+		//$wid_title = apply_filters( 'widget_title', $instance['wid_title'] );
 
 		echo $args['before_widget'];
-		if ( ! empty( $wid_title ) )
-			echo $args['before_title'] . $wid_title . $args['after_title'];
+		//if ( ! empty( $wid_title ) )
+		//	echo $args['before_title'] . $wid_title . $args['after_title'];
 			$this->show_sharing_buttons_horizontal();
 
 		echo $args['after_widget'];
@@ -690,6 +741,8 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 			$token_params_encrypt = mcrypt_encrypt( MCRYPT_RIJNDAEL_128, $customer_token, $token, MCRYPT_MODE_ECB );
 			$token_params_encode = base64_encode( $token_params_encrypt );
 			$token_params = urlencode( $token_params_encode );
+			$userdata = get_option('moopenid_user_attributes')?'true':'false';
+			
 			
 			if(isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off'){
 				$http = "https://";
@@ -701,35 +754,82 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 
     		$return_url = urlencode( $base_return_url . '/?option=moopenid' );
 
-			$url = get_option('mo_openid_host_name') . '/moas/openid-connect/client-app/authenticate?token=' . $token_params . '&id=' . get_option('mo_openid_admin_customer_key') . '&encrypted=true&app=' . $_REQUEST['app_name'] . '_oauth&returnurl=' . $return_url;
+			$url = get_option('mo_openid_host_name') . '/moas/openid-connect/client-app/authenticate?token=' . $token_params . '&userdata=' . $userdata. '&id=' . get_option('mo_openid_admin_customer_key') . '&encrypted=true&app=' . $_REQUEST['app_name'] . '_oauth&returnurl=' . $return_url . '&encrypt_response=true';
 			wp_redirect( $url );
 			exit;
 		}
 
-		if( isset( $_REQUEST['option'] ) and strpos( $_REQUEST['option'], 'moopenid' ) !== false ){
-		
-			//do stuff after returning from oAuth processing			
-			$user_email = '';
-			if( isset( $_POST['email']  ) ) {
-				$user_email = $_POST['email'];
-			} else if( isset( $_POST['username']  )){
-				$user_name = $_POST['username'];
-				$user_email = $user_name.'@instagram.com';
+		if( isset( $_REQUEST['option'] ) and strpos( $_REQUEST['option'], 'moopenid' ) !== false ){			
+			$decrypted_email = isset($_POST['email']) ? mo_openid_decrypt($_POST['email']): '';
+			$decrypted_user_name = isset($_POST['username']) ? mo_openid_decrypt($_POST['username']): '';
+			$decrypted_user_picture = isset($_POST['profilePic']) ? mo_openid_decrypt($_POST['profilePic']): '';
+			$decrypted_user_url = isset($_POST['profileUrl']) ? mo_openid_decrypt($_POST['profileUrl']): '';
+			$decrypted_first_name = isset($_POST['firstName']) ? mo_openid_decrypt($_POST['firstName']): '';
+			$decrypted_last_name = isset($_POST['lastName']) ? mo_openid_decrypt($_POST['lastName']): '';
+			
+			if( isset( $_POST['email'] ) ) {
+				$user_email = $decrypted_email;
+			} else if( isset( $_POST['username'] )){
+				$user_email = $decrypted_user_name.'@social-user.com';
 			}
+			$user_name = $decrypted_user_name;
+			$user_picture = $decrypted_user_picture;
 
+			if(isset($_POST['profileUrl']))
+				$user_url = $decrypted_user_url;			
+			if(isset( $_POST['firstName'] ) && isset( $_POST['lastName'] )){
+				$user_full_name = $decrypted_first_name.' '.$decrypted_last_name;
+				$first_name = $decrypted_first_name;
+				$last_name = $decrypted_last_name;
+			}	
+			else
+				$user_full_name = $decrypted_user_name;
+
+			//Check if username is equal to full name, set username as email
+			if(strcmp($decrypted_user_name, $user_full_name)){
+				$email_split = explode("@", $user_email);
+				$username = $email_split[0];
+			} else {
+				$username = $decrypted_user_name;
+			}
+			
 			if( $user_email ) {
 				if( email_exists( $user_email ) ) { // user is a member
 					  $user 	= get_user_by('email', $user_email );
 					  $user_id 	= $user->ID;
+					  if(get_option('moopenid_social_login_avatar') && isset($user_picture))
+							update_user_meta($user_id, 'moopenid_user_avatar', $user_picture);
+					  do_action( 'wp_login', $user->user_login, $user );
+					  wp_set_auth_cookie( $user_id, true );
+				} else if( username_exists( $username ) ) { // user is a member
+					  $user 	= get_user_by('login', $username );
+					  $user_id 	= $user->ID;
+					  if(get_option('moopenid_social_login_avatar') && isset($user_picture))
+							update_user_meta($user_id, 'moopenid_user_avatar', $user_picture);
 					  do_action( 'wp_login', $user->user_login, $user );
 					  wp_set_auth_cookie( $user_id, true );
 				} else { // this user is a guest
 					if(get_option('mo_openid_auto_register_enable')) {
-						  $random_password 	= wp_generate_password( 10, false );
-						  $user_id 			= wp_create_user( $user_email, $random_password, $user_email );
-						  $user 	= get_user_by('email', $user_email );
-						  do_action( 'wp_login', $user->user_login, $user );
-						  wp_set_auth_cookie( $user_id, true );
+						$random_password 	= wp_generate_password( 10, false );
+						$userdata = array(
+											'user_login'  =>  $username,
+											'user_email'    =>  $user_email,
+											'user_pass'   =>  $random_password,
+											'display_name' => $user_full_name,
+											'first_name' => $first_name,
+											'last_name' => $last_name,
+											'user_url' => $user_url,
+										);
+						
+						  
+						$user_id 	= wp_insert_user( $userdata);
+						$user	= get_user_by('email', $user_email );
+
+						if(get_option('moopenid_social_login_avatar') && isset($user_picture)){
+							update_user_meta($user_id, 'moopenid_user_avatar', $user_picture);
+						}
+						do_action( 'wp_login', $user->user_login, $user );
+						wp_set_auth_cookie( $user_id, true );
 					}
 				}
 			}
@@ -740,11 +840,19 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 
 		}
 		
-		if(isset($_REQUEST['redirect']) and strpos($_REQUEST['redirect'],'true') !== false) {
-			if(!is_user_logged_in() && !get_option('mo_openid_auto_register_enable')) {
+		if(isset($_REQUEST['autoregister']) and strpos($_REQUEST['autoregister'],'false') !== false) {
+			if(!is_user_logged_in()) {
 				mo_openid_disabled_register_message();
 			}
 		}
+	}
+
+	function mo_openid_decrypt($param) {
+		$customer_token = get_option('mo_openid_customer_token');
+		$base64decoded = base64_decode($param);
+		$token_params_decrypt = mcrypt_decrypt( MCRYPT_RIJNDAEL_128, $customer_token, $base64decoded, MCRYPT_MODE_ECB );
+
+		return $token_params_decrypt;
 	}
 	
 	function mo_openid_disabled_register_message() {
@@ -782,9 +890,9 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 			$redirect_url = get_option('mo_openid_login_redirect_url');
 		}
 		if(strpos($redirect_url,'?') !== FALSE) {
-			$redirect_url .= '&redirect=true';
+			$redirect_url .= get_option('mo_openid_auto_register_enable') ? '' : '&autoregister=false';
 		} else{
-			$redirect_url .= '?redirect=true';
+			$redirect_url .= get_option('mo_openid_auto_register_enable') ? '' : '?autoregister=false';
 		}
 		return $redirect_url;
 	}
@@ -797,7 +905,12 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 				$redirect_url = $logout_url . '&redirect_to=' .home_url()  ;
 			}
 			else if($option == 'currentpage'){
-				$redirect_url = $logout_url . '&redirect_to=' . get_permalink() ;
+				if(isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off'){
+					$http = "https://";
+				} else {
+					$http =  "http://";
+				}
+				$redirect_url = $logout_url . '&redirect_to=' . $http . $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'];
 			}
 			else if($option == 'login') {
 				$redirect_url = $logout_url . '&redirect_to=' . site_url() . '/wp-admin' ;
@@ -806,11 +919,15 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 				$redirect_url = $logout_url . '&redirect_to=' . site_url() . (null !== get_option('mo_openid_logout_redirect_url')?get_option('mo_openid_logout_redirect_url'):'');
 			}
 			return $redirect_url;
-		} else {
+		}else{
 			return $logout_url;
 		}
+			
 	}
 
+if(get_option('mo_openid_logout_redirection_enable') == 1){
+	add_filter( 'logout_url', 'mo_openid_redirect_after_logout',0,1);
+}
 add_action( 'widgets_init', create_function( '', 'register_widget( "mo_openid_login_wid" );' ) );
 add_action( 'widgets_init', create_function( '', 'return register_widget( "mo_openid_sharing_ver_wid" );' ) );
 add_action( 'widgets_init', create_function( '', 'return register_widget( "mo_openid_sharing_hor_wid" );' ) );
@@ -819,6 +936,5 @@ add_action( 'init', 'mo_openid_login_validate' );
 add_action( 'wp_enqueue_scripts', 'mo_openid_widget_register_plugin_styles' );
 add_action( 'init', 'mo_openid_start_session' );
 add_action( 'wp_logout', 'mo_openid_end_session' );
-add_filter( 'logout_url', 'mo_openid_redirect_after_logout',0,1);
 }
 ?>

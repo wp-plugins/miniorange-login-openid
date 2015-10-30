@@ -169,3 +169,62 @@ text-decoration:none !important;
 #TB_window, #TB_window #TB_ajaxContent {
 	width:500px!important;
 }
+
+.mo_openid_pricing_table{
+	text-align:center;
+	font-size: 15px !important;
+}
+
+.mo_openid_pricing_header{
+	color: #fff !important;
+	margin: 8px !important;
+}
+
+.mo_openid_pricing_sub_header{
+	margin: 4px !important;
+	color: #fff !important;
+}
+
+.mo_openid_pricing_text{
+	font-size: 15px !important;
+	color: #fff !important;
+	font-weight: bold !important;
+}
+
+.mo_openid_pricing_free_tab{
+	background-color: rgba(34, 153, 221, 0.82)!important;
+	//#29d
+}
+
+.mo_openid_pricing_paid_tab{
+	background-color: #1a71a4 !important;
+}
+
+.mo_openid_thumbnail {
+	width:250px;
+	padding: 4px;
+
+	margin-bottom: 10px;
+	line-height: 1.42857143;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-webkit-transition: border .2s ease-in-out;
+	-o-transition: border .2s ease-in-out;
+	transition: border .2s ease-in-out
+}
+
+.mo_openid_msgs{
+	font-size: 14px !important;
+}
+
+.mo_openid_success_container{
+	background-color: rgba(185, 228, 155, 0.56) !important;
+	margin-left: 3px !important;
+
+}
+
+.mo_openid_error_container{
+	background-color: rgba(251, 102, 0, 0.29) !important;
+	margin-left: 3px !important;
+}

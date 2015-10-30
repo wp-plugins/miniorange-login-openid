@@ -135,14 +135,14 @@ class CustomerOpenID {
 			return $content;
 	}
 
-	function send_otp_token(){
+	function send_otp_token($authType){
 			$url = get_option('mo_openid_host_name') . '/moas/api/auth/challenge';
 			$ch = curl_init($url);
 			$customerKey =  $this->defaultCustomerKey;
 			$apiKey =  $this->defaultApiKey;
 
 			$username = get_option('mo_openid_admin_email');
-
+			$phone = get_option('mo_openid_admin_phone');
 			/* Current time in milliseconds since midnight, January 1, 1970 UTC. */
 			$currentTimeInMillis = round(microtime(true) * 1000);
 
@@ -153,13 +153,21 @@ class CustomerOpenID {
 			$customerKeyHeader = "Customer-Key: " . $customerKey;
 			$timestampHeader = "Timestamp: " . $currentTimeInMillis;
 			$authorizationHeader = "Authorization: " . $hashValue;
-
-			$fields = array(
+			if($authType == 'EMAIL') {
+				$fields = array(
 				'customerKey' => $customerKey,
 				'email' => $username,
 				'authType' => 'EMAIL',
 				'transactionName' => 'WordPress miniOrange Social Login, Social Sharing'
+				);
+			}else if($authType == 'SMS'){
+				$fields = array(
+				'customerKey' => $customerKey,
+				'phone' => $phone,
+				'authType' => 'SMS',
+				'transactionName' => 'WordPress miniOrange Social Login, Social Sharing'
 			);
+			}
 			$field_string = json_encode($fields);
 
 			curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );

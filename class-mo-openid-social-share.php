@@ -1,8 +1,10 @@
 <?php
-$url =  get_permalink();
-if(!$url) {
-	$url = get_site_url();
+if(isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off'){
+	$http = "https://";
+} else {
+	$http =  "http://";
 }
+$url = $http . $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'];
 
 	
 	$selected_theme = get_option('mo_openid_share_theme');
@@ -52,7 +54,7 @@ if(!$url) {
 	}
 </script>
 
-						<a href="http://miniorange.com/single-sign-on-sso" hidden></a>
+							 <a href="http://miniorange.com/single-sign-on-sso" hidden></a>
 						 <div class="mo-openid-app-icons circle ">
 						 <p><?php 
 							if( $orientation == 'hor' ) {
@@ -397,7 +399,7 @@ if(!$url) {
 						}
 						
 						if( get_option('mo_openid_google_share_enable') ) {
-							$link = 'https://plus.google.com/share?url='.$url;							
+							$link = 'https://plus.google.com/share?url='.$url;
 						?>
 						<a title="Google" onclick="popupCenter('<?php echo $link; ?>', 800, 500);" class="mo-openid-share-link" style="margin-bottom:<?php echo $space_icons?>px !important;"><i class="mo-custom-share-icon <?php echo $selected_theme; ?> fa fa-google-plus" style="margin-bottom:<?php echo $space_icons-4?>px!important; padding-top:8px;text-align:center;color:#ffffff;font-size:<?php echo ($sharingSize-16); ?>px !important;background-color:#<?php echo $custom_color?>;height:<?php echo $sharingSize; ?>px !important;width:<?php echo $sharingSize; ?>px !important"></i></a>
 						<?php
