@@ -848,11 +848,15 @@ class mo_openid_sharing_ver_wid extends WP_Widget {
 	}
 
 	function mo_openid_decrypt($param) {
-		$customer_token = get_option('mo_openid_customer_token');
-		$base64decoded = base64_decode($param);
-		$token_params_decrypt = mcrypt_decrypt( MCRYPT_RIJNDAEL_128, $customer_token, $base64decoded, MCRYPT_MODE_ECB );
+		if(strcmp($param,'null')!=0){
+			$customer_token = get_option('mo_openid_customer_token');
+			$base64decoded = base64_decode($param);
+			$token_params_decrypt = mcrypt_decrypt( MCRYPT_RIJNDAEL_128, $customer_token, $base64decoded, MCRYPT_MODE_ECB );
 
-		return $token_params_decrypt;
+			return $token_params_decrypt;
+		}else{
+			return '';
+		}
 	}
 	
 	function mo_openid_disabled_register_message() {
