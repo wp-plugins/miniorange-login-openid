@@ -4,7 +4,7 @@ Donate link: http://miniorange.com
 Tags: accesspress, amazon, auto user registration, User Profile Data, auto-login, autologin, Facebook, facebook connect, Facebook Login, facebook share, floating buttons, free social sharing, google, google plus share, share page, Google Login, google social login, login with twitter, twitter social login, twitter login, login with vkontakte, vkontakte social login, vkontakte login, increase shares, instagram, linkedin, linkedin login, login, login widget, login with amazon, pinterest share, pinterest sharing, reddit share, reddit sharing, vkontakte share, vkontakte sharing, tumblr share, tumblr sharing, stumbleupon share, stumbleupon sharing, pocket share, pocket sharing, digg share, digg sharing, delicious share, delicious sharing, odnoklassniki share, odnoklassniki sharing, login with facebook, login with google, login with linkedin, login with microsoft, login with openid connect, login with salesforce, microsoft, oauth, openid, OpenID Connect, openid connect sso, post to social networks, Reddit, salesforce, salesforce login, salesforce openid connect, Share, share button, share buttons, share icons, share links, social connect, social login, social network login, social network share, social provider, social share, social sharing, social sharing widget, twitter, twitter share, user auto register, widget, windows live, woocommerce sharing, woocommerce, woocommerce connect, comments, yahoo, twitter,plugin,wordpress multisite, SSO technology,social sign-in,Social Plugins, social media tools,social commenting,social authentication,social app, social api, Social Analytics, single sign-on, share post,OpenID integration,Online Identity, multisite, mailchimp, LoginRadius, Oneall, Login Radius, One all, Hubspot,capture social data, captcha, bbPress, buddypress, shortcode
 Requires at least: 2.0.2
 Tested up to: 4.3
-Stable tag: 4.5
+Stable tag: 4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,8 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 
 
 == Changelog ==
+= 4.6 =
+*	Bug Fix
 
 = 4.5 =
 *	Get user information such as name, username after Social Login (Social Login)
@@ -218,6 +220,8 @@ Please email us at info@miniorange.com or <a href="http://miniorange.com/contact
 * First version of Social Login, Social Sharing plugin.
 
 == Upgrade Notice ==
+= 4.6 =
+* 	Bug Fix
 
 = 4.5 =
 *	Get user information such as name, username after Social Login (Social Login)
